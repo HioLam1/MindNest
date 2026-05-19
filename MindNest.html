@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindNest</title>
+    
+    <!-- 新增網站圖示 (Favicon) - 更新為大腦圖示 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%234f46e5%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z%22/><path d=%22M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z%22/></svg>">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Inter', 'Noto Sans TC', 'Noto Sans SC', sans-serif;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 transition-colors duration-300">
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-slate-800 shadow-sm sticky top-0 z-10 transition-colors duration-300">
+        <div class="w-full px-4 sm:px-8 lg:px-12 xl:px-24 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="if(window.state.isLoggedIn) window.navigate('home')">
+                <!-- 左上角的 Logo 大腦圖示 -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" />
+                    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />
+                </svg>
+                <div class="flex items-baseline gap-2">
+                    <h1 id="app-title" class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">MindNest</h1>
+                    <div class="flex items-center gap-1.5">
+                        <span id="badge-s2" class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 tracking-wider uppercase">中學二年級</span>
+                        <!-- 動態角色標籤 (置於 S2 盒子右側) -->
+                        <span id="badge-role" class="hidden px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase transition-colors duration-300"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <!-- Logout Button -->
+                <button id="btn-logout" onclick="window.logout()" class="text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-red-50 dark:hover:bg-red-900/30 hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                </button>
+
+                <!-- NEW: Summary of Today Button (Placed in the middle of light/dark mode and logout) -->
+                <button id="btn-summary" onclick="window.navigate('summary')" class="text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-rose-50 dark:hover:bg-rose-900/30 hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </button>
+
+                <!-- Theme Toggle Button -->
+                <button id="btn-theme" onclick="window.toggleTheme()" class="text-slate-400 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700">
+                    <!-- Icon populated by JS -->
+                </button>
+
+                <!-- Mute/Unmute Button -->
+                <button id="btn-mute" onclick="window.toggleMute()" class="text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700">
+                    <!-- Icon populated by JS -->
+                </button>
+
+                <div class="flex items-center gap-1.5 border-l border-slate-200 dark:border-slate-700 pl-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                    </svg>
+                    <select id="lang-selector" onchange="window.changeLanguage(this.value)" class="bg-slate-100 dark:bg-slate-700 border-none text-sm font-medium rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer text-slate-700 dark:text-slate-200 transition-colors">
+                        <!-- Options populated by JS -->
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow w-full px-4 sm:px-8 lg:px-12 xl:px-24 py-8 md:py-12 flex flex-col">
+        
+        <!-- Login View -->
+        <div id="view-login" class="w-full fade-in hidden flex-col items-center justify-center mt-6 lg:mt-16">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 w-full max-w-md transition-colors duration-300">
+                <div class="text-center mb-8">
+                    <h2 id="text-login-title" class="text-3xl font-bold text-slate-900 dark:text-white mb-2">登入 MindNest</h2>
+                    <p id="text-login-subtitle" class="text-slate-500 dark:text-slate-400">請輸入您的帳號密碼</p>
+                </div>
+
+                <form action="#" method="POST" onsubmit="window.handleLogin(event)" class="space-y-5 text-left">
+                    <div>
+                        <label id="label-username" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">使用者名稱</label>
+                        <input type="text" id="input-username" name="username" autocomplete="username" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 outline-none transition-all" required>
+                    </div>
+                    <div>
+                        <label id="label-password" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">密碼</label>
+                        <input type="password" id="input-password" name="password" autocomplete="current-password" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 outline-none transition-all" required>
+                    </div>
+                    <div class="flex items-center pt-1">
+                        <input type="checkbox" id="input-remember" class="w-4 h-4 text-indigo-600 border-slate-300 dark:border-slate-600 rounded focus:ring-indigo-500 cursor-pointer bg-white dark:bg-slate-700">
+                        <label for="input-remember" id="label-remember" class="ml-2 block text-sm text-slate-600 dark:text-slate-400 cursor-pointer hover:text-slate-800 dark:hover:text-slate-200 transition-colors">記住我</label>
+                    </div>
+                    
+                    <!-- Advanced Error UI -->
+                    <div id="login-error" class="hidden items-start gap-2 p-3 mt-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/50 text-red-600 dark:text-red-400 text-sm rounded-lg font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span id="login-error-text"></span>
+                    </div>
+
+                    <button type="submit" id="btn-login-submit" class="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors mt-4 shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] dark:shadow-none">
+                        登入
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Home Page View -->
+        <div id="view-home" class="w-full fade-in hidden">
+            <div class="mb-10 w-full text-left">
+                <h2 id="home-title" class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 transition-colors">選擇課程</h2>
+                <p id="home-subtitle" class="text-slate-500 dark:text-slate-400 max-w-xl transition-colors">請選擇您想要學習的科目。點擊卡片進入課程。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full mb-8 lg:mb-12">
+                <!-- Teacher Dashboard Card (Visible to Developers and Teachers) -->
+                <div id="card-teacher" onclick="window.navigate('teacher')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-amber-200 dark:hover:border-amber-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> 教師專屬
+                    </div>
+                    <div class="flex items-center gap-4 mb-4 mt-2">
+                        <div class="w-14 h-14 bg-amber-50 dark:bg-amber-900/30 text-amber-500 dark:text-amber-400 rounded-2xl flex items-center justify-center transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="3" y1="9" x2="21" y2="9"></line>
+                                <line x1="9" y1="21" x2="9" y2="9"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 id="card-teacher-title" class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight transition-colors">教師儀表板</h3>
+                            <p id="card-teacher-desc" class="text-slate-500 dark:text-slate-400 mt-1 transition-colors text-sm">查看所有學生的學習進度與狀態。</p>
+                        </div>
+                    </div>
+                    <div class="w-full mt-auto flex justify-end text-amber-600 dark:text-amber-400 font-medium items-center gap-2 group-hover:gap-3 transition-all">
+                        <span id="card-teacher-start">查看進度</span>
+                        <span>&rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Developer Mode Card (Visible ONLY to Developers) -->
+                <div id="card-developer" onclick="window.navigate('developer')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg> ROOT
+                    </div>
+                    <div class="flex items-center gap-4 mb-4 mt-2">
+                        <div class="w-14 h-14 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                <path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 id="card-dev-title" class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight transition-colors">開發者模式</h3>
+                            <p id="card-dev-desc" class="text-slate-500 dark:text-slate-400 mt-1 transition-colors text-sm">管理系統帳號、設定與底層資料庫。</p>
+                        </div>
+                    </div>
+                    <div class="w-full mt-auto flex justify-end text-indigo-600 dark:text-indigo-400 font-medium items-center gap-2 group-hover:gap-3 transition-all">
+                        <span id="card-dev-start">進入系統</span>
+                        <span>&rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full">
+                <!-- Math Card -->
+                <div onclick="window.navigate('math')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
+                    <div class="w-14 h-14 bg-purple-50 dark:bg-purple-900/30 text-purple-500 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="16" height="20" x="4" y="2" rx="2"></rect>
+                            <line x1="8" x2="16" y1="6" y2="6"></line>
+                            <line x1="16" x2="16.01" y1="10" y2="10"></line>
+                            <line x1="12" x2="12.01" y1="10" y2="10"></line>
+                            <line x1="8" x2="8.01" y1="10" y2="10"></line>
+                            <line x1="16" x2="16.01" y1="14" y2="14"></line>
+                            <line x1="12" x2="12.01" y1="14" y2="14"></line>
+                            <line x1="8" x2="8.01" y1="14" y2="14"></line>
+                            <line x1="16" x2="16.01" y1="18" y2="18"></line>
+                            <line x1="12" x2="12.01" y1="18" y2="18"></line>
+                            <line x1="8" x2="8.01" y1="18" y2="18"></line>
+                        </svg>
+                    </div>
+                    <h3 id="card-math-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">數學</h3>
+                    <p id="card-math-desc" class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed transition-colors">探索數字、代數和幾何！</p>
+                    <div class="mt-auto text-teal-600 dark:text-teal-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                        <span id="card-math-start">開始課程</span>
+                        <span>&rarr;</span>
+                    </div>
+                </div>
+
+                <!-- English Card -->
+                <div onclick="window.navigate('english')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
+                    <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-blue-500 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                    </div>
+                    <h3 id="card-english-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">英文</h3>
+                    <p id="card-english-desc" class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed transition-colors">提升你的文法、字彙、閱讀與寫作技巧。</p>
+                    <div class="mt-auto text-teal-600 dark:text-teal-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                        <span id="card-english-start">開始課程</span>
+                        <span>&rarr;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Summary View (Not right time to use) -->
+        <div id="view-summary" class="w-full fade-in hidden">
+            <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span id="btn-back-summary-page">返回首頁</span>
+            </button>
+            
+            <div class="border-2 border-dashed border-rose-200 dark:border-rose-800/50 bg-rose-50/30 dark:bg-rose-900/10 rounded-3xl p-12 flex flex-col items-center justify-center text-center transition-colors duration-300 min-h-[50vh]">
+                <div class="mb-6 text-rose-400 dark:text-rose-500 bg-rose-100 dark:bg-rose-900/30 p-5 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path><path d="M8 2v8l4-2 4 2V2"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-200 mb-4 transition-colors not-right-time-text">目前還不是使用的時機</h3>
+            </div>
+        </div>
+
+        <!-- NEW: Developer Mode View -->
+        <div id="view-developer" class="w-full fade-in hidden">
+            <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span id="btn-back-dev">返回首頁</span>
+            </button>
+
+            <div class="mb-8 w-full text-left">
+                <h2 id="title-dev-page" class="text-3xl font-bold text-slate-900 dark:text-white mb-2 transition-colors">開發者模式</h2>
+                <p id="desc-dev-page" class="text-slate-500 dark:text-slate-400 transition-colors">管理系統帳號、設定與底層資料庫。</p>
+            </div>
+
+            <!-- 開發者專屬：新增帳號全寬面板 -->
+            <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-indigo-200 dark:border-indigo-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors">
+                <h3 class="text-xl font-bold text-indigo-900 dark:text-indigo-200 mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                    </svg>
+                    <span id="text-dev-add-acc-panel-title">新增系統帳號</span>
+                </h3>
+                
+                <form onsubmit="window.handleAddAccount(event)" class="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
+                    <div class="md:col-span-1">
+                        <label id="label-add-acc-user" class="block text-xs font-semibold tracking-wider text-indigo-700 dark:text-indigo-400 mb-2 uppercase">使用者名稱</label>
+                        <input type="text" id="add-acc-user" required class="w-full px-4 py-3 rounded-xl border border-indigo-100 dark:border-indigo-800/60 bg-indigo-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all shadow-sm">
+                    </div>
+                    <div class="md:col-span-1">
+                        <label id="label-add-acc-pass" class="block text-xs font-semibold tracking-wider text-indigo-700 dark:text-indigo-400 mb-2 uppercase">密碼</label>
+                        <input type="text" id="add-acc-pass" required class="w-full px-4 py-3 rounded-xl border border-indigo-100 dark:border-indigo-800/60 bg-indigo-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all shadow-sm">
+                    </div>
+                    <div class="md:col-span-1">
+                        <label id="label-add-acc-role" class="block text-xs font-semibold tracking-wider text-indigo-700 dark:text-indigo-400 mb-2 uppercase">身分組</label>
+                        <select id="add-acc-role" class="w-full px-4 py-3 rounded-xl border border-indigo-100 dark:border-indigo-800/60 bg-indigo-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer shadow-sm appearance-none">
+                            <option value="student" id="opt-role-student">學生 (Student)</option>
+                            <option value="teacher" id="opt-role-teacher">教師 (Teacher)</option>
+                            <option value="developer" id="opt-role-developer">開發者 (Developer)</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-1">
+                        <button type="submit" id="btn-add-acc-submit" class="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md">
+                            立即新增
+                        </button>
+                    </div>
+                </form>
+                <div id="add-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
+            </div>
+            
+            <!-- 開發者專屬：編輯今日總結面板 -->
+            <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-rose-200 dark:border-rose-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
+                <h3 class="text-xl font-bold text-rose-900 dark:text-rose-200 mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-600 dark:text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    <span id="text-dev-edit-summary-title">編輯今日總結</span>
+                </h3>
+                <div class="bg-rose-50/50 dark:bg-rose-900/20 rounded-2xl p-10 flex flex-col items-center justify-center border border-rose-100 dark:border-rose-800/30">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-rose-300 dark:text-rose-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <span class="text-rose-500 dark:text-rose-400 font-semibold dev-not-right-time text-lg">目前還不是使用的時機</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher Dashboard View -->
+        <div id="view-teacher-dashboard" class="w-full fade-in hidden">
+            <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span id="btn-back-teacher">返回首頁</span>
+            </button>
+
+            <div class="mb-6 w-full text-left">
+                <h2 id="title-teacher-dash" class="text-3xl font-bold text-slate-900 dark:text-white mb-2 transition-colors">學生進度追蹤</h2>
+                <p id="desc-teacher-dash" class="text-slate-500 dark:text-slate-400 transition-colors">查看所有已註冊帳號的學習狀態與資料。</p>
+            </div>
+
+            <!-- Tab Switching System inside Teacher Dashboard -->
+            <div class="flex gap-2 border-b border-slate-200 dark:border-slate-700/80 mb-8 overflow-x-auto whitespace-nowrap">
+                <button id="tab-teacher-scores" onclick="window.setTeacherTab('scores')" class="px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 outline-none flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    <span id="text-tab-scores">分數與進度</span>
+                </button>
+                <button id="tab-teacher-status" onclick="window.setTeacherTab('status')" class="px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white outline-none flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.07 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z" />
+                    </svg>
+                    <span id="text-tab-status">在線狀態</span>
+                </button>
+            </div>
+
+            <!-- Dynamic Student List Container -->
+            <div id="student-list-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full">
+                <!-- Cards will be populated by JS from Firebase -->
+            </div>
+        </div>
+
+        <!-- Lesson View -->
+        <div id="view-lesson" class="w-full fade-in hidden">
+            
+            <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span id="btn-back">返回首頁</span>
+            </button>
+
+            <!-- Dynamic Headers -->
+            <div id="lesson-header-math" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
+                 <div class="w-16 h-16 bg-purple-50 dark:bg-purple-900/30 text-purple-500 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="16" height="20" x="4" y="2" rx="2"></rect>
+                        <line x1="8" x2="16" y1="6" y2="6"></line>
+                        <line x1="16" x2="16.01" y1="10" y2="10"></line>
+                        <line x1="12" x2="12.01" y1="10" y2="10"></line>
+                        <line x1="8" x2="8.01" y1="10" y2="10"></line>
+                        <line x1="16" x2="16.01" y1="14" y2="14"></line>
+                        <line x1="12" x2="12.01" y1="14" y2="14"></line>
+                        <line x1="8" x2="8.01" y1="14" y2="14"></line>
+                        <line x1="16" x2="16.01" y1="18" y2="18"></line>
+                        <line x1="12" x2="12.01" y1="18" y2="18"></line>
+                        <line x1="8" x2="8.01" y1="18" y2="18"></line>
+                    </svg>
+                 </div>
+                 <h2 id="lesson-math-title" class="text-3xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">數學</h2>
+                 <p id="lesson-math-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors">探索數字、代數和幾何！</p>
+            </div>
+
+            <!-- Dynamic Sub-Lesson Header (Morphs based on the current level) -->
+            <div id="lesson-header-sub" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
+                 <div id="header-sub-icon-box" class="transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                    <svg id="header-sub-icon" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+                 </div>
+                 <h2 id="header-sub-title" class="text-3xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors"></h2>
+                 <p id="header-sub-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors"></p>
+            </div>
+
+            <div id="lesson-header-english" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
+                 <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/30 text-blue-500 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                 </div>
+                 <h2 id="lesson-english-title" class="text-3xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">英文</h2>
+                 <p id="lesson-english-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors">提升你的文法、字彙、閱讀與寫作技巧。</p>
+            </div>
+
+            <!-- Math Main Content (Sub-lessons list) -->
+            <div id="content-math-main" class="hidden">
+                <div onclick="window.navigate('math-summary')" class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex items-center justify-between group">
+                    <div class="flex items-center gap-5">
+                        <div class="w-14 h-14 bg-purple-50 dark:bg-purple-900/30 text-purple-500 dark:text-purple-400 rounded-2xl flex items-center justify-center transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 id="text-math-summary" class="text-xl font-bold text-slate-900 dark:text-white tracking-tight transition-colors">全課總結</h4>
+                            <p id="text-math-summary-desc" class="text-slate-500 dark:text-slate-400 mt-1 transition-colors">複習所有章節的核心概念。</p>
+                        </div>
+                    </div>
+                    <div class="text-slate-300 dark:text-slate-600 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Math Summary Content (Geometry & Algebra) -->
+            <div id="content-math-summary" class="hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                    <!-- Geometry Card (Shapes) -->
+                    <div onclick="window.navigateCategory('geometry')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-pink-50 dark:bg-pink-900/30 text-pink-500 dark:text-pink-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="8" height="8" rx="2"></rect>
+                                <circle cx="17" cy="7" r="4"></circle>
+                                <polygon points="12 21 7 13 17 13"></polygon>
+                            </svg>
+                        </div>
+                        <h4 id="text-geometry" class="text-xl font-bold text-slate-900 dark:text-white mb-2 transition-colors">幾何</h4>
+                        <p id="text-geometry-desc" class="text-slate-500 dark:text-slate-400 transition-colors">學習圖形、空間與角度。</p>
+                    </div>
+
+                    <!-- Algebra Card (Numbers) -->
+                    <div onclick="window.navigateCategory('algebra')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-center text-center">
+                         <div class="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 4v16"></path>
+                                <path d="M5 6l2-2"></path>
+                                <path d="M13 8a3 3 0 0 1 6 0c0 2-6 5.5-6 8h6"></path>
+                            </svg>
+                         </div>
+                        <h4 id="text-algebra" class="text-xl font-bold text-slate-900 dark:text-white mb-2 transition-colors">代數</h4>
+                        <p id="text-algebra-desc" class="text-slate-500 dark:text-slate-400 transition-colors">學習變數、方程式與函數。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Math Category Content (Chapters 1 & 2) -->
+            <div id="content-math-category" class="hidden">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+                    <div onclick="window.navigateChapter(1)" class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 flex items-center gap-4 cursor-pointer group">
+                        <div class="w-12 h-12 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/40 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors rounded-2xl flex items-center justify-center font-bold text-lg">1</div>
+                        <h4 id="text-chapter-1" class="text-lg font-bold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">第一章</h4>
+                    </div>
+                    <div onclick="window.navigateChapter(2)" class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 flex items-center gap-4 cursor-pointer group">
+                         <div class="w-12 h-12 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/40 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors rounded-2xl flex items-center justify-center font-bold text-lg">2</div>
+                        <h4 id="text-chapter-2" class="text-lg font-bold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">第二章</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Math Chapter Content (Dev block) -->
+            <div id="content-math-chapter" class="hidden border-2 border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 rounded-3xl p-12 flex flex-col items-center text-center transition-colors duration-300">
+                <div class="mb-5 text-slate-400 dark:text-slate-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                </div>
+                <h3 class="dev-title-text text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2 transition-colors">開發中，請稍候...</h3>
+                <p class="dev-msg-text text-slate-500 dark:text-slate-400 text-lg max-w-md transition-colors">我們目前正在建立此模組的學習教材。</p>
+            </div>
+
+            <!-- English Content -->
+            <div id="content-english" class="hidden border-2 border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 rounded-3xl p-12 flex flex-col items-center text-center transition-colors duration-300">
+                <div class="mb-5 text-slate-400 dark:text-slate-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                    </svg>
+                </div>
+                
+                <h3 class="dev-title-text text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2 transition-colors">開發中，請稍候...</h3>
+                <p class="dev-msg-text text-slate-500 dark:text-slate-400 text-lg max-w-md transition-colors">我們目前正在建立此模組的學習教材。</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 改為 module 類型，才能使用 import 匯入 Firebase SDK -->
+    <script type="module">
+        // --- 載入 Firebase 官方雲端 SDK ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- 寫入您的專屬 Firebase 金鑰 ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDInloVr6k4iy5674Ubwfeo79HXQv89Dag",
+            authDomain: "mindnest-hio.firebaseapp.com",
+            projectId: "mindnest-hio",
+            storageBucket: "mindnest-hio.firebasestorage.app",
+            messagingSenderId: "413705025029",
+            appId: "1:413705025029:web:ec4efe45995eb8b4aece6c",
+            measurementId: "G-GXVV6RHW92"
+        };
+
+        // 啟動 Firebase 雲端資料庫
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 1. Dictionaries for 3 languages
+        const dictionaries = {
+            'zh-TW': {
+                appTitle: 'MindNest',
+                s2Badge: '中學二年級',
+                homeTitle: '選擇課程',
+                homeSubtitle: '請選擇您想要學習的科目。點擊卡片進入課程。',
+                math: '數學',
+                mathDesc: '探索數字、代數和幾何！',
+                english: '英文',
+                englishDesc: '提升你的文法、字彙、閱讀與寫作技巧。',
+                startCourse: '開始課程',
+                mathSummary: '全課總結',
+                mathSummaryDesc: '複習所有章節的核心概念。',
+                geometry: '幾何',
+                geometryDesc: '學習圖形、空間與角度。',
+                algebra: '代數',
+                algebraDesc: '學習變數、方程式與函數。',
+                chapter1: '第一章',
+                chapter2: '第二章',
+                devTitle: '開發中，請稍候...',
+                devMsg: '我們目前正在建立此模組的學習教材。',
+                btnBackHome: '返回首頁',
+                btnBackMath: '返回數學',
+                btnBackSummary: '返回總結',
+                btnBackCategory: '返回章節',
+                muteTip: '關閉音效',
+                unmuteTip: '開啟音效',
+                loginTitle: '登入 MindNest',
+                loginSubtitle: '請輸入您的帳號密碼',
+                labelUsername: '使用者名稱',
+                labelPassword: '密碼',
+                loginBtn: '登入',
+                loginError: '此帳號尚未申請。請聯絡開發人員確認。',
+                logoutTip: '登出',
+                themeLight: '切換至亮色模式',
+                themeDark: '切換至暗色模式',
+                rememberMe: '記住我',
+                teacherDashboard: '教師儀表板',
+                teacherDesc: '查看所有學生的學習進度與狀態。',
+                viewProgress: '查看進度',
+                teacherDashboardTitle: '學生進度追蹤',
+                teacherDashboardDesc: '查看所有已註冊帳號的學習狀態與資料。',
+                avgScore: '平均分數',
+                completedLessons: '已完成課程',
+                unitScore: ' 分',
+                unitLesson: ' 堂',
+                developingTag: '開發中',
+                devTeacherMsg: '學生進度追蹤系統開發中...',
+                roleDeveloper: '開發者',
+                roleTeacher: '教師',
+                roleStudent: '學生',
+                tabScores: '分數與進度',
+                tabStatus: '在線狀態',
+                currentStatus: '目前狀態',
+                statusOnline: '在線',
+                statusOffline: '離線',
+                lastActiveTime: '最後活動時間',
+                neverLoggedIn: '從未登入',
+                // 開發者模式專屬翻譯
+                devModeTitle: '開發者模式',
+                devModeDesc: '管理系統帳號、設定與底層資料庫。',
+                devModeStart: '進入系統',
+                devAddAccount: '新增系統帳號',
+                addAccUser: '使用者名稱',
+                addAccPass: '密碼',
+                addAccRole: '身分組',
+                addAccBtn: '立即新增',
+                addAccSuccess: '帳號新增成功！可以立即登入。',
+                addAccExists: '此帳號名稱已被使用！',
+                // 今日總結翻譯
+                summaryOfToday: '今日總結',
+                summaryDesc: '查看您今天的學習進度與重點。',
+                summaryStart: '查看總結',
+                notRightTime: '目前還不是使用的時機',
+                devEditSummary: '編輯今日總結',
+                langs: {
+                    'zh-TW': '繁體中文',
+                    'zh-CN': '简体中文',
+                    'en': 'English'
+                }
+            },
+            'zh-CN': {
+                appTitle: 'MindNest',
+                s2Badge: '中学二年级',
+                homeTitle: '选择课程',
+                homeSubtitle: '请选择您想要学习的科目。点击卡片进入课程。',
+                math: '数学',
+                mathDesc: '探索数字、代数和几何！',
+                english: '英文',
+                englishDesc: '提升你的语法、词汇、阅读与写作技巧。',
+                startCourse: '开始课程',
+                mathSummary: '全课总结',
+                mathSummaryDesc: '复习所有章节的核心概念。',
+                geometry: '几何',
+                geometryDesc: '学习图形、空间与角度。',
+                algebra: '代数',
+                algebraDesc: '学习变量、方程式与函数。',
+                chapter1: '第一章',
+                chapter2: '第二章',
+                devTitle: '开发中，请慢候...',
+                devMsg: '我们 @ 2026 正在建立此模块的学习教材。',
+                btnBackHome: '返回首页',
+                btnBackMath: '返回数学',
+                btnBackSummary: '返回总结',
+                btnBackCategory: '返回章节',
+                muteTip: '关闭音效',
+                unmuteTip: '开启音效',
+                loginTitle: '登录 MindNest',
+                loginSubtitle: '请输入您的账号密码',
+                labelUsername: '用户名',
+                labelPassword: '密码',
+                loginBtn: '登录',
+                loginError: '此账号尚未申请。请联系人员确认。',
+                logoutTip: '登出',
+                themeLight: '切换至亮色模式',
+                themeDark: '切换至暗色模式',
+                rememberMe: '记住我',
+                teacherDashboard: '教师仪表板',
+                teacherDesc: '查看所有学生的学习进度与状态。',
+                viewProgress: '查看进度',
+                teacherDashboardTitle: '学生进度追踪',
+                teacherDashboardDesc: '查看所有已注册账号的学习状态与数据。',
+                avgScore: '平均分数',
+                completedLessons: '已完成课程',
+                unitScore: ' 分',
+                unitLesson: ' 节',
+                developingTag: '开发中',
+                devTeacherMsg: '学生进度追踪系统开发中...',
+                roleDeveloper: '开发者',
+                roleTeacher: '教师',
+                roleStudent: '学生',
+                tabScores: '分数与进度',
+                tabStatus: '在线状态',
+                currentStatus: '当前状态',
+                statusOnline: '在线',
+                statusOffline: '离线',
+                lastActiveTime: '最后活动时间',
+                neverLoggedIn: '从未登录',
+                devModeTitle: '开发者模式',
+                devModeDesc: '管理系统账号、设置与底层数据库。',
+                devModeStart: '进入系统',
+                devAddAccount: '新增系统账号',
+                addAccUser: '用户名',
+                addAccPass: '密码',
+                addAccRole: '身份组',
+                addAccBtn: '立即新增',
+                addAccSuccess: '账号新增成功！可以立即登录。',
+                addAccExists: '此账号名称已被使用！',
+                summaryOfToday: '今日总结',
+                summaryDesc: '查看您今天的学习进度与重点。',
+                summaryStart: '查看总结',
+                notRightTime: '目前还不是使用的时机',
+                devEditSummary: '编辑今日总结',
+                langs: {
+                    'zh-TW': '繁体中文',
+                    'zh-CN': '简体中文',
+                    'en': 'English'
+                }
+            },
+            'en': {
+                appTitle: 'MindNest',
+                s2Badge: 'Secondary 2',
+                homeTitle: 'Select a Lesson',
+                homeSubtitle: 'Choose the subject you want to study. Click a card to enter.',
+                math: 'Mathematics',
+                mathDesc: 'Explore numbers, algebra, and geometry!',
+                english: 'English',
+                englishDesc: 'Improve your grammar, vocabulary, reading, and writing skills.',
+                startCourse: 'Start Course',
+                mathSummary: 'All Lesson Summary',
+                mathSummaryDesc: 'Review core concepts from all chapters.',
+                geometry: 'Geometry',
+                geometryDesc: 'Learn shapes, spaces, and angles.',
+                algebra: 'Algebra',
+                algebraDesc: 'Learn variables, equations, and functions.',
+                chapter1: 'Chapter 1',
+                chapter2: 'Chapter 2',
+                devTitle: 'Under Development...',
+                devMsg: 'We are currently building the learning materials for this module.',
+                btnBackHome: 'Back to Home',
+                btnBackMath: 'Back to Math',
+                btnBackSummary: 'Back to Summary',
+                btnBackCategory: 'Back to Chapters',
+                muteTip: 'Mute Sound',
+                unmuteTip: 'Unmute Sound',
+                loginTitle: 'Login to MindNest',
+                loginSubtitle: 'Please enter your account details',
+                labelUsername: 'Username',
+                labelPassword: 'Password',
+                loginBtn: 'Login',
+                loginError: 'This account is not applied. Please find the developing to check.',
+                logoutTip: 'Logout',
+                themeLight: 'Switch to Light Mode',
+                themeDark: 'Switch to Dark Mode',
+                rememberMe: 'Remember me',
+                teacherDashboard: 'Teacher Dashboard',
+                teacherDesc: 'Monitor student progress and online status.',
+                viewProgress: 'View Progress',
+                teacherDashboardTitle: 'Student Progress Tracking',
+                teacherDashboardDesc: 'View learning status and data for all registered accounts.',
+                avgScore: 'Average Score',
+                completedLessons: 'Completed Lessons',
+                unitScore: ' pts',
+                unitLesson: ' lessons',
+                developingTag: 'Developing',
+                devTeacherMsg: 'Student progress tracking system is under development...',
+                roleDeveloper: 'Developer',
+                roleTeacher: 'Teacher',
+                roleStudent: 'Student',
+                tabScores: 'Scores & Progress',
+                tabStatus: 'Online Status',
+                currentStatus: 'Current Status',
+                statusOnline: 'Online',
+                statusOffline: 'Offline',
+                lastActiveTime: 'Last Active',
+                neverLoggedIn: 'Never Logged In',
+                devModeTitle: 'Developer Mode',
+                devModeDesc: 'Manage system accounts, settings, and database.',
+                devModeStart: 'Enter System',
+                devAddAccount: 'Add System Account',
+                addAccUser: 'Username',
+                addAccPass: 'Password',
+                addAccRole: 'Role',
+                addAccBtn: 'Add Account',
+                addAccSuccess: 'Account successfully added! Can login now.',
+                addAccExists: 'This username is already taken!',
+                summaryOfToday: 'Summary of Today',
+                summaryDesc: 'Review your learning progress and key points of the day.',
+                summaryStart: 'View Summary',
+                notRightTime: 'Not the right time to use',
+                devEditSummary: 'Edit Summary of Today',
+                langs: {
+                    'zh-TW': 'Chinese (Traditional)',
+                    'zh-CN': 'Chinese (Simplified)',
+                    'en': 'English'
+                }
+            }
+        };
+
+        // 預設的帳號驗證清單 (Fallback)
+        const registeredUsers = [
+            { username: 'Hio_Lam1', password: 'Bedwars$20130630', role: 'developer' },
+            { username: 'Hio_Lam2', password: 'Bedwars$20130630', role: 'student' }
+        ];
+
+        // 2. Application State
+        let state = {
+            currentLang: 'zh-TW', // Entry default is Chinese Traditional
+            lastChineseLang: 'zh-TW', // Track this so we revert nicely from English
+            currentPage: 'login',  // Start at login page
+            selectedCategory: '', // 'geometry' or 'algebra'
+            selectedChapter: 1, // 1 or 2
+            isMuted: false, // Sound toggle state
+            isDarkMode: false, // Dark mode state
+            isLoggedIn: false, // Login state
+            role: 'student', // 'student' or 'developer' or 'teacher'
+            teacherTab: 'scores', // 'scores' or 'status'
+            studentsData: {} // 全域暫存雲端抓下來的學生資料
+        };
+        
+        // 為了讓 HTML 標籤能呼叫 module 內的函數，必須將它們掛載到 window 上
+        window.state = state;
+
+        // Web Audio API Context (Initialized on first interaction)
+        let audioCtx = null;
+
+        function playClickSound() {
+            if (state.isMuted) return;
+            if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.1);
+            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.1);
+        }
+
+        // --- 將使用者資料同步寫入 Firebase 雲端資料庫 ---
+        async function syncUserToFirestore(username, role, onlineStatus = "online", password = null) {
+            try {
+                const userRef = doc(db, "students", username);
+                const docSnap = await getDoc(userRef);
+                const currentTime = new Date().toLocaleString();
+                
+                // 如果是第一次登入這套系統，幫他在雲端建立一個檔案
+                if (!docSnap.exists()) {
+                    let newUserData = {
+                        username: username,
+                        role: role,
+                        avgScore: 0,
+                        completedLessons: 0,
+                        lastLogin: currentTime,
+                        lastActive: currentTime,
+                        status: onlineStatus
+                    };
+                    if (password) { newUserData.password = password; } // 儲存密碼以供日後驗證
+                    await setDoc(userRef, newUserData);
+                } else {
+                    // 如果已經有檔案了，更新「最後活動時間」與「在線狀態」
+                    let updateData = { 
+                        lastActive: currentTime,
+                        role: role,
+                        status: onlineStatus
+                    };
+                    if (password) { updateData.password = password; } // 若有密碼也可同步更新
+                    await setDoc(userRef, updateData, { merge: true });
+                }
+            } catch (error) {
+                console.error("寫入雲端失敗 (請確認資料庫已開啟測試模式):", error);
+            }
+        }
+
+        // --- 核心登入驗證（會同時檢查本地預設與 Firebase 雲端密碼）---
+        window.handleLogin = async function(e) {
+            e.preventDefault();
+            const user = document.getElementById('input-username').value.trim();
+            const pass = document.getElementById('input-password').value.trim();
+            const remember = document.getElementById('input-remember').checked;
+            const errorMsg = document.getElementById('login-error');
+            const dict = dictionaries[state.currentLang];
+
+            // 1. 先檢查本地註冊名單
+            let foundUser = registeredUsers.find(u => u.username === user && u.password === pass);
+
+            // 2. 如果本地沒有，去 Firebase 雲端找找看有沒有開發者即時新增的帳號！
+            if (!foundUser) {
+                try {
+                    const userRef = doc(db, "students", user);
+                    const docSnap = await getDoc(userRef);
+                    if (docSnap.exists() && docSnap.data().password === pass) {
+                        foundUser = { 
+                            username: user, 
+                            password: pass, 
+                            role: docSnap.data().role || 'student' 
+                        };
+                    }
+                } catch (err) {
+                    console.error("Firebase Auth Check Error:", err);
+                }
+            }
+
+            if (foundUser) {
+                // 這裡拿掉原本的 playClickSound()，因為 navigate 內部會播。
+
+                if (window.PasswordCredential && navigator.credentials) {
+                    const cred = new PasswordCredential({ id: user, password: pass });
+                    navigator.credentials.store(cred).catch(err => console.log("Credential store failed:", err));
+                }
+
+                state.isLoggedIn = true;
+                state.role = foundUser.role;
+                
+                // 記住我：安全預填模式
+                if (remember) {
+                    localStorage.setItem('mindnest_remember', 'true');
+                    localStorage.setItem('mindnest_username', user);
+                    localStorage.setItem('mindnest_password', pass); 
+                    localStorage.setItem('mindnest_role', state.role);
+                } else {
+                    localStorage.removeItem('mindnest_remember');
+                    localStorage.removeItem('mindnest_username');
+                    localStorage.removeItem('mindnest_password');
+                    localStorage.removeItem('mindnest_role');
+                }
+
+                errorMsg.classList.add('hidden');
+                errorMsg.classList.remove('flex');
+                document.getElementById('input-password').value = ''; 
+                
+                // 登入成功時，把資料推上雲端，狀態為 "online"，並夾帶密碼保障雲端驗證正常運作
+                await syncUserToFirestore(user, state.role, "online", pass);
+                
+                navigate('home');
+            } else {
+                document.getElementById('login-error-text').textContent = dict.loginError;
+                errorMsg.classList.remove('hidden');
+                errorMsg.classList.add('flex');
+            }
+        }
+
+        // --- 開發者專屬：新增帳號並推上雲端 ---
+        window.handleAddAccount = async function(e) {
+            e.preventDefault();
+            const user = document.getElementById('add-acc-user').value.trim();
+            const pass = document.getElementById('add-acc-pass').value.trim();
+            const role = document.getElementById('add-acc-role').value;
+            const msgBox = document.getElementById('add-acc-msg');
+            const dict = dictionaries[state.currentLang];
+
+            if (!user || !pass) return;
+
+            // 初始化訊息框
+            msgBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700');
+            msgBox.innerHTML = '';
+
+            try {
+                // 檢查雲端或本地是否已經存在這個人
+                const userRef = doc(db, "students", user);
+                const docSnap = await getDoc(userRef);
+                const isLocal = registeredUsers.some(u => u.username === user);
+
+                if (docSnap.exists() || isLocal) {
+                    // 帳號已存在，報錯
+                    msgBox.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        ${dict.addAccExists}
+                    `;
+                    msgBox.classList.add('flex', 'bg-red-50', 'text-red-700', 'dark:bg-red-900/30', 'dark:text-red-400');
+                } else {
+                    // 帳號不存在，寫入全新帳號至 Firebase！
+                    await setDoc(userRef, {
+                        username: user,
+                        password: pass,
+                        role: role,
+                        avgScore: 0,
+                        completedLessons: 0,
+                        lastLogin: null,
+                        lastActive: null,
+                        status: 'offline' // 新增的帳號預設為離線
+                    });
+
+                    // 成功提示
+                    msgBox.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        ${dict.addAccSuccess}
+                    `;
+                    msgBox.classList.add('flex', 'bg-green-50', 'text-green-700', 'dark:bg-green-900/30', 'dark:text-green-400');
+
+                    // 清空輸入框
+                    document.getElementById('add-acc-user').value = '';
+                    document.getElementById('add-acc-pass').value = '';
+                }
+            } catch (err) {
+                console.error("Add Account Error:", err);
+                msgBox.innerHTML = `⚠️ 系統發生錯誤。請確認資料庫狀態。`;
+                msgBox.classList.add('flex', 'bg-red-50', 'text-red-700');
+            }
+        }
+
+        window.logout = async function() {
+            // 這裡拿掉原本的 playClickSound()，因為 navigate 內部會播。
+            const currentUser = localStorage.getItem('mindnest_username') || (state.isLoggedIn ? document.getElementById('input-username').value : null);
+            
+            if (currentUser) {
+                try {
+                    // 登出時，在雲端將該學生狀態設為離線 "offline"
+                    const userRef = doc(db, "students", currentUser);
+                    await setDoc(userRef, { status: "offline" }, { merge: true });
+                } catch(err) {
+                    console.error("更新離線狀態失敗:", err);
+                }
+            }
+
+            state.isLoggedIn = false;
+            state.role = 'student';
+            
+            // 登出時：【不清除】localStorage 的記住我數據，以便回到登入頁面時自動填寫
+            navigate('login');
+        }
+
+        // 安全防護網：當使用者直接關閉分頁或瀏覽器時，強制同步「離線」到雲端
+        window.addEventListener('beforeunload', function() {
+            if (state.isLoggedIn) {
+                const currentUser = localStorage.getItem('mindnest_username') || document.getElementById('input-username').value;
+                if (currentUser) {
+                    const userRef = doc(db, "students", currentUser);
+                    // 發送同步離線狀態
+                    setDoc(userRef, { status: "offline" }, { merge: true });
+                }
+            }
+        });
+
+        window.toggleTheme = function() {
+            playClickSound();
+            state.isDarkMode = !state.isDarkMode;
+            if (state.isDarkMode) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('mindnest_theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('mindnest_theme', 'light');
+            }
+            renderThemeButton();
+        }
+
+        window.toggleMute = function() {
+            state.isMuted = !state.isMuted;
+            renderMuteButton(); 
+            if (!state.isMuted) { playClickSound(); }
+        }
+
+        window.navigateBack = function() {
+            if (state.currentPage === 'math-chapter') { navigate('math-category'); }
+            else if (state.currentPage === 'math-category') { navigate('math-summary'); }
+            else if (state.currentPage === 'math-summary') { navigate('math'); }
+            else if (state.currentPage === 'summary') { navigate('home'); }
+            else { navigate('home'); }
+        }
+
+        window.navigateCategory = function(cat) {
+            state.selectedCategory = cat;
+            navigate('math-category');
+        }
+
+        window.navigateChapter = function(chap) {
+            state.selectedChapter = chap;
+            navigate('math-chapter');
+        }
+
+        // 控制教師儀表板內的 Tab 切換
+        window.setTeacherTab = function(tabName) {
+            playClickSound();
+            state.teacherTab = tabName;
+            render(); // 觸發重新渲染畫面
+        }
+
+        window.navigate = navigate; // for internal JS usage
+        function navigate(page) {
+            playClickSound(); 
+            if (!state.isLoggedIn && page !== 'login') { page = 'login'; }
+            state.currentPage = page;
+
+            if (page === 'math' || page === 'math-summary' || page === 'math-category' || page === 'math-chapter') {
+                if (state.currentLang === 'en') { state.currentLang = state.lastChineseLang; }
+            } else if (page === 'english') {
+                if (state.currentLang === 'zh-TW' || state.currentLang === 'zh-CN') {
+                    state.lastChineseLang = state.currentLang;
+                    state.currentLang = 'en';
+                }
+            }
+            
+            // 進入開發者模式時，清空可能殘留的狀態訊息
+            if (page === 'developer') {
+                const addMsgBox = document.getElementById('add-acc-msg');
+                if(addMsgBox) {
+                    addMsgBox.classList.add('hidden');
+                    document.getElementById('add-acc-user').value = '';
+                    document.getElementById('add-acc-pass').value = '';
+                }
+            }
+            
+            render();
+        }
+
+        window.changeLanguage = function(langCode) {
+            playClickSound(); 
+            state.currentLang = langCode;
+            if (langCode === 'zh-TW' || langCode === 'zh-CN') { state.lastChineseLang = langCode; }
+            render();
+        }
+
+        function renderMuteButton() {
+            const dict = dictionaries[state.currentLang];
+            const btnMute = document.getElementById('btn-mute');
+            if (state.isMuted) {
+                btnMute.title = dict.unmuteTip;
+                btnMute.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                    </svg>`;
+            } else {
+                btnMute.title = dict.muteTip;
+                btnMute.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                    </svg>`;
+            }
+        }
+
+        function renderThemeButton() {
+            const dict = dictionaries[state.currentLang];
+            const btnTheme = document.getElementById('btn-theme');
+            if (!btnTheme) return; 
+
+            if (state.isDarkMode) {
+                btnTheme.title = dict.themeLight;
+                btnTheme.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>`;
+            } else {
+                btnTheme.title = dict.themeDark;
+                btnTheme.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>`;
+            }
+        }
+
+        // 用來追蹤 Firebase 監聽器的變數
+        let unsubscribeTeacher = null;
+
+        // 4. View Rendering
+        function render() {
+            const dict = dictionaries[state.currentLang];
+            document.documentElement.lang = state.currentLang;
+
+            // --- Update UI Texts ---
+            document.getElementById('app-title').textContent = dict.appTitle;
+            document.getElementById('badge-s2').textContent = dict.s2Badge;
+            document.title = dict.appTitle;
+            
+            // Login View Texts
+            document.getElementById('text-login-title').textContent = dict.loginTitle;
+            document.getElementById('text-login-subtitle').textContent = dict.loginSubtitle;
+            document.getElementById('label-username').textContent = dict.labelUsername;
+            document.getElementById('label-password').textContent = dict.labelPassword;
+            document.getElementById('btn-login-submit').textContent = dict.loginBtn;
+            if(!document.getElementById('login-error').classList.contains('hidden')) {
+                document.getElementById('login-error-text').textContent = dict.loginError;
+            }
+            document.getElementById('btn-logout').title = dict.logoutTip;
+            document.getElementById('label-remember').textContent = dict.rememberMe;
+
+            // 渲染頂部導覽列右側的角色標籤
+            const badgeRole = document.getElementById('badge-role');
+            if (state.isLoggedIn) {
+                badgeRole.classList.remove('hidden');
+                if (state.role === 'developer') {
+                    badgeRole.textContent = dict.roleDeveloper;
+                    badgeRole.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 tracking-wider uppercase';
+                } else if (state.role === 'teacher') {
+                    badgeRole.textContent = dict.roleTeacher;
+                    badgeRole.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 tracking-wider uppercase';
+                } else {
+                    badgeRole.textContent = dict.roleStudent;
+                    badgeRole.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 tracking-wider uppercase';
+                }
+            } else {
+                badgeRole.classList.add('hidden');
+            }
+
+            const btnLogout = document.getElementById('btn-logout');
+            const btnSummary = document.getElementById('btn-summary');
+            
+            if (state.isLoggedIn) { 
+                btnLogout.classList.remove('hidden'); 
+                btnSummary.classList.remove('hidden'); 
+            } else { 
+                btnLogout.classList.add('hidden'); 
+                btnSummary.classList.add('hidden'); 
+            }
+
+            document.getElementById('home-title').textContent = dict.homeTitle;
+            document.getElementById('home-subtitle').textContent = dict.homeSubtitle;
+            document.getElementById('card-math-title').textContent = dict.math;
+            document.getElementById('card-math-desc').textContent = dict.mathDesc;
+            document.getElementById('card-english-title').textContent = dict.english;
+            document.getElementById('card-english-desc').textContent = dict.englishDesc;
+            document.getElementById('card-math-start').textContent = dict.startCourse;
+            document.getElementById('card-english-start').textContent = dict.startCourse;
+
+            document.getElementById('card-teacher-title').textContent = dict.teacherDashboard;
+            document.getElementById('card-teacher-desc').textContent = dict.teacherDesc;
+            document.getElementById('card-teacher-start').textContent = dict.viewProgress;
+            
+            // 新增：今日總結導覽列按鈕提示翻譯
+            btnSummary.title = dict.summaryOfToday;
+            
+            // 新增：今日總結與開發者編輯區的「未到時機」翻譯
+            document.querySelectorAll('.not-right-time-text').forEach(el => el.textContent = dict.notRightTime);
+            document.querySelectorAll('.dev-not-right-time').forEach(el => el.textContent = dict.notRightTime);
+            document.getElementById('text-dev-edit-summary-title').textContent = dict.devEditSummary;
+            document.getElementById('btn-back-summary-page').textContent = dict.btnBackHome;
+
+            // 首頁開發者卡片翻譯
+            document.getElementById('card-dev-title').textContent = dict.devModeTitle;
+            document.getElementById('card-dev-desc').textContent = dict.devModeDesc;
+            document.getElementById('card-dev-start').textContent = dict.devModeStart;
+            
+            // 開發者內部頁面翻譯
+            document.getElementById('title-dev-page').textContent = dict.devModeTitle;
+            document.getElementById('desc-dev-page').textContent = dict.devModeDesc;
+            document.getElementById('text-dev-add-acc-panel-title').textContent = dict.devAddAccount;
+            document.getElementById('label-add-acc-user').textContent = dict.addAccUser;
+            document.getElementById('label-add-acc-pass').textContent = dict.addAccPass;
+            document.getElementById('label-add-acc-role').textContent = dict.addAccRole;
+            document.getElementById('btn-add-acc-submit').textContent = dict.addAccBtn;
+
+            document.getElementById('title-teacher-dash').textContent = dict.teacherDashboardTitle;
+            document.getElementById('desc-teacher-dash').textContent = dict.teacherDashboardDesc;
+
+            // 身分組選項的翻譯
+            document.getElementById('opt-role-student').textContent = dict.langs[state.currentLang] === 'English' ? 'Student' : (dict.langs[state.currentLang] === '简体中文' ? '学生 (Student)' : '學生 (Student)');
+            document.getElementById('opt-role-teacher').textContent = dict.langs[state.currentLang] === 'English' ? 'Teacher' : (dict.langs[state.currentLang] === '简体中文' ? '教师 (Teacher)' : '教師 (Teacher)');
+            document.getElementById('opt-role-developer').textContent = dict.langs[state.currentLang] === 'English' ? 'Developer' : (dict.langs[state.currentLang] === '简体中文' ? '开发者 (Developer)' : '開發者 (Developer)');
+
+            // 切換按鈕與 Tab 標題翻譯
+            document.getElementById('text-tab-scores').textContent = dict.tabScores;
+            document.getElementById('text-tab-status').textContent = dict.tabStatus;
+
+            // 更改選中的 Tab 樣式
+            const tabScores = document.getElementById('tab-teacher-scores');
+            const tabStatus = document.getElementById('tab-teacher-status');
+            if (state.teacherTab === 'scores') {
+                tabScores.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 outline-none flex items-center gap-2';
+                tabStatus.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white outline-none flex items-center gap-2';
+            } else {
+                tabStatus.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 outline-none flex items-center gap-2';
+                tabScores.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white outline-none flex items-center gap-2';
+            }
+
+            // 權限控制：首頁的兩張特權卡片
+            const cardTeacher = document.getElementById('card-teacher');
+            const cardDeveloper = document.getElementById('card-developer');
+            
+            if (state.role === 'developer' || state.role === 'teacher') {
+                cardTeacher.classList.remove('hidden');
+                cardTeacher.classList.add('flex');
+            } else {
+                cardTeacher.classList.add('hidden');
+                cardTeacher.classList.remove('flex');
+            }
+
+            if (state.role === 'developer') {
+                cardDeveloper.classList.remove('hidden');
+                cardDeveloper.classList.add('flex');
+            } else {
+                cardDeveloper.classList.add('hidden');
+                cardDeveloper.classList.remove('flex');
+            }
+
+            // --- 教師專屬：卡片動態繪製邏輯 ---
+            if (state.currentPage === 'teacher') {
+                const studentContainer = document.getElementById('student-list-container');
+                
+                // 【核心重構：重新繪製學生資料卡片】
+                const redrawCards = () => {
+                    if (!studentContainer) return;
+                    studentContainer.innerHTML = ''; 
+                    
+                    // 將 Firebase 的資料與本地的硬編碼資料合併！
+                    const allUsersMap = {};
+                    
+                    // 1. 先把本地預設資料塞進去 (提供預設離線狀態)
+                    registeredUsers.forEach(u => {
+                        allUsersMap[u.username] = {
+                            username: u.username,
+                            role: u.role,
+                            avgScore: 0,
+                            completedLessons: 0,
+                            status: 'offline',
+                            lastActive: null
+                        };
+                    });
+
+                    // 2. 把雲端抓下來的資料蓋過去 (包含開發者在UI動態新增的所有人！)
+                    Object.values(state.studentsData).forEach(u => {
+                        allUsersMap[u.username] = { ...allUsersMap[u.username], ...u };
+                    });
+                    
+                    // 3. 畫出所有人
+                    Object.values(allUsersMap).forEach(u => {
+                        const roleBadgeClass = u.role === 'developer' ? 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300' :
+                                               u.role === 'teacher' ? 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300' :
+                                               'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
+                        const roleText = u.role === 'developer' ? dict.roleDeveloper :
+                                         u.role === 'teacher' ? dict.roleTeacher : dict.roleStudent;
+
+                        const card = document.createElement('div');
+                        card.className = 'bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col transition-colors duration-300 relative overflow-hidden';
+                        
+                        // 判斷當前要顯示哪一個 Tab 的詳細資料
+                        let tabContentHTML = '';
+                        if (state.teacherTab === 'scores') {
+                            tabContentHTML = `
+                                <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
+                                    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.avgScore}</span>
+                                    <span class="text-xs font-semibold ${u.avgScore > 0 ? 'text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30' : 'text-amber-500 bg-amber-50 dark:bg-amber-900/30'} px-2 py-1 rounded-lg flex items-center gap-1">
+                                        ${u.avgScore > 0 ? u.avgScore + dict.unitScore : `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${dict.developingTag}`}
+                                    </span>
+                                </div>
+                                <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
+                                    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.completedLessons}</span>
+                                    <span class="text-xs font-semibold ${u.completedLessons > 0 ? 'text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30' : 'text-amber-500 bg-amber-50 dark:bg-amber-900/30'} px-2 py-1 rounded-lg flex items-center gap-1">
+                                        ${u.completedLessons > 0 ? u.completedLessons + dict.unitLesson : `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${dict.developingTag}`}
+                                    </span>
+                                </div>
+                            `;
+                        } else {
+                            const isOnline = u.status === 'online';
+                            const statusDotHTML = isOnline 
+                                ? `<span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span></span>`
+                                : `<span class="h-2.5 w-2.5 rounded-full bg-slate-300 dark:bg-slate-600 inline-block"></span>`;
+                            
+                            const displayTime = u.lastActive ? u.lastActive : dict.neverLoggedIn;
+
+                            tabContentHTML = `
+                                <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
+                                    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.currentStatus}</span>
+                                    <span class="text-xs font-semibold px-2 py-1 rounded-lg flex items-center gap-1.5 ${isOnline ? 'text-green-600 bg-green-50 dark:bg-green-950/30' : 'text-slate-500 bg-slate-100 dark:bg-slate-800'}">
+                                        ${statusDotHTML}
+                                        ${isOnline ? dict.statusOnline : dict.statusOffline}
+                                    </span>
+                                </div>
+                                <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex flex-col gap-1 transition-colors text-left">
+                                    <span class="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">${dict.lastActiveTime}</span>
+                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                        ${displayTime}
+                                    </span>
+                                </div>
+                            `;
+                        }
+
+                        card.innerHTML = `
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl transition-colors shadow-inner">
+                                    ${u.username.charAt(0).toUpperCase()}
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="font-bold text-lg text-slate-900 dark:text-white transition-colors">${u.username}</h4>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase transition-colors ${roleBadgeClass}">${roleText}</span>
+                                </div>
+                            </div>
+                            <div class="space-y-3 mt-auto">
+                                ${tabContentHTML}
+                            </div>
+                        `;
+                        studentContainer.appendChild(card);
+                    });
+                };
+                
+                // 如果還沒有開啟監聽，建立 Firebase 監聽器
+                if (!unsubscribeTeacher) {
+                    studentContainer.innerHTML = '<p class="text-slate-500 p-4">正在連線至雲端抓取即時資料...</p>';
+                    
+                    try {
+                        const studentsRef = collection(db, "students");
+                        unsubscribeTeacher = onSnapshot(studentsRef, (snapshot) => {
+                            state.studentsData = {};
+                            snapshot.forEach(docSnap => {
+                                state.studentsData[docSnap.id] = docSnap.data();
+                            });
+                            
+                            redrawCards(); 
+                        }, (error) => {
+                            console.error("即時監聽失敗:", error);
+                            studentContainer.innerHTML = '<p class="text-red-500 font-bold p-4">無法連線至雲端。請確保在 Firebase 控制台中將「Firestore Database」設定為「測試模式」。</p>';
+                        });
+                    } catch (err) {
+                        console.error(err);
+                    }
+                } else {
+                    // 若已連線，點切換/切換語言時強制觸發重繪
+                    redrawCards();
+                }
+            } else {
+                if (unsubscribeTeacher) {
+                    unsubscribeTeacher();
+                    unsubscribeTeacher = null;
+                }
+            }
+
+            document.getElementById('lesson-math-title').textContent = dict.math;
+            document.getElementById('lesson-math-desc').textContent = dict.mathDesc;
+            document.getElementById('lesson-english-title').textContent = dict.english;
+            document.getElementById('lesson-english-desc').textContent = dict.englishDesc;
+            
+            const headerSubIconBox = document.getElementById('header-sub-icon-box');
+            const headerSubIcon = document.getElementById('header-sub-icon');
+            const headerSubTitle = document.getElementById('header-sub-title');
+            const headerSubDesc = document.getElementById('header-sub-desc');
+
+            if (state.currentPage === 'math-summary') {
+                headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-purple-50 text-purple-500';
+                headerSubIcon.innerHTML = '<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>';
+                headerSubTitle.textContent = dict.mathSummary;
+                headerSubDesc.textContent = dict.mathSummaryDesc;
+            } else if (state.currentPage === 'math-category') {
+                if (state.selectedCategory === 'geometry') {
+                    headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-pink-50 text-pink-500';
+                    headerSubIcon.innerHTML = '<rect x="3" y="3" width="8" height="8" rx="2"></rect><circle cx="17" cy="7" r="4"></circle><polygon points="12 21 7 13 17 13"></polygon>';
+                    headerSubTitle.textContent = dict.geometry;
+                    headerSubDesc.textContent = dict.geometryDesc;
+                } else {
+                    headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-emerald-50 text-emerald-500';
+                    headerSubIcon.innerHTML = '<path d="M7 4v16"></path><path d="M5 6l2-2"></path><path d="M13 8a3 3 0 0 1 6 0c0 2-6 5.5-6 8h6"></path>';
+                    headerSubTitle.textContent = dict.algebra;
+                    headerSubDesc.textContent = dict.algebraDesc;
+                }
+            } else if (state.currentPage === 'math-chapter') {
+                headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-indigo-50 text-indigo-500';
+                headerSubIcon.innerHTML = '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>'; // Bookmark icon
+                headerSubTitle.textContent = state.selectedChapter === 1 ? dict.chapter1 : dict.chapter2;
+                headerSubDesc.textContent = state.selectedCategory === 'geometry' ? dict.geometry : dict.algebra;
+            }
+
+            document.getElementById('text-math-summary').textContent = dict.mathSummary;
+            document.getElementById('text-math-summary-desc').textContent = dict.mathSummaryDesc;
+            
+            document.getElementById('text-geometry').textContent = dict.geometry;
+            document.getElementById('text-geometry-desc').textContent = dict.geometryDesc;
+            document.getElementById('text-algebra').textContent = dict.algebra;
+            document.getElementById('text-algebra-desc').textContent = dict.algebraDesc;
+            
+            document.getElementById('text-chapter-1').textContent = dict.chapter1;
+            document.getElementById('text-chapter-2').textContent = dict.chapter2;
+            
+            document.querySelectorAll('.dev-title-text').forEach(el => el.textContent = dict.devTitle);
+            document.querySelectorAll('.dev-msg-text').forEach(el => el.textContent = dict.devMsg);
+
+            if (state.currentPage === 'math-chapter') {
+                document.getElementById('btn-back').textContent = dict.btnBackCategory;
+            } else if (state.currentPage === 'math-category') {
+                document.getElementById('btn-back').textContent = dict.btnBackSummary;
+            } else if (state.currentPage === 'math-summary') {
+                document.getElementById('btn-back').textContent = dict.btnBackMath;
+            } else if (state.currentPage === 'developer' || state.currentPage === 'summary') {
+                document.getElementById('btn-back-dev') && (document.getElementById('btn-back-dev').textContent = dict.btnBackHome);
+                document.getElementById('btn-back-summary-page') && (document.getElementById('btn-back-summary-page').textContent = dict.btnBackHome);
+            } else {
+                document.getElementById('btn-back') && (document.getElementById('btn-back').textContent = dict.btnBackHome);
+                document.getElementById('btn-back-teacher') && (document.getElementById('btn-back-teacher').textContent = dict.btnBackHome);
+            }
+
+            renderMuteButton();
+            renderThemeButton();
+
+            const select = document.getElementById('lang-selector');
+            select.innerHTML = ''; 
+            let allowedLangs = ['zh-TW', 'zh-CN', 'en'];
+            
+            if (state.currentPage === 'math' || state.currentPage === 'math-summary' || state.currentPage === 'math-category' || state.currentPage === 'math-chapter') {
+                allowedLangs = ['zh-TW', 'zh-CN']; 
+            } else if (state.currentPage === 'english') {
+                allowedLangs = ['en']; 
+            }
+
+            allowedLangs.forEach(langCode => {
+                const option = document.createElement('option');
+                option.value = langCode;
+                option.textContent = dict.langs[langCode];
+                if (langCode === state.currentLang) { option.selected = true; }
+                select.appendChild(option);
+            });
+
+            // --- Page Routing ---
+            const viewLogin = document.getElementById('view-login');
+            const viewHome = document.getElementById('view-home');
+            const viewLesson = document.getElementById('view-lesson');
+            const viewTeacherDashboard = document.getElementById('view-teacher-dashboard');
+            const viewDeveloper = document.getElementById('view-developer');
+            const viewSummary = document.getElementById('view-summary');
+            const lessonHeaderMath = document.getElementById('lesson-header-math');
+            const lessonHeaderSub = document.getElementById('lesson-header-sub');
+            const lessonHeaderEnglish = document.getElementById('lesson-header-english');
+            const contentMathMain = document.getElementById('content-math-main');
+            const contentMathSummary = document.getElementById('content-math-summary');
+            const contentMathCategory = document.getElementById('content-math-category');
+            const contentMathChapter = document.getElementById('content-math-chapter');
+            const contentEnglish = document.getElementById('content-english');
+
+            viewLogin.classList.remove('flex');
+            viewLogin.classList.add('hidden');
+            viewLogin.classList.remove('fade-in');
+            viewHome.classList.add('hidden');
+            viewHome.classList.remove('fade-in');
+            viewLesson.classList.add('hidden');
+            viewLesson.classList.remove('fade-in');
+            viewTeacherDashboard.classList.add('hidden');
+            viewTeacherDashboard.classList.remove('fade-in');
+            viewDeveloper.classList.add('hidden');
+            viewDeveloper.classList.remove('fade-in');
+            viewSummary.classList.add('hidden');
+            viewSummary.classList.remove('fade-in');
+            
+            lessonHeaderMath.classList.add('hidden');
+            lessonHeaderSub.classList.add('hidden');
+            lessonHeaderEnglish.classList.add('hidden');
+            contentMathMain.classList.add('hidden');
+            contentMathSummary.classList.add('hidden');
+            contentMathCategory.classList.add('hidden');
+            contentMathChapter.classList.add('hidden');
+            contentEnglish.classList.add('hidden');
+
+            setTimeout(() => {
+                if (state.currentPage === 'login') {
+                    viewLogin.classList.remove('hidden');
+                    viewLogin.classList.add('flex');
+                    viewLogin.classList.add('fade-in');
+                }
+                else if (state.currentPage === 'home') {
+                    viewHome.classList.remove('hidden');
+                    viewHome.classList.add('fade-in');
+                } 
+                else if (state.currentPage === 'math') {
+                    viewLesson.classList.remove('hidden');
+                    viewLesson.classList.add('fade-in');
+                    lessonHeaderMath.classList.remove('hidden');
+                    contentMathMain.classList.remove('hidden');
+                } 
+                else if (state.currentPage === 'math-summary') {
+                    viewLesson.classList.remove('hidden');
+                    viewLesson.classList.add('fade-in');
+                    lessonHeaderSub.classList.remove('hidden'); 
+                    contentMathSummary.classList.remove('hidden'); 
+                }
+                else if (state.currentPage === 'math-category') {
+                    viewLesson.classList.remove('hidden');
+                    viewLesson.classList.add('fade-in');
+                    lessonHeaderSub.classList.remove('hidden'); 
+                    contentMathCategory.classList.remove('hidden'); 
+                }
+                else if (state.currentPage === 'math-chapter') {
+                    viewLesson.classList.remove('hidden');
+                    viewLesson.classList.add('fade-in');
+                    lessonHeaderSub.classList.remove('hidden'); 
+                    contentMathChapter.classList.remove('hidden'); 
+                }
+                else if (state.currentPage === 'english') {
+                    viewLesson.classList.remove('hidden');
+                    viewLesson.classList.add('fade-in');
+                    lessonHeaderEnglish.classList.remove('hidden');
+                    contentEnglish.classList.remove('hidden');
+                }
+                else if (state.currentPage === 'teacher') {
+                    viewTeacherDashboard.classList.remove('hidden');
+                    viewTeacherDashboard.classList.add('fade-in');
+                }
+                else if (state.currentPage === 'developer') {
+                    viewDeveloper.classList.remove('hidden');
+                    viewDeveloper.classList.add('fade-in');
+                }
+                else if (state.currentPage === 'summary') {
+                    viewSummary.classList.remove('hidden');
+                    viewSummary.classList.add('fade-in');
+                }
+            }, 10);
+        }
+
+        // 初始化與讀取記住的狀態
+        async function initApp() {
+            const savedTheme = localStorage.getItem('mindnest_theme');
+            if (savedTheme === 'dark') {
+                state.isDarkMode = true;
+                document.documentElement.classList.add('dark');
+            } else {
+                state.isDarkMode = false;
+                document.documentElement.classList.remove('dark');
+            }
+
+            // 【核心安全重構】：網頁開啟時「預設一律保持離線、登出」
+            state.isLoggedIn = false;
+            state.role = 'student';
+            state.currentPage = 'login';
+
+            const rememberMe = localStorage.getItem('mindnest_remember');
+            const savedUser = localStorage.getItem('mindnest_username');
+            const savedPass = localStorage.getItem('mindnest_password'); // 讀取儲存密碼
+            
+            if (rememberMe === 'true' && savedUser) {
+                // 安全填入機制：不直接登入，只幫使用者「代打」帳密與勾選「記住我」
+                setTimeout(() => {
+                    const userField = document.getElementById('input-username');
+                    const passField = document.getElementById('input-password');
+                    const rememberField = document.getElementById('input-remember');
+                    
+                    if (userField) userField.value = savedUser;
+                    if (passField) passField.value = savedPass || '';
+                    if (rememberField) rememberField.checked = true;
+                }, 50);
+            }
+
+            render();
+        }
+
+        initApp();
+
+    </script>
+</body>
+</html>
