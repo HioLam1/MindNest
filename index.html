@@ -334,9 +334,9 @@
                     <div class="md:col-span-1">
                         <label id="label-add-acc-role" class="block text-xs font-semibold tracking-wider text-indigo-700 dark:text-indigo-400 mb-2 uppercase">身分組</label>
                         <select id="add-acc-role" class="w-full px-4 py-3 rounded-xl border border-indigo-100 dark:border-indigo-800/60 bg-indigo-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer shadow-sm appearance-none">
-                            <option value="student" id="opt-role-student">學生 (Student)</option>
-                            <option value="teacher" id="opt-role-teacher">教師 (Teacher)</option>
                             <option value="developer" id="opt-role-developer">開發者 (Developer)</option>
+                            <option value="teacher" id="opt-role-teacher">教師 (Teacher)</option>
+                            <option value="student" id="opt-role-student">學生 (Student)</option>
                         </select>
                     </div>
                     <div class="md:col-span-1">
@@ -368,9 +368,9 @@
                     <div class="md:col-span-1">
                         <label id="label-change-acc-role" class="block text-xs font-semibold tracking-wider text-blue-700 dark:text-blue-400 mb-2 uppercase">新身分組</label>
                         <select id="change-acc-role" class="w-full px-4 py-3 rounded-xl border border-blue-100 dark:border-blue-800/60 bg-blue-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer shadow-sm appearance-none">
-                            <option value="student" id="opt-change-role-student">學生 (Student)</option>
-                            <option value="teacher" id="opt-change-role-teacher">教師 (Teacher)</option>
                             <option value="developer" id="opt-change-role-developer">開發者 (Developer)</option>
+                            <option value="teacher" id="opt-change-role-teacher">教師 (Teacher)</option>
+                            <option value="student" id="opt-change-role-student">學生 (Student)</option>
                         </select>
                     </div>
                     <div class="md:col-span-1">
@@ -431,7 +431,7 @@
             </div>
 
             <!-- Tab Switching System inside Teacher Dashboard -->
-            <div class="flex gap-2 border-b border-slate-200 dark:border-slate-700/80 mb-8 overflow-x-auto whitespace-nowrap">
+            <div class="flex gap-2 border-b border-slate-200 dark:border-slate-700/80 mb-4 overflow-x-auto whitespace-nowrap">
                 <button id="tab-teacher-scores" onclick="window.setTeacherTab('scores')" class="px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 outline-none flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -444,6 +444,15 @@
                     </svg>
                     <span id="text-tab-status">在線狀態</span>
                 </button>
+            </div>
+
+            <!-- NEW: Role Filter for Student Progress -->
+            <div class="flex items-center gap-2 mb-8 overflow-x-auto whitespace-nowrap pb-2">
+                <span id="text-filter-role" class="text-sm font-semibold text-slate-500 dark:text-slate-400 mr-2">身分篩選：</span>
+                <button id="filter-all" onclick="window.setRoleFilter('all')" class="px-4 py-1.5 rounded-xl text-sm font-semibold transition-all">全部</button>
+                <button id="filter-developer" onclick="window.setRoleFilter('developer')" class="px-4 py-1.5 rounded-xl text-sm font-semibold transition-all">開發者</button>
+                <button id="filter-teacher" onclick="window.setRoleFilter('teacher')" class="px-4 py-1.5 rounded-xl text-sm font-semibold transition-all">教師</button>
+                <button id="filter-student" onclick="window.setRoleFilter('student')" class="px-4 py-1.5 rounded-xl text-sm font-semibold transition-all">學生</button>
             </div>
 
             <!-- Dynamic Student List Container -->
@@ -605,7 +614,7 @@
             </div>
         </div>
 
-        <!-- NEW: Password Verification Modal for Self Demotion (安全自我降級防護彈窗) -->
+        <!-- Password Verification Modal for Self Demotion (安全自我降級防護彈窗) -->
         <div id="modal-demote-verify" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in transition-opacity duration-300">
             <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-slate-100 dark:border-slate-700 text-center">
                 <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-5">
@@ -707,6 +716,8 @@
                 statusOffline: '離線',
                 lastActiveTime: '最後活動時間',
                 neverLoggedIn: '從未登入',
+                filterRole: '身分篩選：',
+                roleAll: '全部',
                 // 開發者模式專屬翻譯
                 devModeTitle: '開發者模式',
                 devModeDesc: '管理系統帳號、設定與底層資料庫。',
@@ -818,6 +829,8 @@
                 statusOffline: '离线',
                 lastActiveTime: '最后活动时间',
                 neverLoggedIn: '从未登录',
+                filterRole: '身份筛选：',
+                roleAll: '全部',
                 devModeTitle: '开发者模式',
                 devModeDesc: '管理系统账号、设置与底层数据库。',
                 devModeStart: '进入系统',
@@ -926,6 +939,8 @@
                 statusOffline: 'Offline',
                 lastActiveTime: 'Last Active',
                 neverLoggedIn: 'Never Logged In',
+                filterRole: 'Filter Role:',
+                roleAll: 'All',
                 devModeTitle: 'Developer Mode',
                 devModeDesc: 'Manage system accounts, settings, and database.',
                 devModeStart: 'Enter System',
@@ -998,6 +1013,7 @@
             role: 'student', // 'student' or 'developer' or 'teacher'
             username: '', // 追蹤當前登入者帳號
             teacherTab: 'scores', // 'scores' or 'status'
+            teacherRoleFilter: 'all', // NEW: 身分過濾器狀態 ('all', 'developer', 'teacher', 'student')
             studentsData: {}, // 全域暫存雲端抓下來的學生資料
             pendingRoleChange: null // 暫存準備被更改身分的資料
         };
@@ -1490,6 +1506,13 @@
             render(); // 觸發重新渲染畫面
         }
 
+        // NEW: 控制教師儀表板內的身分篩選器
+        window.setRoleFilter = function(roleName) {
+            playClickSound();
+            state.teacherRoleFilter = roleName;
+            render(); // 觸發重繪
+        }
+
         window.navigate = navigate; // for internal JS usage
         function navigate(page) {
             playClickSound(); 
@@ -1709,7 +1732,7 @@
             document.getElementById('title-teacher-dash').textContent = dict.teacherDashboardTitle;
             document.getElementById('desc-teacher-dash').textContent = dict.teacherDashboardDesc;
 
-            // 身分組選項的翻譯 (適用於兩個下拉選單)
+            // 身分組選項的翻譯 (適用於兩個下拉選單與教師篩選列)
             const roleOptionsText = {
                 'zh-TW': { s: '學生 (Student)', t: '教師 (Teacher)', d: '開發者 (Developer)' },
                 'zh-CN': { s: '学生 (Student)', t: '教师 (Teacher)', d: '开发者 (Developer)' },
@@ -1724,6 +1747,32 @@
             document.getElementById('opt-change-role-student').textContent = targetText.s;
             document.getElementById('opt-change-role-teacher').textContent = targetText.t;
             document.getElementById('opt-change-role-developer').textContent = targetText.d;
+
+            // 教師儀表板 - 身分篩選器 翻譯
+            document.getElementById('text-filter-role').textContent = dict.filterRole;
+            document.getElementById('filter-all').textContent = dict.roleAll;
+            document.getElementById('filter-developer').textContent = targetText.d;
+            document.getElementById('filter-teacher').textContent = targetText.t;
+            document.getElementById('filter-student').textContent = targetText.s;
+
+            // 教師儀表板 - 篩選器按鈕狀態樣式切換
+            const filterAll = document.getElementById('filter-all');
+            const filterDev = document.getElementById('filter-developer');
+            const filterTeacher = document.getElementById('filter-teacher');
+            const filterStudent = document.getElementById('filter-student');
+
+            const activeFilterClass = "bg-indigo-600 text-white shadow-md dark:bg-indigo-500";
+            const inactiveFilterClass = "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700";
+
+            [filterAll, filterDev, filterTeacher, filterStudent].forEach(el => {
+                el.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${inactiveFilterClass}`;
+            });
+
+            if (state.teacherRoleFilter === 'all') filterAll.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
+            else if (state.teacherRoleFilter === 'developer') filterDev.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
+            else if (state.teacherRoleFilter === 'teacher') filterTeacher.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
+            else if (state.teacherRoleFilter === 'student') filterStudent.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
+
 
             // 切換按鈕與 Tab 標題翻譯
             document.getElementById('text-tab-scores').textContent = dict.tabScores;
@@ -1840,7 +1889,7 @@
                 });
             };
 
-            // 重新繪製學生資料卡片
+            // 重新繪製學生資料卡片 (包含身分篩選功能)
             const redrawCards = () => {
                 if (!studentContainer) return;
                 studentContainer.innerHTML = ''; 
@@ -1862,8 +1911,23 @@
                 Object.values(state.studentsData).forEach(u => {
                     allUsersMap[u.username] = { ...allUsersMap[u.username], ...u };
                 });
+
+                // NEW: 根據當前選擇的身分篩選器過濾要顯示的卡片
+                let filteredUsers = Object.values(allUsersMap);
+                if (state.teacherRoleFilter !== 'all') {
+                    filteredUsers = filteredUsers.filter(u => u.role === state.teacherRoleFilter);
+                }
                 
-                Object.values(allUsersMap).forEach(u => {
+                // NEW: 根據身分自動排序分群 (Developer -> Teacher -> Student)，相同身分再按字母排序
+                const rolePriority = { 'developer': 1, 'teacher': 2, 'student': 3 };
+                filteredUsers.sort((a, b) => {
+                    if (rolePriority[a.role] !== rolePriority[b.role]) {
+                        return rolePriority[a.role] - rolePriority[b.role];
+                    }
+                    return a.username.localeCompare(b.username);
+                });
+                
+                filteredUsers.forEach(u => {
                     const roleBadgeClass = u.role === 'developer' ? 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300' :
                                            u.role === 'teacher' ? 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300' :
                                            'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
