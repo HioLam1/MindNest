@@ -207,7 +207,7 @@
                 <!-- Developer Mode Card -->
                 <div id="card-developer" onclick="window.navigate('developer')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
                     
-                    <!-- NEW: 未讀信件小紅點 (Unread Mailbox Red Dot) - 成功加進來了！ -->
+                    <!-- NEW: 未讀信件小紅點 (Unread Mailbox Red Dot) -->
                     <div id="badge-dev-unread" class="hidden absolute top-4 left-4 h-3.5 w-3.5 z-10 flex">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 shadow-sm border-2 border-white dark:border-slate-800 transition-colors"></span>
@@ -1031,31 +1031,39 @@
             const errorMsg = document.getElementById('login-error');
             const dict = dictionaries[state.currentLang];
 
-            // 1. 先檢查本地註冊名單
-            let foundUser = registeredUsers.find(u => u.username === user && u.password === pass);
+            // 1. 先找找本地有沒有預設的資料
+            let localUser = registeredUsers.find(u => u.username === user && u.password === pass);
+            let finalUser = null;
 
-            // 2. 如果本地沒有，去 Firebase 雲端找找看有沒有開發者即時新增的帳號！
-            if (!foundUser) {
-                try {
-                    const userRef = doc(db, "students", user);
-                    const docSnap = await getDoc(userRef);
-                    if (docSnap.exists() && docSnap.data().password === pass) {
-                        foundUser = { 
+            try {
+                // 2. 去 Firebase 雲端檢查是否有這個帳號 (以雲端身分為絕對優先)
+                const userRef = doc(db, "students", user);
+                const docSnap = await getDoc(userRef);
+                
+                if (docSnap.exists()) {
+                    const dbData = docSnap.data();
+                    // 雲端密碼正確，或者這是本地預設帳號，我們都允許登入
+                    if (dbData.password === pass || localUser) {
+                        finalUser = { 
                             username: user, 
                             password: pass, 
-                            role: docSnap.data().role || 'student' 
+                            // 【關鍵修復】登入時，強制優先使用 Firebase 上的身分！
+                            role: dbData.role || (localUser ? localUser.role : 'student') 
                         };
                     }
-                } catch (err) {
-                    console.error("Firebase Auth Check Error:", err);
+                } else if (localUser) {
+                    // 雲端還沒有這個帳號，但他存在於本地預設名單
+                    finalUser = { ...localUser };
                 }
+            } catch (err) {
+                console.error("Firebase Auth Check Error:", err);
+                // 發生網路錯誤的備用方案
+                if (localUser) { finalUser = { ...localUser }; }
             }
 
-            if (foundUser) {
-                // 這裡拿掉原本的 playClickSound()，因為 navigate 內部會播。
-
+            if (finalUser) {
                 state.isLoggedIn = true;
-                state.role = foundUser.role;
+                state.role = finalUser.role; // 【關鍵修復】確實套用新身分
                 
                 // 記住我：安全預填模式
                 if (remember) {
@@ -1284,8 +1292,10 @@
                      await setDoc(userRef, { role: newRole }, { merge: true });
                 } else {
                      // 處理極端情況：使用者在 local 端但未曾登入雲端，幫他建立完整資料
+                     const localUser = registeredUsers.find(u => u.username === user);
                      await setDoc(userRef, {
                         username: user,
+                        password: localUser ? localUser.password : '',
                         role: newRole,
                         avgScore: 0,
                         completedLessons: 0,
@@ -1293,6 +1303,19 @@
                         lastActive: null,
                         status: 'offline'
                      });
+                }
+
+                // 【關鍵修復】：如果更改的是「自己」的權限，必須即時生效！
+                const currentLoggedUser = localStorage.getItem('mindnest_username') || document.getElementById('input-username').value.trim();
+                if (user === currentLoggedUser) {
+                    state.role = newRole;
+                    localStorage.setItem('mindnest_role', newRole);
+                    
+                    // 如果自己把自己的 Developer 權限拔掉了，就馬上踢回首頁，不能再留在開發者模式
+                    if (newRole !== 'developer' && state.currentPage === 'developer') {
+                        setTimeout(() => { navigate('home'); }, 1500);
+                    }
+                    render(); // 即時重繪畫面
                 }
                 
                 msgBox.innerHTML = `
