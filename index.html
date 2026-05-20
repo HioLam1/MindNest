@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindNest</title>
     
-    <!-- 新增網站圖示 (Favicon) - 更新為大腦圖示 -->
+    <!-- 網站圖示 (Favicon) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%234f46e5%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z%22/><path d=%22M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z%22/></svg>">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,7 +37,6 @@
     <header class="bg-white dark:bg-slate-800 shadow-sm sticky top-0 z-10 transition-colors duration-300">
         <div class="w-full px-4 sm:px-8 lg:px-12 xl:px-24 h-16 flex items-center justify-between">
             <div class="flex items-center gap-2 cursor-pointer" onclick="if(window.state.isLoggedIn) window.navigate('home')">
-                <!-- 左上角的 Logo 大腦圖示 -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" />
                     <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />
@@ -46,44 +45,26 @@
                     <h1 id="app-title" class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">MindNest</h1>
                     <div class="flex items-center gap-1.5">
                         <span id="badge-s2" class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 tracking-wider uppercase">中學二年級</span>
-                        <!-- 動態角色標籤 (置於 S2 盒子右側) -->
                         <span id="badge-role" class="hidden px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase transition-colors duration-300"></span>
                     </div>
                 </div>
             </div>
             
             <div class="flex items-center gap-3">
-                <!-- Logout Button -->
                 <button id="btn-logout" onclick="window.logout()" class="text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-red-50 dark:hover:bg-red-900/30 hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
                 </button>
 
-                <!-- Summary of Today Button -->
                 <button id="btn-summary" onclick="window.navigate('summary')" class="text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-rose-50 dark:hover:bg-rose-900/30 hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                 </button>
 
-                <!-- Theme Toggle Button -->
-                <button id="btn-theme" onclick="window.toggleTheme()" class="text-slate-400 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700">
-                    <!-- Icon populated by JS -->
-                </button>
-
-                <!-- Mute/Unmute Button -->
-                <button id="btn-mute" onclick="window.toggleMute()" class="text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700">
-                    <!-- Icon populated by JS -->
-                </button>
+                <button id="btn-theme" onclick="window.toggleTheme()" class="text-slate-400 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"></button>
+                <button id="btn-mute" onclick="window.toggleMute()" class="text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"></button>
 
                 <div class="flex items-center gap-1.5 border-l border-slate-200 dark:border-slate-700 pl-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                    </svg>
-                    <select id="lang-selector" onchange="window.changeLanguage(this.value)" class="bg-slate-100 dark:bg-slate-700 border-none text-sm font-medium rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer text-slate-700 dark:text-slate-200 transition-colors">
-                        <!-- Options populated by JS -->
-                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>
+                    <select id="lang-selector" onchange="window.changeLanguage(this.value)" class="bg-slate-100 dark:bg-slate-700 border-none text-sm font-medium rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer text-slate-700 dark:text-slate-200 transition-colors"></select>
                 </div>
             </div>
         </div>
@@ -114,23 +95,17 @@
                         <label for="input-remember" id="label-remember" class="ml-2 block text-sm text-slate-600 dark:text-slate-400 cursor-pointer hover:text-slate-800 dark:hover:text-slate-200 transition-colors">記住我</label>
                     </div>
                     
-                    <!-- Advanced Error UI -->
                     <div id="login-error" class="hidden items-start gap-2 p-3 mt-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/50 text-red-600 dark:text-red-400 text-sm rounded-lg font-medium">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <div class="flex flex-col gap-1 w-full text-left">
                             <span id="login-error-text"></span>
-                            <!-- 聯絡開發者連結 -->
-                            <button type="button" onclick="window.navigate('write-letter')" class="text-xs text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-bold underline mt-1 text-left self-start" id="btn-login-contact-dev">
-                                想聯絡開發者嗎？
-                            </button>
+                            <button type="button" onclick="window.navigate('write-letter')" class="text-xs text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-bold underline mt-1 text-left self-start" id="btn-login-contact-dev">想聯絡開發者嗎？</button>
                         </div>
                     </div>
 
-                    <button type="submit" id="btn-login-submit" class="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors mt-4 shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] dark:shadow-none">
-                        登入
-                    </button>
+                    <button type="submit" id="btn-login-submit" class="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors mt-4 shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] dark:shadow-none">登入</button>
                 </form>
             </div>
         </div>
@@ -154,19 +129,13 @@
                     </div>
                     
                     <div id="letter-success-msg" class="hidden items-center gap-2 p-3 bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-900/50 text-green-700 dark:text-green-400 text-sm rounded-lg font-medium">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         <span id="text-letter-success">發送成功！</span>
                     </div>
 
                     <div class="flex gap-3">
-                        <button type="button" onclick="window.navigate('login')" id="btn-letter-back" class="flex-1 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-center text-sm">
-                            返回登入
-                        </button>
-                        <button type="submit" id="btn-letter-submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors shadow-sm text-sm">
-                            發送訊息
-                        </button>
+                        <button type="button" onclick="window.navigate('login')" id="btn-letter-back" class="flex-1 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-center text-sm">返回登入</button>
+                        <button type="submit" id="btn-letter-submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors shadow-sm text-sm">發送訊息</button>
                     </div>
                 </form>
             </div>
@@ -187,11 +156,7 @@
                     </div>
                     <div class="flex items-center gap-4 mb-4 mt-2">
                         <div class="w-14 h-14 bg-amber-50 dark:bg-amber-900/30 text-amber-500 dark:text-amber-400 rounded-2xl flex items-center justify-center transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="3" y1="9" x2="21" y2="9"></line>
-                                <line x1="9" y1="21" x2="9" y2="9"></line>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                         </div>
                         <div>
                             <h3 id="card-teacher-title" class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight transition-colors">教師儀表板</h3>
@@ -199,20 +164,16 @@
                         </div>
                     </div>
                     <div class="w-full mt-auto flex justify-end text-amber-600 dark:text-amber-400 font-medium items-center gap-2 group-hover:gap-3 transition-all">
-                        <span id="card-teacher-start">查看進度</span>
-                        <span>&rarr;</span>
+                        <span id="card-teacher-start">查看進度</span><span>&rarr;</span>
                     </div>
                 </div>
 
                 <!-- Developer Mode Card -->
                 <div id="card-developer" onclick="window.navigate('developer')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
-                    
-                    <!-- 未讀信件小紅點 (Unread Mailbox Red Dot) -->
                     <div id="badge-dev-unread" class="hidden absolute top-4 left-4 h-3.5 w-3.5 z-10 flex">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 shadow-sm border-2 border-white dark:border-slate-800 transition-colors"></span>
                     </div>
-
                     <div class="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider flex items-center gap-1 shadow-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg> ROOT
                     </div>
@@ -221,7 +182,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 14l9-5-9-5-9 5 9 5z" />
                                 <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                                <path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                <path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                             </svg>
                         </div>
                         <div>
@@ -230,8 +191,7 @@
                         </div>
                     </div>
                     <div class="w-full mt-auto flex justify-end text-indigo-600 dark:text-indigo-400 font-medium items-center gap-2 group-hover:gap-3 transition-all">
-                        <span id="card-dev-start">進入系統</span>
-                        <span>&rarr;</span>
+                        <span id="card-dev-start">進入系統</span><span>&rarr;</span>
                     </div>
                 </div>
             </div>
@@ -240,41 +200,24 @@
                 <!-- Math Card -->
                 <div onclick="window.navigate('math')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
                     <div class="w-14 h-14 bg-purple-50 dark:bg-purple-900/30 text-purple-500 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect width="16" height="20" x="4" y="2" rx="2"></rect>
-                            <line x1="8" x2="16" y1="6" y2="6"></line>
-                            <line x1="16" x2="16.01" y1="10" y2="10"></line>
-                            <line x1="12" x2="12.01" y1="10" y2="10"></line>
-                            <line x1="8" x2="8.01" y1="10" y2="10"></line>
-                            <line x1="16" x2="16.01" y1="14" y2="14"></line>
-                            <line x1="12" x2="12.01" y1="14" y2="14"></line>
-                            <line x1="8" x2="8.01" y1="14" y2="14"></line>
-                            <line x1="16" x2="16.01" y1="18" y2="18"></line>
-                            <line x1="12" x2="12.01" y1="18" y2="18"></line>
-                            <line x1="8" x2="8.01" y1="18" y2="18"></line>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><line x1="8" x2="16" y1="6" y2="6"></line><line x1="16" x2="16.01" y1="10" y2="10"></line><line x1="12" x2="12.01" y1="10" y2="10"></line><line x1="8" x2="8.01" y1="10" y2="10"></line><line x1="16" x2="16.01" y1="14" y2="14"></line><line x1="12" x2="12.01" y1="14" y2="14"></line><line x1="8" x2="8.01" y1="14" y2="14"></line><line x1="16" x2="16.01" y1="18" y2="18"></line><line x1="12" x2="12.01" y1="18" y2="18"></line><line x1="8" x2="8.01" y1="18" y2="18"></line></svg>
                     </div>
                     <h3 id="card-math-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">數學</h3>
                     <p id="card-math-desc" class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed transition-colors">探索數字、代數和幾何！</p>
                     <div class="mt-auto text-teal-600 dark:text-teal-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
-                        <span id="card-math-start">開始課程</span>
-                        <span>&rarr;</span>
+                        <span id="card-math-start">開始課程</span><span>&rarr;</span>
                     </div>
                 </div>
 
                 <!-- English Card -->
                 <div onclick="window.navigate('english')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
                     <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-blue-500 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                     </div>
                     <h3 id="card-english-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">英文</h3>
                     <p id="card-english-desc" class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed transition-colors">提升你的文法、字彙、閱讀與寫作技巧。</p>
                     <div class="mt-auto text-teal-600 dark:text-teal-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
-                        <span id="card-english-start">開始課程</span>
-                        <span>&rarr;</span>
+                        <span id="card-english-start">開始課程</span><span>&rarr;</span>
                     </div>
                 </div>
             </div>
@@ -283,28 +226,21 @@
         <!-- Summary View (Not right time to use) -->
         <div id="view-summary" class="w-full fade-in hidden">
             <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span id="btn-back-summary-page">返回首頁</span>
             </button>
-            
             <div class="border-2 border-dashed border-rose-200 dark:border-rose-800/50 bg-rose-50/30 dark:bg-rose-900/10 rounded-3xl p-12 flex flex-col items-center justify-center text-center transition-colors duration-300 min-h-[50vh]">
                 <div class="mb-6 text-rose-400 dark:text-rose-500 bg-rose-100 dark:bg-rose-900/30 p-5 rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path><path d="M8 2v8l4-2 4 2V2"></path>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path><path d="M8 2v8l4-2 4 2V2"></path></svg>
                 </div>
                 <h3 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-200 mb-4 transition-colors not-right-time-text">目前還不是使用的時機</h3>
             </div>
         </div>
 
-        <!-- Developer Mode View -->
+        <!-- Developer Mode View (ONLY ONE IN THE WHOLE FILE!) -->
         <div id="view-developer" class="w-full fade-in hidden">
             <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span id="btn-back-dev">返回首頁</span>
             </button>
 
@@ -316,12 +252,9 @@
             <!-- 開發者專屬：新增帳號全寬面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-indigo-200 dark:border-indigo-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors">
                 <h3 class="text-xl font-bold text-indigo-900 dark:text-indigo-200 mb-6 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>
                     <span id="text-dev-add-acc-panel-title">新增系統帳號</span>
                 </h3>
-                
                 <form onsubmit="window.handleAddAccount(event)" class="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
                     <div class="md:col-span-1">
                         <label id="label-add-acc-user" class="block text-xs font-semibold tracking-wider text-indigo-700 dark:text-indigo-400 mb-2 uppercase">使用者名稱</label>
@@ -340,9 +273,7 @@
                         </select>
                     </div>
                     <div class="md:col-span-1">
-                        <button type="submit" id="btn-add-acc-submit" class="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md">
-                            立即新增
-                        </button>
+                        <button type="submit" id="btn-add-acc-submit" class="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md">立即新增</button>
                     </div>
                 </form>
                 <div id="add-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
@@ -351,19 +282,13 @@
             <!-- 開發者專屬：變更帳號身分面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-blue-200 dark:border-blue-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-blue-900 dark:text-blue-200 mb-6 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                     <span id="text-dev-change-role-panel-title">變更帳號身分</span>
                 </h3>
-                
                 <form onsubmit="window.handleChangeRole(event)" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
                     <div class="md:col-span-1">
                         <label id="label-change-acc-user" class="block text-xs font-semibold tracking-wider text-blue-700 dark:text-blue-400 mb-2 uppercase">使用者名稱</label>
-                        <!-- 改為下拉選單，防止打字錯誤 -->
-                        <select id="change-acc-user" required class="w-full px-4 py-3 rounded-xl border border-blue-100 dark:border-blue-800/60 bg-blue-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all shadow-sm cursor-pointer">
-                            <!-- 選項會由 JS 動態生成 -->
-                        </select>
+                        <select id="change-acc-user" required class="w-full px-4 py-3 rounded-xl border border-blue-100 dark:border-blue-800/60 bg-blue-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all shadow-sm cursor-pointer"></select>
                     </div>
                     <div class="md:col-span-1">
                         <label id="label-change-acc-role" class="block text-xs font-semibold tracking-wider text-blue-700 dark:text-blue-400 mb-2 uppercase">新身分組</label>
@@ -374,26 +299,45 @@
                         </select>
                     </div>
                     <div class="md:col-span-1">
-                        <button type="submit" id="btn-change-acc-submit" class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md">
-                            變更身分
-                        </button>
+                        <button type="submit" id="btn-change-acc-submit" class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md">變更身分</button>
                     </div>
                 </form>
                 <div id="change-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
             </div>
 
+            <!-- 開發者專屬：批次刪除帳號面板 (這是你找不到的功能，現在確保它在這裡！) -->
+            <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-red-200 dark:border-red-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
+                <h3 class="text-xl font-bold text-red-900 dark:text-red-200 mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    <span id="text-dev-del-acc-title">批次刪除帳號</span>
+                </h3>
+                
+                <div class="mb-4 flex items-center px-2">
+                    <input type="checkbox" id="checkbox-select-all" onclick="window.toggleSelectAllDelete(this)" class="w-4 h-4 text-red-600 border-red-300 rounded focus:ring-red-500 bg-white dark:bg-slate-700 cursor-pointer transition-all">
+                    <label for="checkbox-select-all" id="label-select-all" class="ml-3 text-sm font-bold text-slate-700 dark:text-slate-300 cursor-pointer uppercase tracking-wider">全選</label>
+                </div>
+                
+                <div id="delete-user-list" class="max-h-60 overflow-y-auto border border-red-100 dark:border-red-900/30 rounded-2xl p-4 bg-red-50/30 dark:bg-red-900/10 space-y-1 mb-6">
+                    <!-- Checkboxes populated by JS -->
+                </div>
+                
+                <button onclick="window.initiateDeleteAccounts()" class="w-full bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    <span id="btn-del-acc-text">刪除選取帳號</span>
+                </button>
+                <div id="del-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
+            </div>
+
             <!-- 開發者專屬：編輯今日總結面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-rose-200 dark:border-rose-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-rose-900 dark:text-rose-200 mb-6 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-600 dark:text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-600 dark:text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                     <span id="text-dev-edit-summary-title">編輯今日總結</span>
                 </h3>
                 <div class="bg-rose-50/50 dark:bg-rose-900/20 rounded-2xl p-10 flex flex-col items-center justify-center border border-rose-100 dark:border-rose-800/30">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-rose-300 dark:text-rose-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-rose-300 dark:text-rose-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                     <span class="text-rose-500 dark:text-rose-400 font-semibold dev-not-right-time text-lg">目前還不是使用的時機</span>
                 </div>
             </div>
@@ -401,27 +345,18 @@
             <!-- 開發者專屬：聯絡信箱 (Developer Inbox) -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-indigo-200 dark:border-indigo-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-indigo-900 dark:text-indigo-200 mb-6 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 19v-8.93a2 2 0 01.89-1.664l8-5.333a2 2 0 012.22 0l8 5.333A2 2 0 0121 10.07V19a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 9l-3 3m0 0l-3-3m3 3V3" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 19v-8.93a2 2 0 01.89-1.664l8-5.333a2 2 0 012.22 0l8 5.333A2 2 0 0121 10.07V19a2 2 0 01-2 2H5a2 2 0 01-2-2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 9l-3 3m0 0l-3-3m3 3V3" /></svg>
                     <span id="text-dev-mailbox-title">開發者信箱 (Inbox)</span>
                 </h3>
                 <p id="desc-dev-mailbox" class="text-sm text-slate-500 dark:text-slate-400 mb-6">查看所有學生發送的聯絡留言。</p>
-                
-                <!-- 信件列表容器 -->
-                <div id="dev-mailbox-container" class="space-y-4 max-h-[400px] overflow-y-auto pr-2">
-                    <!-- 信件將由 JS 動態生成 -->
-                </div>
+                <div id="dev-mailbox-container" class="space-y-4 max-h-[400px] overflow-y-auto pr-2"></div>
             </div>
         </div>
 
-        <!-- Teacher Dashboard View -->
+        <!-- Teacher Dashboard View (ONLY ONE IN THE WHOLE FILE!) -->
         <div id="view-teacher-dashboard" class="w-full fade-in hidden">
             <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span id="btn-back-teacher">返回首頁</span>
             </button>
 
@@ -433,15 +368,11 @@
             <!-- Tab Switching System inside Teacher Dashboard -->
             <div class="flex gap-2 border-b border-slate-200 dark:border-slate-700/80 mb-4 overflow-x-auto whitespace-nowrap">
                 <button id="tab-teacher-scores" onclick="window.setTeacherTab('scores')" class="px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 outline-none flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                     <span id="text-tab-scores">分數與進度</span>
                 </button>
                 <button id="tab-teacher-status" onclick="window.setTeacherTab('status')" class="px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white outline-none flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.07 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.07 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z" /></svg>
                     <span id="text-tab-status">在線狀態</span>
                 </button>
             </div>
@@ -456,37 +387,20 @@
             </div>
 
             <!-- Dynamic Student List Container -->
-            <div id="student-list-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full">
-                <!-- Cards will be populated by JS from Firebase -->
-            </div>
+            <div id="student-list-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full"></div>
         </div>
 
         <!-- Lesson View -->
         <div id="view-lesson" class="w-full fade-in hidden">
-            
             <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span id="btn-back">返回首頁</span>
             </button>
 
             <!-- Dynamic Headers -->
             <div id="lesson-header-math" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
                  <div class="w-16 h-16 bg-purple-50 dark:bg-purple-900/30 text-purple-500 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect width="16" height="20" x="4" y="2" rx="2"></rect>
-                        <line x1="8" x2="16" y1="6" y2="6"></line>
-                        <line x1="16" x2="16.01" y1="10" y2="10"></line>
-                        <line x1="12" x2="12.01" y1="10" y2="10"></line>
-                        <line x1="8" x2="8.01" y1="10" y2="10"></line>
-                        <line x1="16" x2="16.01" y1="14" y2="14"></line>
-                        <line x1="12" x2="12.01" y1="14" y2="14"></line>
-                        <line x1="8" x2="8.01" y1="14" y2="14"></line>
-                        <line x1="16" x2="16.01" y1="18" y2="18"></line>
-                        <line x1="12" x2="12.01" y1="18" y2="18"></line>
-                        <line x1="8" x2="8.01" y1="18" y2="18"></line>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><line x1="8" x2="16" y1="6" y2="6"></line><line x1="16" x2="16.01" y1="10" y2="10"></line><line x1="12" x2="12.01" y1="10" y2="10"></line><line x1="8" x2="8.01" y1="10" y2="10"></line><line x1="16" x2="16.01" y1="14" y2="14"></line><line x1="12" x2="12.01" y1="14" y2="14"></line><line x1="8" x2="8.01" y1="14" y2="14"></line><line x1="16" x2="16.01" y1="18" y2="18"></line><line x1="12" x2="12.01" y1="18" y2="18"></line><line x1="8" x2="8.01" y1="18" y2="18"></line></svg>
                  </div>
                  <h2 id="lesson-math-title" class="text-3xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">數學</h2>
                  <p id="lesson-math-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors">探索數字、代數和幾何！</p>
@@ -503,10 +417,7 @@
 
             <div id="lesson-header-english" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
                  <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/30 text-blue-500 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                  </div>
                  <h2 id="lesson-english-title" class="text-3xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">英文</h2>
                  <p id="lesson-english-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors">提升你的文法、字彙、閱讀與寫作技巧。</p>
@@ -535,11 +446,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                     <div onclick="window.navigateCategory('geometry')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-center text-center">
                         <div class="w-16 h-16 bg-pink-50 dark:bg-pink-900/30 text-pink-500 dark:text-pink-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="8" height="8" rx="2"></rect>
-                                <circle cx="17" cy="7" r="4"></circle>
-                                <polygon points="12 21 7 13 17 13"></polygon>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"></rect><circle cx="17" cy="7" r="4"></circle><polygon points="12 21 7 13 17 13"></polygon></svg>
                         </div>
                         <h4 id="text-geometry" class="text-xl font-bold text-slate-900 dark:text-white mb-2 transition-colors">幾何</h4>
                         <p id="text-geometry-desc" class="text-slate-500 dark:text-slate-400 transition-colors">學習圖形、空間與角度。</p>
@@ -547,11 +454,7 @@
 
                     <div onclick="window.navigateCategory('algebra')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-center text-center">
                          <div class="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7 4v16"></path>
-                                <path d="M5 6l2-2"></path>
-                                <path d="M13 8a3 3 0 0 1 6 0c0 2-6 5.5-6 8h6"></path>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16"></path><path d="M5 6l2-2"></path><path d="M13 8a3 3 0 0 1 6 0c0 2-6 5.5-6 8h6"></path></svg>
                          </div>
                         <h4 id="text-algebra" class="text-xl font-bold text-slate-900 dark:text-white mb-2 transition-colors">代數</h4>
                         <p id="text-algebra-desc" class="text-slate-500 dark:text-slate-400 transition-colors">學習變數、方程式與函數。</p>
@@ -585,23 +488,20 @@
             <!-- English Content -->
             <div id="content-english" class="hidden border-2 border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 rounded-3xl p-12 flex flex-col items-center text-center transition-colors duration-300">
                 <div class="mb-5 text-slate-400 dark:text-slate-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-12 md:w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-12 md:w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
                 </div>
-                
                 <h3 class="dev-title-text text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2 transition-colors">開發中，請稍候...</h3>
                 <p class="dev-msg-text text-slate-500 dark:text-slate-400 text-lg max-w-md transition-colors">我們目前正在建立此模組的學習教材。</p>
             </div>
         </div>
         
+        <!-- Modals -->
+        
         <!-- Confirmation Modal for Changing Developer Role -->
         <div id="modal-confirm" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in transition-opacity duration-300">
             <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-slate-100 dark:border-slate-700 text-center">
                 <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                 </div>
                 <h3 id="modal-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-2">確定嗎？</h3>
                 <p id="modal-desc" class="text-slate-500 dark:text-slate-400 mb-8 text-sm">您即將更改一名開發者 (Developer) 的權限。這可能會影響系統管理。</p>
@@ -616,9 +516,7 @@
         <div id="modal-demote-verify" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in transition-opacity duration-300">
             <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-slate-100 dark:border-slate-700 text-center">
                 <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                 </div>
                 <h3 id="modal-demote-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-2">確認您的密碼</h3>
                 <p id="modal-demote-desc" class="text-slate-500 dark:text-slate-400 mb-6 text-sm">若要變更您自己的開發者權限，請輸入您的密碼：</p>
@@ -629,6 +527,21 @@
                 <div class="flex gap-3 justify-center">
                     <button onclick="window.cancelDemoteVerify()" id="btn-modal-demote-cancel" class="flex-1 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">取消</button>
                     <button onclick="window.confirmDemoteVerify()" id="btn-modal-demote-confirm" class="flex-1 py-3 rounded-xl font-semibold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-md">驗證並變更</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Batch Delete Confirmation Modal (刪除確認彈窗) -->
+        <div id="modal-delete-verify" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in transition-opacity duration-300">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-slate-100 dark:border-slate-700 text-center">
+                <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                </div>
+                <h3 id="modal-del-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-2">確定刪除嗎？</h3>
+                <p id="modal-del-desc" class="text-slate-500 dark:text-slate-400 mb-8 text-sm">您即將永久刪除選取的帳號，此操作無法復原。</p>
+                <div class="flex gap-3 justify-center">
+                    <button onclick="window.cancelDeleteAccounts()" id="btn-modal-del-cancel" class="flex-1 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">取消</button>
+                    <button onclick="window.confirmDeleteAccounts()" id="btn-modal-del-confirm" class="flex-1 py-3 rounded-xl font-semibold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-md">確認刪除</button>
                 </div>
             </div>
         </div>
@@ -759,6 +672,14 @@
                 devInboxDesc: '查看所有學生或教師發送的聯絡訊息與申請。',
                 noMessages: '目前沒有任何訊息。',
                 deleteBtn: '刪除',
+                // 批次刪除系統翻譯
+                devDelAccTitle: '批次刪除帳號',
+                selectAll: '全選',
+                btnDelAcc: '刪除選取帳號',
+                delAccSuccess: '帳號刪除成功！',
+                delAccNoSelection: '請先選取要刪除的帳號！',
+                modalDelTitle: '確定刪除嗎？',
+                modalDelDesc: '您即將永久刪除選取的帳號，此操作無法復原。',
                 // 今日總結翻譯
                 summaryOfToday: '今日總結',
                 summaryDesc: '查看您今天的學習進度與重點。',
@@ -870,6 +791,14 @@
                 devInboxDesc: '查看所有学生或教师发送的联络消息与申请。',
                 noMessages: '目前没有任何消息。',
                 deleteBtn: '删除',
+                // 批次刪除系統翻譯
+                devDelAccTitle: '批次删除账号',
+                selectAll: '全选',
+                btnDelAcc: '删除选定账号',
+                delAccSuccess: '账号删除成功！',
+                delAccNoSelection: '请先选择要删除的账号！',
+                modalDelTitle: '确定删除吗？',
+                modalDelDesc: '您即将永久删除选定的账号，此操作无法恢复。',
                 summaryOfToday: '今日总结',
                 summaryDesc: '查看您今天的学习进度与重点。',
                 summaryStart: '查看总结',
@@ -980,7 +909,14 @@
                 devInboxDesc: 'View all contact messages and applications sent by students or teachers.',
                 noMessages: 'No messages currently.',
                 deleteBtn: 'Delete',
-                // 今日總結翻譯
+                // New: Batch Delete translation
+                devDelAccTitle: 'Batch Delete Accounts',
+                selectAll: 'Select All',
+                btnDelAcc: 'Delete Selected',
+                delAccSuccess: 'Accounts successfully deleted!',
+                delAccNoSelection: 'Please select accounts to delete!',
+                modalDelTitle: 'Are you sure?',
+                modalDelDesc: 'You are about to permanently delete the selected accounts. This cannot be undone.',
                 summaryOfToday: 'Summary of Today',
                 summaryDesc: 'Review your learning progress and key points of the day.',
                 summaryStart: 'View Summary',
@@ -1002,23 +938,23 @@
 
         // 2. Application State
         let state = {
-            currentLang: 'zh-TW', // Entry default is Chinese Traditional
-            lastChineseLang: 'zh-TW', // Track this so we revert nicely from English
-            currentPage: 'login',  // Start at login page
-            selectedCategory: '', // 'geometry' or 'algebra'
-            selectedChapter: 1, // 1 or 2
-            isMuted: false, // Sound toggle state
-            isDarkMode: false, // Dark mode state
-            isLoggedIn: false, // Login state
-            role: 'student', // 'student' or 'developer' or 'teacher'
-            username: '', // 追蹤當前登入者帳號
-            teacherTab: 'scores', // 'scores' or 'status'
-            teacherRoleFilter: 'all', // 身分過濾器狀態 ('all', 'developer', 'teacher', 'student')
-            studentsData: {}, // 全域暫存雲端抓下來的學生資料
-            pendingRoleChange: null // 暫存準備被更改身分的資料
+            currentLang: 'zh-TW', 
+            lastChineseLang: 'zh-TW', 
+            currentPage: 'login',  
+            selectedCategory: '', 
+            selectedChapter: 1, 
+            isMuted: false, 
+            isDarkMode: false, 
+            isLoggedIn: false, 
+            role: 'student', 
+            username: '', 
+            teacherTab: 'scores', 
+            teacherRoleFilter: 'all', 
+            studentsData: {}, 
+            pendingRoleChange: null, 
+            pendingDeletions: [] 
         };
         
-        // 為了讓 HTML 標籤能呼叫 module 內的函數，必須將它們掛載到 window 上
         window.state = state;
 
         // Web Audio API Context (Initialized on first interaction)
@@ -1078,7 +1014,7 @@
             }
         }
 
-        // --- 核心登入驗證（會同時檢查本地預設與 Firebase 雲端密碼）---
+        // --- 核心登入驗證 ---
         window.handleLogin = async function(e) {
             e.preventDefault();
             const user = document.getElementById('input-username').value.trim();
@@ -1098,29 +1034,25 @@
                 
                 if (docSnap.exists()) {
                     const dbData = docSnap.data();
-                    // 雲端密碼正確，或者這是本地預設帳號，我們都允許登入
                     if (dbData.password === pass || localUser) {
                         finalUser = { 
                             username: user, 
                             password: pass, 
-                            // 登入時，強制優先使用 Firebase 上的身分！
                             role: dbData.role || (localUser ? localUser.role : 'student') 
                         };
                     }
                 } else if (localUser) {
-                    // 雲端還沒有這個帳號，但他存在於本地預設名單
                     finalUser = { ...localUser };
                 }
             } catch (err) {
                 console.error("Firebase Auth Check Error:", err);
-                // 發生網路錯誤的備用方案
                 if (localUser) { finalUser = { ...localUser }; }
             }
 
             if (finalUser) {
                 state.isLoggedIn = true;
-                state.role = finalUser.role; // 確實套用新身分
-                state.username = finalUser.username; // 紀錄當前登入者名稱
+                state.role = finalUser.role; 
+                state.username = finalUser.username; 
                 
                 // 記住我：安全預填模式
                 if (remember) {
@@ -1139,9 +1071,7 @@
                 errorMsg.classList.remove('flex');
                 document.getElementById('input-password').value = ''; 
                 
-                // 登入成功時，把資料推上雲端，狀態為 "online"，並夾帶密碼保障雲端驗證正常運作
                 await syncUserToFirestore(user, state.role, "online", pass);
-                
                 navigate('home');
             } else {
                 document.getElementById('login-error-text').textContent = dict.loginError;
@@ -1150,7 +1080,7 @@
             }
         }
 
-        // --- 開發者專屬：新增帳號並推上雲端 ---
+        // --- 開發者專屬：新增帳號 ---
         window.handleAddAccount = async function(e) {
             e.preventDefault();
             const user = document.getElementById('add-acc-user').value.trim();
@@ -1161,25 +1091,21 @@
 
             if (!user || !pass) return;
 
-            // 初始化訊息框
             msgBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700', 'dark:bg-green-900/30', 'dark:text-green-400', 'dark:bg-red-900/30', 'dark:text-red-400');
             msgBox.innerHTML = '';
 
             try {
-                // 檢查雲端或本地是否已經存在這個人
                 const userRef = doc(db, "students", user);
                 const docSnap = await getDoc(userRef);
                 const isLocal = registeredUsers.some(u => u.username === user);
 
                 if (docSnap.exists() || isLocal) {
-                    // 帳號已存在，報錯
                     msgBox.innerHTML = `
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                         ${dict.addAccExists}
                     `;
                     msgBox.classList.add('flex', 'bg-red-50', 'text-red-700', 'dark:bg-red-900/30', 'dark:text-red-400');
                 } else {
-                    // 帳號不存在，寫入全新帳號至 Firebase！
                     await setDoc(userRef, {
                         username: user,
                         password: pass,
@@ -1188,17 +1114,15 @@
                         completedLessons: 0,
                         lastLogin: null,
                         lastActive: null,
-                        status: 'offline' // 新增的帳號預設為離線
+                        status: 'offline' 
                     });
 
-                    // 成功提示
                     msgBox.innerHTML = `
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         ${dict.addAccSuccess}
                     `;
                     msgBox.classList.add('flex', 'bg-green-50', 'text-green-700', 'dark:bg-green-900/30', 'dark:text-green-400');
 
-                    // 清空輸入框
                     document.getElementById('add-acc-user').value = '';
                     document.getElementById('add-acc-pass').value = '';
                 }
@@ -1209,7 +1133,7 @@
             }
         }
 
-        // --- 學生/未註冊者：撰寫信件並推上雲端 ---
+        // --- 學生/未註冊者：撰寫信件 ---
         window.handleSendLetter = async function(e) {
             e.preventDefault();
             const sender = document.getElementById('input-letter-sender').value.trim();
@@ -1222,7 +1146,6 @@
             submitBtn.disabled = true;
 
             try {
-                // 自動生成信件專屬隨機 document id
                 const msgRef = doc(collection(db, "developer_messages"));
                 await setDoc(msgRef, {
                     id: msgRef.id,
@@ -1232,7 +1155,6 @@
                     unread: true
                 });
 
-                // 發送成功，播放點擊音效，並顯示成功提示框
                 playClickSound();
                 successBox.classList.remove('hidden');
                 successBox.classList.add('flex');
@@ -1264,13 +1186,12 @@
         // --- 開發者專屬：變更帳號身分功能 ---
         window.handleChangeRole = async function(e) {
             e.preventDefault();
-            // 現在從下拉選單獲取值
             const user = document.getElementById('change-acc-user').value.trim();
             const newRole = document.getElementById('change-acc-role').value;
             const msgBox = document.getElementById('change-acc-msg');
             const dict = dictionaries[state.currentLang];
 
-            if (!user) return; // 如果選到預設的「請選擇帳號」就不執行
+            if (!user) return; 
 
             msgBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700', 'dark:bg-green-900/30', 'dark:text-green-400', 'dark:bg-red-900/30', 'dark:text-red-400');
             msgBox.innerHTML = '';
@@ -1282,7 +1203,6 @@
                 let currentRole = null;
                 let existsInDb = false;
 
-                // 檢查雲端或全域暫存資料庫是否有這個人
                 if (docSnap.exists()) {
                     currentRole = docSnap.data().role;
                     existsInDb = true;
@@ -1294,7 +1214,6 @@
                     if (localUser) { currentRole = localUser.role; }
                 }
 
-                // 若完全找不到此人
                 if (!currentRole && !existsInDb) {
                     msgBox.innerHTML = `
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
@@ -1304,21 +1223,18 @@
                     return;
                 }
 
-                // 安全自我降級防護系統：如果當前登入者試圖變更自己的「開發者」身分
+                // 安全自我降級防護系統
                 const currentLoggedUser = localStorage.getItem('mindnest_username') || state.username;
                 if (user === currentLoggedUser && currentRole === 'developer' && newRole !== 'developer') {
-                    // 暫存此變更任務，並呼叫密碼驗證彈窗
                     state.pendingRoleChange = { username: user, newRole: newRole, existsInDb: existsInDb };
                     document.getElementById('input-demote-password').value = '';
                     document.getElementById('demote-password-error').classList.add('hidden');
                     document.getElementById('modal-demote-verify').classList.remove('hidden');
                 } 
-                // 若非自己，而是去降級其他人的 developer 身分，走普通的二次確認彈窗
                 else if (currentRole === 'developer' && newRole !== 'developer') {
                     state.pendingRoleChange = { username: user, newRole: newRole, existsInDb: existsInDb };
                     document.getElementById('modal-confirm').classList.remove('hidden');
                 } else {
-                    // 一般學員權限變更，直接執行
                     await executeRoleChange(user, newRole, existsInDb);
                 }
             } catch (err) {
@@ -1328,20 +1244,17 @@
             }
         }
 
-        // --- 降級確認彈窗：取消按鈕 ---
         window.cancelDemoteVerify = function() {
             playClickSound();
             document.getElementById('modal-demote-verify').classList.add('hidden');
-            state.pendingRoleChange = null; // 廢棄暫存
+            state.pendingRoleChange = null;
         }
 
-        // --- 降級確認彈窗：輸入密碼並驗證確認 ---
         window.confirmDemoteVerify = async function() {
             playClickSound();
             const typedPassword = document.getElementById('input-demote-password').value.trim();
             const errorLabel = document.getElementById('demote-password-error');
 
-            // 嚴格比對您的專屬密碼：Bedwars$20130630
             if (typedPassword === 'Bedwars$20130630') {
                 errorLabel.classList.add('hidden');
                 document.getElementById('modal-demote-verify').classList.add('hidden');
@@ -1349,22 +1262,19 @@
                 if (state.pendingRoleChange) {
                     const { username, newRole, existsInDb } = state.pendingRoleChange;
                     await executeRoleChange(username, newRole, existsInDb);
-                    state.pendingRoleChange = null; // 任務完成清空
+                    state.pendingRoleChange = null; 
                 }
             } else {
-                // 驗證失敗，顯示紅字警告，且不予更改
                 errorLabel.classList.remove('hidden');
             }
         }
 
-        // --- 傳統確認彈跳視窗取消按鈕 ---
         window.cancelChangeRole = function() {
             playClickSound();
             document.getElementById('modal-confirm').classList.add('hidden');
-            state.pendingRoleChange = null; // 清除暫存
+            state.pendingRoleChange = null; 
         }
 
-        // --- 傳統確認彈跳視窗確認按鈕 ---
         window.confirmChangeRole = async function() {
             playClickSound();
             if (state.pendingRoleChange) {
@@ -1375,7 +1285,6 @@
             }
         }
 
-        // --- 真正執行變更並同步 Firebase 的函式 ---
         window.executeRoleChange = async function(user, newRole, existsInDb) {
             const msgBox = document.getElementById('change-acc-msg');
             const dict = dictionaries[state.currentLang];
@@ -1383,10 +1292,8 @@
             try {
                 const userRef = doc(db, "students", user);
                 if (existsInDb) {
-                     // 只更新 Firebase 的 role 欄位 (merge: true)
                      await setDoc(userRef, { role: newRole }, { merge: true });
                 } else {
-                     // 處理極端情況：使用者在 local 端但未曾登入雲端，幫他建立完整資料
                      const localUser = registeredUsers.find(u => u.username === user);
                      await setDoc(userRef, {
                         username: user,
@@ -1400,17 +1307,14 @@
                      });
                 }
 
-                // 如果更改的是「自己」的權限，必須即時生效！
                 const currentLoggedUser = localStorage.getItem('mindnest_username') || state.username;
                 if (user === currentLoggedUser) {
                     state.role = newRole;
                     localStorage.setItem('mindnest_role', newRole);
-                    
-                    // 如果自己把自己的 Developer 權限拔掉了，就馬上踢回首頁，不能再留在開發者模式
                     if (newRole !== 'developer' && state.currentPage === 'developer') {
                         setTimeout(() => { navigate('home'); }, 1500);
                     }
-                    render(); // 即時重繪畫面
+                    render();
                 }
                 
                 msgBox.innerHTML = `
@@ -1419,7 +1323,6 @@
                 `;
                 msgBox.classList.add('flex', 'bg-green-50', 'text-green-700', 'dark:bg-green-900/30', 'dark:text-green-400');
                 
-                // 成功後將下拉選單歸零
                 document.getElementById('change-acc-user').value = '';
             } catch(err) {
                 console.error("Execute Change Error:", err);
@@ -1428,13 +1331,75 @@
             }
         }
 
+        // --- NEW: 批次刪除帳號相關邏輯 ---
+        window.toggleSelectAllDelete = function(checkbox) {
+            playClickSound();
+            const checkboxes = document.querySelectorAll('.delete-checkbox');
+            checkboxes.forEach(cb => cb.checked = checkbox.checked);
+        }
+
+        window.initiateDeleteAccounts = function() {
+            playClickSound();
+            const dict = dictionaries[state.currentLang];
+            const checkboxes = document.querySelectorAll('.delete-checkbox:checked');
+            const msgBox = document.getElementById('del-acc-msg');
+            msgBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700', 'dark:bg-green-900/30', 'dark:text-green-400', 'dark:bg-red-900/30', 'dark:text-red-400');
+            
+            if (checkboxes.length === 0) {
+                msgBox.innerHTML = `⚠️ ${dict.delAccNoSelection}`;
+                msgBox.classList.add('flex', 'bg-red-50', 'text-red-700', 'dark:bg-red-900/30', 'dark:text-red-400');
+                return;
+            }
+
+            state.pendingDeletions = Array.from(checkboxes).map(cb => cb.value);
+            document.getElementById('modal-delete-verify').classList.remove('hidden');
+        }
+
+        window.cancelDeleteAccounts = function() {
+            playClickSound();
+            document.getElementById('modal-delete-verify').classList.add('hidden');
+            state.pendingDeletions = [];
+        }
+
+        window.confirmDeleteAccounts = async function() {
+            playClickSound();
+            document.getElementById('modal-delete-verify').classList.add('hidden');
+            const msgBox = document.getElementById('del-acc-msg');
+            const dict = dictionaries[state.currentLang];
+            
+            try {
+                if (state.pendingDeletions && state.pendingDeletions.length > 0) {
+                    for (const username of state.pendingDeletions) {
+                        await deleteDoc(doc(db, "students", username));
+                    }
+                    
+                    msgBox.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        ${dict.delAccSuccess}
+                    `;
+                    msgBox.classList.add('flex', 'bg-green-50', 'text-green-700', 'dark:bg-green-900/30', 'dark:text-green-400');
+                    
+                    document.getElementById('checkbox-select-all').checked = false;
+                    
+                    // 如果自己刪除了自己，直接登出踢出系統
+                    const currentLoggedUser = localStorage.getItem('mindnest_username') || state.username;
+                    if (state.pendingDeletions.includes(currentLoggedUser)) {
+                        setTimeout(() => { window.logout(); }, 1500);
+                    }
+                }
+            } catch(err) {
+                console.error("Delete Logic Error:", err);
+                msgBox.innerHTML = `⚠️ 系統發生錯誤。`;
+                msgBox.classList.add('flex', 'bg-red-50', 'text-red-700');
+            }
+            state.pendingDeletions = [];
+        }
+
         window.logout = async function() {
-            // 這裡拿掉原本的 playClickSound()，因為 navigate 內部會播。
             const currentUser = localStorage.getItem('mindnest_username') || (state.isLoggedIn ? state.username : null);
             
             if (currentUser) {
                 try {
-                    // 登出時，在雲端將該學生狀態設為離線 "offline"
                     const userRef = doc(db, "students", currentUser);
                     await setDoc(userRef, { status: "offline" }, { merge: true });
                 } catch(err) {
@@ -1446,17 +1411,14 @@
             state.role = 'student';
             state.username = '';
             
-            // 登出時：【不清除】localStorage 的記住我數據，以便回到登入頁面時自動填寫
             navigate('login');
         }
 
-        // 安全防護網：當使用者直接關閉分頁或瀏覽器時，強制同步「離線」到雲端
         window.addEventListener('beforeunload', function() {
             if (state.isLoggedIn) {
                 const currentUser = localStorage.getItem('mindnest_username') || state.username;
                 if (currentUser) {
                     const userRef = doc(db, "students", currentUser);
-                    // 發送同步離線狀態
                     setDoc(userRef, { status: "offline" }, { merge: true });
                 }
             }
@@ -1499,21 +1461,19 @@
             navigate('math-chapter');
         }
 
-        // 控制教師儀表板內的 Tab 切換
         window.setTeacherTab = function(tabName) {
             playClickSound();
             state.teacherTab = tabName;
-            render(); // 觸發重新渲染畫面
+            render(); 
         }
 
-        // NEW: 控制教師儀表板內的身分篩選器
         window.setRoleFilter = function(roleName) {
             playClickSound();
             state.teacherRoleFilter = roleName;
-            render(); // 觸發重繪
+            render(); 
         }
 
-        window.navigate = navigate; // for internal JS usage
+        window.navigate = navigate; 
         function navigate(page) {
             playClickSound(); 
             if (!state.isLoggedIn && page !== 'login' && page !== 'write-letter') { page = 'login'; }
@@ -1528,22 +1488,22 @@
                 }
             }
             
-            // 進入開發者模式時，清空可能殘留的狀態訊息
             if (page === 'developer') {
                 const addMsgBox = document.getElementById('add-acc-msg');
                 const changeMsgBox = document.getElementById('change-acc-msg');
+                const delMsgBox = document.getElementById('del-acc-msg');
                 if(addMsgBox) {
                     addMsgBox.classList.add('hidden');
                     document.getElementById('add-acc-user').value = '';
                     document.getElementById('add-acc-pass').value = '';
                 }
-                if(changeMsgBox) {
-                    changeMsgBox.classList.add('hidden');
-                    // 當進入開發者頁面，會觸發 render 重新抓取一次下拉選單
-                }
+                if(changeMsgBox) changeMsgBox.classList.add('hidden');
+                if(delMsgBox) delMsgBox.classList.add('hidden');
+                
+                const selectAllCb = document.getElementById('checkbox-select-all');
+                if(selectAllCb) selectAllCb.checked = false;
             }
 
-            // 貼心自動填入帳號機制：當切換至「寫信」頁面，自動將先前在登入輸入框打的字填入姓名欄
             if (page === 'write-letter') {
                 const typedUser = document.getElementById('input-username').value.trim();
                 setTimeout(() => {
@@ -1569,17 +1529,10 @@
             const btnMute = document.getElementById('btn-mute');
             if (state.isMuted) {
                 btnMute.title = dict.unmuteTip;
-                btnMute.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-                    </svg>`;
+                btnMute.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>`;
             } else {
                 btnMute.title = dict.muteTip;
-                btnMute.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 0 1 0 7.072m2.828-9.9a9 9 0 0 1 0 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                    </svg>`;
+                btnMute.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 0 1 0 7.072m2.828-9.9a9 9 0 0 1 0 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>`;
             }
         }
 
@@ -1590,35 +1543,25 @@
 
             if (state.isDarkMode) {
                 btnTheme.title = dict.themeLight;
-                btnTheme.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>`;
+                btnTheme.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`;
             } else {
                 btnTheme.title = dict.themeDark;
-                btnTheme.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>`;
+                btnTheme.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`;
             }
         }
 
-        // 用來追蹤 Firebase 監聽器的變數
         let unsubscribeTeacher = null;
         let unsubscribeMailbox = null;
         let mailboxData = {};
 
-        // 4. View Rendering
         function render() {
             const dict = dictionaries[state.currentLang];
             document.documentElement.lang = state.currentLang;
 
-            // --- Update UI Texts ---
             document.getElementById('app-title').textContent = dict.appTitle;
             document.getElementById('badge-s2').textContent = dict.s2Badge;
             document.title = dict.appTitle;
             
-            // Login View Texts
             document.getElementById('text-login-title').textContent = dict.loginTitle;
             document.getElementById('text-login-subtitle').textContent = dict.loginSubtitle;
             document.getElementById('label-username').textContent = dict.labelUsername;
@@ -1630,7 +1573,6 @@
             document.getElementById('btn-logout').title = dict.logoutTip;
             document.getElementById('label-remember').textContent = dict.rememberMe;
 
-            // 聯絡開發者連結與寫信頁面 翻譯
             document.getElementById('btn-login-contact-dev').textContent = dict.contactDevQuestion;
             document.getElementById('text-write-letter-title').textContent = dict.writeLetterTitle;
             document.getElementById('text-write-letter-desc').textContent = dict.writeLetterDesc;
@@ -1640,11 +1582,9 @@
             document.getElementById('btn-letter-back').textContent = dict.backToLogin;
             document.getElementById('btn-letter-submit').textContent = dict.sendLetterBtn;
 
-            // 信箱與新增面板 翻譯
             document.getElementById('text-dev-mailbox-title').textContent = dict.devInboxTitle;
             document.getElementById('desc-dev-mailbox').textContent = dict.devInboxDesc;
 
-            // 渲染頂部導覽列右側的角色標籤
             const badgeRole = document.getElementById('badge-role');
             if (state.isLoggedIn) {
                 badgeRole.classList.remove('hidden');
@@ -1686,21 +1626,17 @@
             document.getElementById('card-teacher-desc').textContent = dict.teacherDesc;
             document.getElementById('card-teacher-start').textContent = dict.viewProgress;
             
-            // 頂部導覽列按鈕提示翻譯
             btnSummary.title = dict.summaryOfToday;
             
-            // 今日總結與開發者編輯區的「未到時機」翻譯
             document.querySelectorAll('.not-right-time-text').forEach(el => el.textContent = dict.notRightTime);
             document.querySelectorAll('.dev-not-right-time').forEach(el => el.textContent = dict.notRightTime);
             document.getElementById('text-dev-edit-summary-title').textContent = dict.devEditSummary;
             document.getElementById('btn-back-summary-page').textContent = dict.btnBackHome;
 
-            // 首頁開發者卡片翻譯
             document.getElementById('card-dev-title').textContent = dict.devModeTitle;
             document.getElementById('card-dev-desc').textContent = dict.devModeDesc;
             document.getElementById('card-dev-start').textContent = dict.devModeStart;
             
-            // 開發者內部頁面 - 新增帳號 面板翻譯
             document.getElementById('title-dev-page').textContent = dict.devModeTitle;
             document.getElementById('desc-dev-page').textContent = dict.devModeDesc;
             document.getElementById('text-dev-add-acc-panel-title').textContent = dict.devAddAccount;
@@ -1709,19 +1645,16 @@
             document.getElementById('label-add-acc-role').textContent = dict.addAccRole;
             document.getElementById('btn-add-acc-submit').textContent = dict.addAccBtn;
 
-            // 開發者內部頁面 - 變更身分 面板翻譯
             document.getElementById('text-dev-change-role-panel-title').textContent = dict.devChangeRoleTitle;
             document.getElementById('label-change-acc-user').textContent = dict.changeAccUser;
             document.getElementById('label-change-acc-role').textContent = dict.changeAccNewRole;
             document.getElementById('btn-change-acc-submit').textContent = dict.changeAccBtn;
             
-            // 開發者內部頁面 - 二次確認彈跳視窗 翻譯
             document.getElementById('modal-title').textContent = dict.modalTitle;
             document.getElementById('modal-desc').textContent = dict.modalDesc;
             document.getElementById('btn-modal-cancel').textContent = dict.btnCancel;
             document.getElementById('btn-modal-confirm').textContent = dict.btnConfirm;
 
-            // 開發者內部頁面 - 自我降級安全驗證彈窗 翻譯
             document.getElementById('modal-demote-title').textContent = dict.modalDemoteTitle;
             document.getElementById('modal-demote-desc').textContent = dict.modalDemoteDesc;
             document.getElementById('input-demote-password').placeholder = dict.placeholderDemotePass;
@@ -1729,10 +1662,19 @@
             document.getElementById('btn-modal-demote-cancel').textContent = dict.btnCancel;
             document.getElementById('btn-modal-demote-confirm').textContent = dict.btnDemoteConfirm;
 
+            if (document.getElementById('text-dev-del-acc-title')) {
+                document.getElementById('text-dev-del-acc-title').textContent = dict.devDelAccTitle;
+                document.getElementById('label-select-all').textContent = dict.selectAll;
+                document.getElementById('btn-del-acc-text').textContent = dict.btnDelAcc;
+                document.getElementById('modal-del-title').textContent = dict.modalDelTitle;
+                document.getElementById('modal-del-desc').textContent = dict.modalDelDesc;
+                document.getElementById('btn-modal-del-cancel').textContent = dict.btnCancel;
+                document.getElementById('btn-modal-del-confirm').textContent = dict.modalDelTitle.replace('嗎？', '').replace('吗？', '').replace('?', '');
+            }
+
             document.getElementById('title-teacher-dash').textContent = dict.teacherDashboardTitle;
             document.getElementById('desc-teacher-dash').textContent = dict.teacherDashboardDesc;
 
-            // 身分組選項的翻譯 (適用於兩個下拉選單與教師篩選列)
             const roleOptionsText = {
                 'zh-TW': { s: '學生 (Student)', t: '教師 (Teacher)', d: '開發者 (Developer)' },
                 'zh-CN': { s: '学生 (Student)', t: '教师 (Teacher)', d: '开发者 (Developer)' },
@@ -1748,14 +1690,12 @@
             document.getElementById('opt-change-role-teacher').textContent = targetText.t;
             document.getElementById('opt-change-role-developer').textContent = targetText.d;
 
-            // 教師儀表板 - 身分篩選器 翻譯
             document.getElementById('text-filter-role').textContent = dict.filterRole;
             document.getElementById('filter-all').textContent = dict.roleAll;
             document.getElementById('filter-developer').textContent = targetText.d;
             document.getElementById('filter-teacher').textContent = targetText.t;
             document.getElementById('filter-student').textContent = targetText.s;
 
-            // 教師儀表板 - 篩選器按鈕狀態樣式切換
             const filterAll = document.getElementById('filter-all');
             const filterDev = document.getElementById('filter-developer');
             const filterTeacher = document.getElementById('filter-teacher');
@@ -1773,12 +1713,9 @@
             else if (state.teacherRoleFilter === 'teacher') filterTeacher.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
             else if (state.teacherRoleFilter === 'student') filterStudent.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
 
-
-            // 切換按鈕與 Tab 標題翻譯
             document.getElementById('text-tab-scores').textContent = dict.tabScores;
             document.getElementById('text-tab-status').textContent = dict.tabStatus;
 
-            // 更改選中的 Tab 樣式
             const tabScores = document.getElementById('tab-teacher-scores');
             const tabStatus = document.getElementById('tab-teacher-status');
             if (state.teacherTab === 'scores') {
@@ -1789,7 +1726,6 @@
                 tabScores.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white outline-none flex items-center gap-2';
             }
 
-            // 權限控制：首頁的兩張特權卡片 (與排版響應式整合)
             const cardTeacher = document.getElementById('card-teacher');
             const cardDeveloper = document.getElementById('card-developer');
             
@@ -1797,7 +1733,6 @@
                 cardTeacher.classList.remove('hidden');
                 cardTeacher.classList.add('flex');
                 
-                // 動態排版：若只是教師身分登入，讓儀表板卡片獨佔一整列
                 if (state.role === 'teacher') {
                     cardTeacher.classList.add('md:col-span-2');
                 } else {
@@ -1816,46 +1751,84 @@
                 cardDeveloper.classList.remove('flex');
             }
 
-            // --- Firebase 資料監聽與重繪邏輯 ---
             const studentContainer = document.getElementById('student-list-container');
             const mailboxContainer = document.getElementById('dev-mailbox-container');
 
-            // 動態更新開發者頁面的「下拉選單帳號清單」
             const updateDeveloperDropdown = () => {
                 const selectUser = document.getElementById('change-acc-user');
-                if (!selectUser) return;
+                const listContainer = document.getElementById('delete-user-list');
                 
-                const currentVal = selectUser.value;
-                selectUser.innerHTML = '';
-                
-                // 收集所有帳號 (包含預設與雲端)
                 const allUsernames = new Set();
                 registeredUsers.forEach(u => allUsernames.add(u.username));
                 Object.keys(state.studentsData).forEach(u => allUsernames.add(u));
                 
-                // 加入預設的提示選項
-                const defaultOpt = document.createElement('option');
-                defaultOpt.value = "";
-                defaultOpt.textContent = dict.selectUserToChange || "--- 請選擇帳號 ---";
-                defaultOpt.disabled = true;
-                defaultOpt.selected = !currentVal;
-                selectUser.appendChild(defaultOpt);
-
-                // 排序並生成選項
-                Array.from(allUsernames).sort().forEach(username => {
-                    const opt = document.createElement('option');
-                    opt.value = username;
-                    opt.textContent = username;
-                    selectUser.appendChild(opt);
+                const allUsersMap = {};
+                registeredUsers.forEach(u => {
+                    allUsersMap[u.username] = { username: u.username, role: u.role };
+                });
+                Object.values(state.studentsData).forEach(u => {
+                    allUsersMap[u.username] = { ...allUsersMap[u.username], ...u };
                 });
                 
-                // 恢復剛剛選擇的值
-                if (currentVal && allUsernames.has(currentVal)) {
-                    selectUser.value = currentVal;
+                let allUsersArr = Object.values(allUsersMap);
+                
+                const rolePriority = { 'developer': 1, 'teacher': 2, 'student': 3 };
+                allUsersArr.sort((a, b) => {
+                    if (rolePriority[a.role] !== rolePriority[b.role]) {
+                        return rolePriority[a.role] - rolePriority[b.role];
+                    }
+                    return a.username.localeCompare(b.username);
+                });
+
+                if (selectUser) {
+                    const currentVal = selectUser.value;
+                    selectUser.innerHTML = '';
+                    
+                    const defaultOpt = document.createElement('option');
+                    defaultOpt.value = "";
+                    defaultOpt.textContent = dict.selectUserToChange || "--- 請選擇帳號 ---";
+                    defaultOpt.disabled = true;
+                    defaultOpt.selected = !currentVal;
+                    selectUser.appendChild(defaultOpt);
+
+                    allUsersArr.forEach(u => {
+                        const opt = document.createElement('option');
+                        opt.value = u.username;
+                        opt.textContent = u.username;
+                        selectUser.appendChild(opt);
+                    });
+                    
+                    if (currentVal && allUsersMap[currentVal]) {
+                        selectUser.value = currentVal;
+                    }
+                }
+                
+                if (listContainer) {
+                    const checkedBoxes = Array.from(document.querySelectorAll('.delete-checkbox:checked')).map(cb => cb.value);
+                    listContainer.innerHTML = '';
+                    
+                    const roleOptionsText = {
+                        'zh-TW': { s: '學生', t: '教師', d: '開發者' },
+                        'zh-CN': { s: '学生', t: '教师', d: '开发者' },
+                        'en': { s: 'Student', t: 'Teacher', d: 'Developer' }
+                    };
+                    const tText = roleOptionsText[state.currentLang] || roleOptionsText['en'];
+
+                    allUsersArr.forEach(u => {
+                        const roleName = u.role === 'developer' ? tText.d : (u.role === 'teacher' ? tText.t : tText.s);
+                        const isChecked = checkedBoxes.includes(u.username) ? 'checked' : '';
+                        
+                        const label = document.createElement('label');
+                        label.className = "flex items-center gap-3 p-3 hover:bg-red-100/50 dark:hover:bg-red-900/30 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-red-200 dark:hover:border-red-800/50";
+                        label.innerHTML = `
+                            <input type="checkbox" value="${u.username}" class="delete-checkbox w-4 h-4 text-red-600 border-red-300 rounded focus:ring-red-500 bg-white dark:bg-slate-700 cursor-pointer transition-all" ${isChecked}>
+                            <span class="text-sm font-bold text-slate-700 dark:text-slate-300">${u.username} <span class="text-xs font-semibold text-slate-400 dark:text-slate-500 ml-1">(${roleName})</span></span>
+                        `;
+                        listContainer.appendChild(label);
+                    });
                 }
             };
 
-            // 開發者模式：即時重繪聯絡信箱卡片邏輯
             const redrawMailbox = () => {
                 if (!mailboxContainer) return;
                 mailboxContainer.innerHTML = '';
@@ -1870,7 +1843,6 @@
                     return;
                 }
 
-                // 排序信件（新信在最上面）- JS 記憶體中純粹排序，符合 RULE 2 無複雜查詢限制
                 messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
                 messages.forEach(msg => {
@@ -1886,9 +1858,7 @@
                             <p class="text-sm text-slate-600 dark:text-slate-300 whitespace-pre-wrap leading-relaxed">${msg.message}</p>
                         </div>
                         <button onclick="window.deleteMessage('${msg.id}')" class="flex items-center gap-1 text-xs font-semibold text-rose-500 hover:text-rose-700 bg-rose-50 dark:bg-rose-950/30 hover:bg-rose-100 dark:hover:bg-rose-900/40 px-3.5 py-2 rounded-xl transition-all self-end md:self-center shadow-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                             <span>${dict.deleteBtn}</span>
                         </button>
                     `;
@@ -1896,12 +1866,10 @@
                 });
             };
 
-            // 重新繪製學生資料卡片 (包含身分篩選功能)
             const redrawCards = () => {
                 if (!studentContainer) return;
                 studentContainer.innerHTML = ''; 
                 
-                // 將 Firebase 的資料與本地的硬編碼資料合併！
                 const allUsersMap = {};
                 
                 registeredUsers.forEach(u => {
@@ -1919,13 +1887,11 @@
                     allUsersMap[u.username] = { ...allUsersMap[u.username], ...u };
                 });
 
-                // 根據當前選擇的身分篩選器過濾要顯示的卡片
                 let filteredUsers = Object.values(allUsersMap);
                 if (state.teacherRoleFilter !== 'all') {
                     filteredUsers = filteredUsers.filter(u => u.role === state.teacherRoleFilter);
                 }
                 
-                // 根據身分自動排序分群 (Developer -> Teacher -> Student)，相同身分再按字母排序
                 const rolePriority = { 'developer': 1, 'teacher': 2, 'student': 3 };
                 filteredUsers.sort((a, b) => {
                     if (rolePriority[a.role] !== rolePriority[b.role]) {
@@ -2003,7 +1969,6 @@
                 });
             };
             
-            // 1. 學生資料追蹤監聽器 (限制在教師與開發者頁面內)
             if (state.currentPage === 'teacher' || state.currentPage === 'developer') {
                 if (!unsubscribeTeacher) {
                     if (state.currentPage === 'teacher' && studentContainer) {
@@ -2039,7 +2004,6 @@
                 }
             }
 
-            // 2. 開發者信箱全域監聽器 (只要登入且為 developer 即啟用，首頁才能顯示紅點)
             if (state.isLoggedIn && state.role === 'developer') {
                 if (!unsubscribeMailbox) {
                     if (state.currentPage === 'developer' && mailboxContainer) {
@@ -2055,14 +2019,12 @@
                             });
                             
                             const newMessageCount = Object.keys(mailboxData).length;
-                            // 有新信件進來時發出嗶聲 (避免初次載入就叫)
                             if (newMessageCount > oldMessageCount && oldMessageCount > 0) {
                                 playClickSound();
                             }
                             
                             if (state.currentPage === 'developer') redrawMailbox();
 
-                            // 更新首頁的未讀紅點
                             const devBadge = document.getElementById('badge-dev-unread');
                             if (devBadge) {
                                 if (newMessageCount > 0) {
@@ -2078,7 +2040,6 @@
                         console.error(err);
                     }
                 } else {
-                    // 若已監聽中但只是切換頁面
                     if (state.currentPage === 'developer') redrawMailbox();
                     
                     const devBadge = document.getElementById('badge-dev-unread');
@@ -2126,7 +2087,7 @@
                 }
             } else if (state.currentPage === 'math-chapter') {
                 headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-indigo-50 text-indigo-500';
-                headerSubIcon.innerHTML = '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>'; // Bookmark icon
+                headerSubIcon.innerHTML = '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>'; 
                 headerSubTitle.textContent = state.selectedChapter === 1 ? dict.chapter1 : dict.chapter2;
                 headerSubDesc.textContent = state.selectedCategory === 'geometry' ? dict.geometry : dict.algebra;
             }
@@ -2284,7 +2245,6 @@
             }, 10);
         }
 
-        // 初始化與讀取記住的狀態
         async function initApp() {
             const savedTheme = localStorage.getItem('mindnest_theme');
             if (savedTheme === 'dark') {
@@ -2295,7 +2255,6 @@
                 document.documentElement.classList.remove('dark');
             }
 
-            // 【核心安全重構】：網頁開啟時「預設一律保持離線、登出」
             state.isLoggedIn = false;
             state.role = 'student';
             state.username = '';
@@ -2303,10 +2262,9 @@
 
             const rememberMe = localStorage.getItem('mindnest_remember');
             const savedUser = localStorage.getItem('mindnest_username');
-            const savedPass = localStorage.getItem('mindnest_password'); // 讀取儲存密碼
+            const savedPass = localStorage.getItem('mindnest_password');
             
             if (rememberMe === 'true' && savedUser) {
-                // 安全填入機制：不直接登入，只幫使用者「代打」帳密與勾選「記住我」
                 setTimeout(() => {
                     const userField = document.getElementById('input-username');
                     const passField = document.getElementById('input-password');
@@ -2322,7 +2280,6 @@
         }
 
         initApp();
-
     </script>
 </body>
 </html>
