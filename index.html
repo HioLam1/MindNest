@@ -207,7 +207,7 @@
                 <!-- Developer Mode Card -->
                 <div id="card-developer" onclick="window.navigate('developer')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
                     
-                    <!-- NEW: 未讀信件小紅點 (Unread Mailbox Red Dot) -->
+                    <!-- 未讀信件小紅點 (Unread Mailbox Red Dot) -->
                     <div id="badge-dev-unread" class="hidden absolute top-4 left-4 h-3.5 w-3.5 z-10 flex">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 shadow-sm border-2 border-white dark:border-slate-800 transition-colors"></span>
@@ -588,7 +588,7 @@
             </div>
         </div>
         
-        <!-- NEW: Confirmation Modal for Changing Developer Role -->
+        <!-- Confirmation Modal for Changing Developer Role -->
         <div id="modal-confirm" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in transition-opacity duration-300">
             <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-slate-100 dark:border-slate-700 text-center">
                 <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-5">
@@ -601,6 +601,27 @@
                 <div class="flex gap-3 justify-center">
                     <button onclick="window.cancelChangeRole()" id="btn-modal-cancel" class="flex-1 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">取消</button>
                     <button onclick="window.confirmChangeRole()" id="btn-modal-confirm" class="flex-1 py-3 rounded-xl font-semibold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-md">確認變更</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Password Verification Modal for Self Demotion (安全自我降級防護彈窗) -->
+        <div id="modal-demote-verify" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in transition-opacity duration-300">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-slate-100 dark:border-slate-700 text-center">
+                <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <h3 id="modal-demote-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-2">確認您的密碼</h3>
+                <p id="modal-demote-desc" class="text-slate-500 dark:text-slate-400 mb-6 text-sm">若要變更您自己的開發者權限，請輸入您的密碼：</p>
+                <div class="mb-6">
+                    <input type="password" id="input-demote-password" placeholder="請輸入密碼" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all text-center">
+                    <p id="demote-password-error" class="text-xs text-red-500 font-semibold mt-2 hidden">密碼錯誤，請重新輸入！</p>
+                </div>
+                <div class="flex gap-3 justify-center">
+                    <button onclick="window.cancelDemoteVerify()" id="btn-modal-demote-cancel" class="flex-1 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">取消</button>
+                    <button onclick="window.confirmDemoteVerify()" id="btn-modal-demote-confirm" class="flex-1 py-3 rounded-xl font-semibold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-md">驗證並變更</button>
                 </div>
             </div>
         </div>
@@ -709,6 +730,12 @@
                 modalDesc: '您即將更改一名開發者 (Developer) 的權限。這可能會影響系統管理。',
                 btnCancel: '取消',
                 btnConfirm: '確認變更',
+                // 自我降級安全防護
+                modalDemoteTitle: '確認您的密碼',
+                modalDemoteDesc: '若要變更您自己的開發者權限，請輸入您的密碼：',
+                demotePasswordError: '密碼錯誤，請重新輸入！',
+                placeholderDemotePass: '輸入密碼',
+                btnDemoteConfirm: '驗證並變更',
                 // 聯絡開發者信件系統翻譯
                 contactDevQuestion: '你想聯絡開發者嗎？',
                 writeLetterTitle: '給開發者的信',
@@ -812,10 +839,16 @@
                 modalDesc: '您即将更改一名开发者 (Developer) 的权限。这可能会影响系统管理。',
                 btnCancel: '取消',
                 btnConfirm: '确认变更',
+                // 自我降级安全防护
+                modalDemoteTitle: '确认您的密码',
+                modalDemoteDesc: '若要变更您自己的开发者权限，请输入您的密码：',
+                demotePasswordError: '密码错误，请重新输入！',
+                placeholderDemotePass: '输入密码',
+                btnDemoteConfirm: '验证并变更',
                 // 联络开发者信件系统翻译
                 contactDevQuestion: '你想联系开发者吗？',
                 writeLetterTitle: '给开发者的信',
-                writeLetterDesc: '请在下方写下您的问题或留言，开发者收到后会尽快处理您的账号申请！',
+                writeLetterDesc: '请在下方写下您的问题 or 留言，开发者收到后会尽快处理您的账号申请！',
                 senderLabel: '您的姓名/拟申请账号',
                 messageLabel: '消息内容',
                 sendLetterBtn: '发送消息',
@@ -914,6 +947,12 @@
                 modalDesc: 'You are about to change the permissions of a Developer. This may affect system management.',
                 btnCancel: 'Cancel',
                 btnConfirm: 'Confirm Change',
+                // Self Demotion
+                modalDemoteTitle: 'Confirm Your Password',
+                modalDemoteDesc: 'If you want to demote yourself, please enter your password:',
+                demotePasswordError: 'Incorrect password, please try again!',
+                placeholderDemotePass: 'Enter password',
+                btnDemoteConfirm: 'Verify & Change',
                 // Write Letter Section translation
                 contactDevQuestion: 'Would you like to contact the developer?',
                 writeLetterTitle: 'Write to the Developer',
@@ -957,6 +996,7 @@
             isDarkMode: false, // Dark mode state
             isLoggedIn: false, // Login state
             role: 'student', // 'student' or 'developer' or 'teacher'
+            username: '', // 追蹤當前登入者帳號
             teacherTab: 'scores', // 'scores' or 'status'
             studentsData: {}, // 全域暫存雲端抓下來的學生資料
             pendingRoleChange: null // 暫存準備被更改身分的資料
@@ -1047,7 +1087,7 @@
                         finalUser = { 
                             username: user, 
                             password: pass, 
-                            // 【關鍵修復】登入時，強制優先使用 Firebase 上的身分！
+                            // 登入時，強制優先使用 Firebase 上的身分！
                             role: dbData.role || (localUser ? localUser.role : 'student') 
                         };
                     }
@@ -1063,7 +1103,8 @@
 
             if (finalUser) {
                 state.isLoggedIn = true;
-                state.role = finalUser.role; // 【關鍵修復】確實套用新身分
+                state.role = finalUser.role; // 確實套用新身分
+                state.username = finalUser.username; // 紀錄當前登入者名稱
                 
                 // 記住我：安全預填模式
                 if (remember) {
@@ -1247,12 +1288,21 @@
                     return;
                 }
 
-                // 最高防護機制：如果目前身分是 developer 且欲改成其他身分，跳出二次確認彈跳視窗
-                if (currentRole === 'developer' && newRole !== 'developer') {
+                // 安全自我降級防護系統：如果當前登入者試圖變更自己的「開發者」身分
+                const currentLoggedUser = localStorage.getItem('mindnest_username') || state.username;
+                if (user === currentLoggedUser && currentRole === 'developer' && newRole !== 'developer') {
+                    // 暫存此變更任務，並呼叫密碼驗證彈窗
+                    state.pendingRoleChange = { username: user, newRole: newRole, existsInDb: existsInDb };
+                    document.getElementById('input-demote-password').value = '';
+                    document.getElementById('demote-password-error').classList.add('hidden');
+                    document.getElementById('modal-demote-verify').classList.remove('hidden');
+                } 
+                // 若非自己，而是去降級其他人的 developer 身分，走普通的二次確認彈窗
+                else if (currentRole === 'developer' && newRole !== 'developer') {
                     state.pendingRoleChange = { username: user, newRole: newRole, existsInDb: existsInDb };
                     document.getElementById('modal-confirm').classList.remove('hidden');
                 } else {
-                    // 若是一般變更，直接執行
+                    // 一般學員權限變更，直接執行
                     await executeRoleChange(user, newRole, existsInDb);
                 }
             } catch (err) {
@@ -1262,14 +1312,43 @@
             }
         }
 
-        // --- 彈跳視窗取消按鈕 ---
+        // --- 降級確認彈窗：取消按鈕 ---
+        window.cancelDemoteVerify = function() {
+            playClickSound();
+            document.getElementById('modal-demote-verify').classList.add('hidden');
+            state.pendingRoleChange = null; // 廢棄暫存
+        }
+
+        // --- 降級確認彈窗：輸入密碼並驗證確認 ---
+        window.confirmDemoteVerify = async function() {
+            playClickSound();
+            const typedPassword = document.getElementById('input-demote-password').value.trim();
+            const errorLabel = document.getElementById('demote-password-error');
+
+            // 嚴格比對您的專屬密碼：Bedwars$20130630
+            if (typedPassword === 'Bedwars$20130630') {
+                errorLabel.classList.add('hidden');
+                document.getElementById('modal-demote-verify').classList.add('hidden');
+                
+                if (state.pendingRoleChange) {
+                    const { username, newRole, existsInDb } = state.pendingRoleChange;
+                    await executeRoleChange(username, newRole, existsInDb);
+                    state.pendingRoleChange = null; // 任務完成清空
+                }
+            } else {
+                // 驗證失敗，顯示紅字警告，且不予更改
+                errorLabel.classList.remove('hidden');
+            }
+        }
+
+        // --- 傳統確認彈跳視窗取消按鈕 ---
         window.cancelChangeRole = function() {
             playClickSound();
             document.getElementById('modal-confirm').classList.add('hidden');
             state.pendingRoleChange = null; // 清除暫存
         }
 
-        // --- 彈跳視窗確認按鈕 ---
+        // --- 傳統確認彈跳視窗確認按鈕 ---
         window.confirmChangeRole = async function() {
             playClickSound();
             if (state.pendingRoleChange) {
@@ -1305,8 +1384,8 @@
                      });
                 }
 
-                // 【關鍵修復】：如果更改的是「自己」的權限，必須即時生效！
-                const currentLoggedUser = localStorage.getItem('mindnest_username') || document.getElementById('input-username').value.trim();
+                // 如果更改的是「自己」的權限，必須即時生效！
+                const currentLoggedUser = localStorage.getItem('mindnest_username') || state.username;
                 if (user === currentLoggedUser) {
                     state.role = newRole;
                     localStorage.setItem('mindnest_role', newRole);
@@ -1335,7 +1414,7 @@
 
         window.logout = async function() {
             // 這裡拿掉原本的 playClickSound()，因為 navigate 內部會播。
-            const currentUser = localStorage.getItem('mindnest_username') || (state.isLoggedIn ? document.getElementById('input-username').value : null);
+            const currentUser = localStorage.getItem('mindnest_username') || (state.isLoggedIn ? state.username : null);
             
             if (currentUser) {
                 try {
@@ -1349,6 +1428,7 @@
 
             state.isLoggedIn = false;
             state.role = 'student';
+            state.username = '';
             
             // 登出時：【不清除】localStorage 的記住我數據，以便回到登入頁面時自動填寫
             navigate('login');
@@ -1357,7 +1437,7 @@
         // 安全防護網：當使用者直接關閉分頁或瀏覽器時，強制同步「離線」到雲端
         window.addEventListener('beforeunload', function() {
             if (state.isLoggedIn) {
-                const currentUser = localStorage.getItem('mindnest_username') || document.getElementById('input-username').value;
+                const currentUser = localStorage.getItem('mindnest_username') || state.username;
                 if (currentUser) {
                     const userRef = doc(db, "students", currentUser);
                     // 發送同步離線狀態
@@ -1583,10 +1663,10 @@
             document.getElementById('card-teacher-desc').textContent = dict.teacherDesc;
             document.getElementById('card-teacher-start').textContent = dict.viewProgress;
             
-            // 新增：今日總結導覽列按鈕提示翻譯
+            // 頂部導覽列按鈕提示翻譯
             btnSummary.title = dict.summaryOfToday;
             
-            // 新增：今日總結與開發者編輯區的「未到時機」翻譯
+            // 今日總結與開發者編輯區的「未到時機」翻譯
             document.querySelectorAll('.not-right-time-text').forEach(el => el.textContent = dict.notRightTime);
             document.querySelectorAll('.dev-not-right-time').forEach(el => el.textContent = dict.notRightTime);
             document.getElementById('text-dev-edit-summary-title').textContent = dict.devEditSummary;
@@ -1617,6 +1697,14 @@
             document.getElementById('modal-desc').textContent = dict.modalDesc;
             document.getElementById('btn-modal-cancel').textContent = dict.btnCancel;
             document.getElementById('btn-modal-confirm').textContent = dict.btnConfirm;
+
+            // 開發者內部頁面 - 自我降級安全驗證彈窗 翻譯
+            document.getElementById('modal-demote-title').textContent = dict.modalDemoteTitle;
+            document.getElementById('modal-demote-desc').textContent = dict.modalDemoteDesc;
+            document.getElementById('input-demote-password').placeholder = dict.placeholderDemotePass;
+            document.getElementById('demote-password-error').textContent = dict.demotePasswordError;
+            document.getElementById('btn-modal-demote-cancel').textContent = dict.btnCancel;
+            document.getElementById('btn-modal-demote-confirm').textContent = dict.btnDemoteConfirm;
 
             document.getElementById('title-teacher-dash').textContent = dict.teacherDashboardTitle;
             document.getElementById('desc-teacher-dash').textContent = dict.teacherDashboardDesc;
@@ -2139,6 +2227,7 @@
             // 【核心安全重構】：網頁開啟時「預設一律保持離線、登出」
             state.isLoggedIn = false;
             state.role = 'student';
+            state.username = '';
             state.currentPage = 'login';
 
             const rememberMe = localStorage.getItem('mindnest_remember');
