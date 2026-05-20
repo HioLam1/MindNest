@@ -221,7 +221,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 14l9-5-9-5-9 5 9 5z" />
                                 <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                                <path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                                <path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                             </svg>
                         </div>
                         <div>
@@ -360,6 +360,7 @@
                 <form onsubmit="window.handleChangeRole(event)" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
                     <div class="md:col-span-1">
                         <label id="label-change-acc-user" class="block text-xs font-semibold tracking-wider text-blue-700 dark:text-blue-400 mb-2 uppercase">使用者名稱</label>
+                        <!-- 改為下拉選單，防止打字錯誤 -->
                         <select id="change-acc-user" required class="w-full px-4 py-3 rounded-xl border border-blue-100 dark:border-blue-800/60 bg-blue-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all shadow-sm cursor-pointer">
                             <!-- 選項會由 JS 動態生成 -->
                         </select>
@@ -584,7 +585,7 @@
             <!-- English Content -->
             <div id="content-english" class="hidden border-2 border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 rounded-3xl p-12 flex flex-col items-center text-center transition-colors duration-300">
                 <div class="mb-5 text-slate-400 dark:text-slate-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-12 md:w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
                     </svg>
                 </div>
@@ -830,7 +831,7 @@
                 filterRole: '身份筛选：',
                 roleAll: '全部',
                 devModeTitle: '开发者模式',
-                devModeDesc: '管理系统账号、设置与底层数据库。',
+                devModeDesc: '管理系统账号、设置 with 底层数据库。',
                 devModeStart: '进入系统',
                 devAddAccount: '新增系统账号',
                 addAccUser: '用户名',
@@ -979,6 +980,7 @@
                 devInboxDesc: 'View all contact messages and applications sent by students or teachers.',
                 noMessages: 'No messages currently.',
                 deleteBtn: 'Delete',
+                // 今日總結翻譯
                 summaryOfToday: 'Summary of Today',
                 summaryDesc: 'Review your learning progress and key points of the day.',
                 summaryStart: 'View Summary',
@@ -1011,7 +1013,7 @@
             role: 'student', // 'student' or 'developer' or 'teacher'
             username: '', // 追蹤當前登入者帳號
             teacherTab: 'scores', // 'scores' or 'status'
-            teacherRoleFilter: 'all', // NEW: 身分過濾器狀態 ('all', 'developer', 'teacher', 'student')
+            teacherRoleFilter: 'all', // 身分過濾器狀態 ('all', 'developer', 'teacher', 'student')
             studentsData: {}, // 全域暫存雲端抓下來的學生資料
             pendingRoleChange: null // 暫存準備被更改身分的資料
         };
@@ -1787,16 +1789,23 @@
                 tabScores.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white outline-none flex items-center gap-2';
             }
 
-            // 權限控制：首頁的兩張特權卡片
+            // 權限控制：首頁的兩張特權卡片 (與排版響應式整合)
             const cardTeacher = document.getElementById('card-teacher');
             const cardDeveloper = document.getElementById('card-developer');
             
             if (state.role === 'developer' || state.role === 'teacher') {
                 cardTeacher.classList.remove('hidden');
                 cardTeacher.classList.add('flex');
+                
+                // 動態排版：若只是教師身分登入，讓儀表板卡片獨佔一整列
+                if (state.role === 'teacher') {
+                    cardTeacher.classList.add('md:col-span-2');
+                } else {
+                    cardTeacher.classList.remove('md:col-span-2');
+                }
             } else {
                 cardTeacher.classList.add('hidden');
-                cardTeacher.classList.remove('flex');
+                cardTeacher.classList.remove('flex', 'md:col-span-2');
             }
 
             if (state.role === 'developer') {
