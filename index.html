@@ -60,7 +60,7 @@
                     </svg>
                 </button>
 
-                <!-- NEW: Summary of Today Button (Placed in the middle of light/dark mode and logout) -->
+                <!-- Summary of Today Button -->
                 <button id="btn-summary" onclick="window.navigate('summary')" class="text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-rose-50 dark:hover:bg-rose-900/30 hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -119,12 +119,55 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span id="login-error-text"></span>
+                        <div class="flex flex-col gap-1 w-full text-left">
+                            <span id="login-error-text"></span>
+                            <!-- 聯絡開發者連結 -->
+                            <button type="button" onclick="window.navigate('write-letter')" class="text-xs text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-bold underline mt-1 text-left self-start" id="btn-login-contact-dev">
+                                想聯絡開發者嗎？
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" id="btn-login-submit" class="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors mt-4 shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] dark:shadow-none">
                         登入
                     </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- NEW: Write Letter View -->
+        <div id="view-write-letter" class="w-full fade-in hidden flex-col items-center justify-center mt-6 lg:mt-16">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 w-full max-w-md transition-colors duration-300">
+                <div class="text-center mb-8">
+                    <h2 id="text-write-letter-title" class="text-3xl font-bold text-slate-900 dark:text-white mb-2">給開發者的信</h2>
+                    <p id="text-write-letter-desc" class="text-slate-500 dark:text-slate-400 text-sm">請寫下您的問題或留言</p>
+                </div>
+
+                <form onsubmit="window.handleSendLetter(event)" class="space-y-5 text-left">
+                    <div>
+                        <label id="label-letter-sender" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">您的姓名/擬申請帳號</label>
+                        <input type="text" id="input-letter-sender" required class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                    </div>
+                    <div>
+                        <label id="label-letter-msg" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">訊息內容</label>
+                        <textarea id="input-letter-msg" required rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all resize-none"></textarea>
+                    </div>
+                    
+                    <div id="letter-success-msg" class="hidden items-center gap-2 p-3 bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-900/50 text-green-700 dark:text-green-400 text-sm rounded-lg font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span id="text-letter-success">發送成功！</span>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button type="button" onclick="window.navigate('login')" id="btn-letter-back" class="flex-1 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-center text-sm">
+                            返回登入
+                        </button>
+                        <button type="submit" id="btn-letter-submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors shadow-sm text-sm">
+                            發送訊息
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -137,7 +180,7 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full mb-8 lg:mb-12">
-                <!-- Teacher Dashboard Card (Visible to Developers and Teachers) -->
+                <!-- Teacher Dashboard Card -->
                 <div id="card-teacher" onclick="window.navigate('teacher')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-amber-200 dark:hover:border-amber-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
                     <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider flex items-center gap-1 shadow-sm">
                         <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> 教師專屬
@@ -161,8 +204,15 @@
                     </div>
                 </div>
 
-                <!-- Developer Mode Card (Visible ONLY to Developers) -->
+                <!-- Developer Mode Card -->
                 <div id="card-developer" onclick="window.navigate('developer')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
+                    
+                    <!-- NEW: 未讀信件小紅點 (Unread Mailbox Red Dot) - 成功加進來了！ -->
+                    <div id="badge-dev-unread" class="hidden absolute top-4 left-4 h-3.5 w-3.5 z-10 flex">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 shadow-sm border-2 border-white dark:border-slate-800 transition-colors"></span>
+                    </div>
+
                     <div class="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider flex items-center gap-1 shadow-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg> ROOT
                     </div>
@@ -298,6 +348,40 @@
                 <div id="add-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
             </div>
             
+            <!-- NEW: 開發者專屬：變更帳號身分面板 -->
+            <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-blue-200 dark:border-blue-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
+                <h3 class="text-xl font-bold text-blue-900 dark:text-blue-200 mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    <span id="text-dev-change-role-panel-title">變更帳號身分</span>
+                </h3>
+                
+                <form onsubmit="window.handleChangeRole(event)" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+                    <div class="md:col-span-1">
+                        <label id="label-change-acc-user" class="block text-xs font-semibold tracking-wider text-blue-700 dark:text-blue-400 mb-2 uppercase">使用者名稱</label>
+                        <!-- 改為下拉選單，防止打字錯誤 -->
+                        <select id="change-acc-user" required class="w-full px-4 py-3 rounded-xl border border-blue-100 dark:border-blue-800/60 bg-blue-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all shadow-sm cursor-pointer">
+                            <!-- 選項會由 JS 動態生成 -->
+                        </select>
+                    </div>
+                    <div class="md:col-span-1">
+                        <label id="label-change-acc-role" class="block text-xs font-semibold tracking-wider text-blue-700 dark:text-blue-400 mb-2 uppercase">新身分組</label>
+                        <select id="change-acc-role" class="w-full px-4 py-3 rounded-xl border border-blue-100 dark:border-blue-800/60 bg-blue-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer shadow-sm appearance-none">
+                            <option value="student" id="opt-change-role-student">學生 (Student)</option>
+                            <option value="teacher" id="opt-change-role-teacher">教師 (Teacher)</option>
+                            <option value="developer" id="opt-change-role-developer">開發者 (Developer)</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-1">
+                        <button type="submit" id="btn-change-acc-submit" class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md">
+                            變更身分
+                        </button>
+                    </div>
+                </form>
+                <div id="change-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
+            </div>
+
             <!-- 開發者專屬：編輯今日總結面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-rose-200 dark:border-rose-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-rose-900 dark:text-rose-200 mb-6 flex items-center gap-2">
@@ -311,6 +395,23 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                     <span class="text-rose-500 dark:text-rose-400 font-semibold dev-not-right-time text-lg">目前還不是使用的時機</span>
+                </div>
+            </div>
+
+            <!-- NEW: 開發者專屬：聯絡信箱 (Developer Inbox) -->
+            <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-indigo-200 dark:border-indigo-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
+                <h3 class="text-xl font-bold text-indigo-900 dark:text-indigo-200 mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 19v-8.93a2 2 0 01.89-1.664l8-5.333a2 2 0 012.22 0l8 5.333A2 2 0 0121 10.07V19a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 9l-3 3m0 0l-3-3m3 3V3" />
+                    </svg>
+                    <span id="text-dev-mailbox-title">開發者信箱 (Inbox)</span>
+                </h3>
+                <p id="desc-dev-mailbox" class="text-sm text-slate-500 dark:text-slate-400 mb-6">查看所有學生發送的聯絡留言。</p>
+                
+                <!-- 信件列表容器 -->
+                <div id="dev-mailbox-container" class="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                    <!-- 信件將由 JS 動態生成 -->
                 </div>
             </div>
         </div>
@@ -486,13 +587,30 @@
                 <p class="dev-msg-text text-slate-500 dark:text-slate-400 text-lg max-w-md transition-colors">我們目前正在建立此模組的學習教材。</p>
             </div>
         </div>
+        
+        <!-- NEW: Confirmation Modal for Changing Developer Role -->
+        <div id="modal-confirm" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in transition-opacity duration-300">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-slate-100 dark:border-slate-700 text-center">
+                <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+                <h3 id="modal-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-2">確定嗎？</h3>
+                <p id="modal-desc" class="text-slate-500 dark:text-slate-400 mb-8 text-sm">您即將更改一名開發者 (Developer) 的權限。這可能會影響系統管理。</p>
+                <div class="flex gap-3 justify-center">
+                    <button onclick="window.cancelChangeRole()" id="btn-modal-cancel" class="flex-1 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">取消</button>
+                    <button onclick="window.confirmChangeRole()" id="btn-modal-confirm" class="flex-1 py-3 rounded-xl font-semibold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-md">確認變更</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- 改為 module 類型，才能使用 import 匯入 Firebase SDK -->
     <script type="module">
         // --- 載入 Firebase 官方雲端 SDK ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- 寫入您的專屬 Firebase 金鑰 ---
         const firebaseConfig = {
@@ -579,6 +697,31 @@
                 addAccBtn: '立即新增',
                 addAccSuccess: '帳號新增成功！可以立即登入。',
                 addAccExists: '此帳號名稱已被使用！',
+                // 變更身分系統翻譯
+                devChangeRoleTitle: '變更帳號身分',
+                changeAccUser: '使用者名稱',
+                changeAccNewRole: '新身分組',
+                changeAccBtn: '變更身分',
+                changeAccSuccess: '身分變更成功！',
+                changeAccNotFound: '找不到此帳號！',
+                selectUserToChange: '--- 請選擇帳號 ---',
+                modalTitle: '確定嗎？',
+                modalDesc: '您即將更改一名開發者 (Developer) 的權限。這可能會影響系統管理。',
+                btnCancel: '取消',
+                btnConfirm: '確認變更',
+                // 聯絡開發者信件系統翻譯
+                contactDevQuestion: '你想聯絡開發者嗎？',
+                writeLetterTitle: '給開發者的信',
+                writeLetterDesc: '請在下方寫下您的問題或留言，開發者收到後會盡快處理您的帳號申請！',
+                senderLabel: '您的姓名/擬申請帳號',
+                messageLabel: '訊息內容',
+                sendLetterBtn: '發送訊息',
+                letterSuccess: '發送成功！開發者已收到您的訊息。',
+                backToLogin: '返回登入',
+                devInboxTitle: '開發者信箱',
+                devInboxDesc: '查看所有學生或教師發送的聯絡訊息與申請。',
+                noMessages: '目前沒有任何訊息。',
+                deleteBtn: '刪除',
                 // 今日總結翻譯
                 summaryOfToday: '今日總結',
                 summaryDesc: '查看您今天的學習進度與重點。',
@@ -658,6 +801,30 @@
                 addAccBtn: '立即新增',
                 addAccSuccess: '账号新增成功！可以立即登录。',
                 addAccExists: '此账号名称已被使用！',
+                devChangeRoleTitle: '变更账号身份',
+                changeAccUser: '用户名',
+                changeAccNewRole: '新身份组',
+                changeAccBtn: '变更身份',
+                changeAccSuccess: '身份变更成功！',
+                changeAccNotFound: '找不到此账号！',
+                selectUserToChange: '--- 请选择账号 ---',
+                modalTitle: '确定吗？',
+                modalDesc: '您即将更改一名开发者 (Developer) 的权限。这可能会影响系统管理。',
+                btnCancel: '取消',
+                btnConfirm: '确认变更',
+                // 联络开发者信件系统翻译
+                contactDevQuestion: '你想联系开发者吗？',
+                writeLetterTitle: '给开发者的信',
+                writeLetterDesc: '请在下方写下您的问题或留言，开发者收到后会尽快处理您的账号申请！',
+                senderLabel: '您的姓名/拟申请账号',
+                messageLabel: '消息内容',
+                sendLetterBtn: '发送消息',
+                letterSuccess: '发送成功！开发者已收到您的消息。',
+                backToLogin: '返回登录',
+                devInboxTitle: '开发者信箱',
+                devInboxDesc: '查看所有学生或教师发送的联络消息与申请。',
+                noMessages: '目前没有任何消息。',
+                deleteBtn: '删除',
                 summaryOfToday: '今日总结',
                 summaryDesc: '查看您今天的学习进度与重点。',
                 summaryStart: '查看总结',
@@ -736,6 +903,30 @@
                 addAccBtn: 'Add Account',
                 addAccSuccess: 'Account successfully added! Can login now.',
                 addAccExists: 'This username is already taken!',
+                devChangeRoleTitle: 'Change Account Role',
+                changeAccUser: 'Username',
+                changeAccNewRole: 'New Role',
+                changeAccBtn: 'Change Role',
+                changeAccSuccess: 'Role successfully changed!',
+                changeAccNotFound: 'Account not found!',
+                selectUserToChange: '--- Select Account ---',
+                modalTitle: 'Are you sure?',
+                modalDesc: 'You are about to change the permissions of a Developer. This may affect system management.',
+                btnCancel: 'Cancel',
+                btnConfirm: 'Confirm Change',
+                // Write Letter Section translation
+                contactDevQuestion: 'Would you like to contact the developer?',
+                writeLetterTitle: 'Write to the Developer',
+                writeLetterDesc: 'Please write your issue or message below. The developer will process your account application as soon as possible!',
+                senderLabel: 'Your Name / Desired Username',
+                messageLabel: 'Message Content',
+                sendLetterBtn: 'Send Message',
+                letterSuccess: 'Success! The developer has received your message.',
+                backToLogin: 'Back to Login',
+                devInboxTitle: 'Developer Inbox',
+                devInboxDesc: 'View all contact messages and applications sent by students or teachers.',
+                noMessages: 'No messages currently.',
+                deleteBtn: 'Delete',
                 summaryOfToday: 'Summary of Today',
                 summaryDesc: 'Review your learning progress and key points of the day.',
                 summaryStart: 'View Summary',
@@ -767,7 +958,8 @@
             isLoggedIn: false, // Login state
             role: 'student', // 'student' or 'developer' or 'teacher'
             teacherTab: 'scores', // 'scores' or 'status'
-            studentsData: {} // 全域暫存雲端抓下來的學生資料
+            studentsData: {}, // 全域暫存雲端抓下來的學生資料
+            pendingRoleChange: null // 暫存準備被更改身分的資料
         };
         
         // 為了讓 HTML 標籤能呼叫 module 內的函數，必須將它們掛載到 window 上
@@ -862,11 +1054,6 @@
             if (foundUser) {
                 // 這裡拿掉原本的 playClickSound()，因為 navigate 內部會播。
 
-                if (window.PasswordCredential && navigator.credentials) {
-                    const cred = new PasswordCredential({ id: user, password: pass });
-                    navigator.credentials.store(cred).catch(err => console.log("Credential store failed:", err));
-                }
-
                 state.isLoggedIn = true;
                 state.role = foundUser.role;
                 
@@ -910,7 +1097,7 @@
             if (!user || !pass) return;
 
             // 初始化訊息框
-            msgBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700');
+            msgBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700', 'dark:bg-green-900/30', 'dark:text-green-400', 'dark:bg-red-900/30', 'dark:text-red-400');
             msgBox.innerHTML = '';
 
             try {
@@ -953,6 +1140,172 @@
             } catch (err) {
                 console.error("Add Account Error:", err);
                 msgBox.innerHTML = `⚠️ 系統發生錯誤。請確認資料庫狀態。`;
+                msgBox.classList.add('flex', 'bg-red-50', 'text-red-700');
+            }
+        }
+
+        // --- 學生/未註冊者：撰寫信件並推上雲端 ---
+        window.handleSendLetter = async function(e) {
+            e.preventDefault();
+            const sender = document.getElementById('input-letter-sender').value.trim();
+            const message = document.getElementById('input-letter-msg').value.trim();
+            const successBox = document.getElementById('letter-success-msg');
+            const submitBtn = document.getElementById('btn-letter-submit');
+
+            if (!sender || !message) return;
+
+            submitBtn.disabled = true;
+
+            try {
+                // 自動生成信件專屬隨機 document id
+                const msgRef = doc(collection(db, "developer_messages"));
+                await setDoc(msgRef, {
+                    id: msgRef.id,
+                    sender: sender,
+                    message: message,
+                    timestamp: new Date().toLocaleString(),
+                    unread: true
+                });
+
+                // 發送成功，播放點擊音效，並顯示成功提示框
+                playClickSound();
+                successBox.classList.remove('hidden');
+                successBox.classList.add('flex');
+                document.getElementById('input-letter-msg').value = '';
+
+                setTimeout(() => {
+                    successBox.classList.add('hidden');
+                    successBox.classList.remove('flex');
+                    submitBtn.disabled = false;
+                    navigate('login');
+                }, 2500);
+
+            } catch (err) {
+                console.error("Error sending message to developer:", err);
+                submitBtn.disabled = false;
+            }
+        }
+
+        // --- 開發者：刪除特定信件功能 ---
+        window.deleteMessage = async function(msgId) {
+            playClickSound();
+            try {
+                await deleteDoc(doc(db, "developer_messages", msgId));
+            } catch (err) {
+                console.error("Error deleting message:", err);
+            }
+        }
+
+        // --- 開發者專屬：變更帳號身分功能 ---
+        window.handleChangeRole = async function(e) {
+            e.preventDefault();
+            // 現在從下拉選單獲取值
+            const user = document.getElementById('change-acc-user').value.trim();
+            const newRole = document.getElementById('change-acc-role').value;
+            const msgBox = document.getElementById('change-acc-msg');
+            const dict = dictionaries[state.currentLang];
+
+            if (!user) return; // 如果選到預設的「請選擇帳號」就不執行
+
+            msgBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700', 'dark:bg-green-900/30', 'dark:text-green-400', 'dark:bg-red-900/30', 'dark:text-red-400');
+            msgBox.innerHTML = '';
+
+            try {
+                const userRef = doc(db, "students", user);
+                const docSnap = await getDoc(userRef);
+                
+                let currentRole = null;
+                let existsInDb = false;
+
+                // 檢查雲端或全域暫存資料庫是否有這個人
+                if (docSnap.exists()) {
+                    currentRole = docSnap.data().role;
+                    existsInDb = true;
+                } else if (state.studentsData[user]) {
+                    currentRole = state.studentsData[user].role;
+                    existsInDb = true;
+                } else {
+                    const localUser = registeredUsers.find(u => u.username === user);
+                    if (localUser) { currentRole = localUser.role; }
+                }
+
+                // 若完全找不到此人
+                if (!currentRole && !existsInDb) {
+                    msgBox.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        ${dict.changeAccNotFound}
+                    `;
+                    msgBox.classList.add('flex', 'bg-red-50', 'text-red-700', 'dark:bg-red-900/30', 'dark:text-red-400');
+                    return;
+                }
+
+                // 最高防護機制：如果目前身分是 developer 且欲改成其他身分，跳出二次確認彈跳視窗
+                if (currentRole === 'developer' && newRole !== 'developer') {
+                    state.pendingRoleChange = { username: user, newRole: newRole, existsInDb: existsInDb };
+                    document.getElementById('modal-confirm').classList.remove('hidden');
+                } else {
+                    // 若是一般變更，直接執行
+                    await executeRoleChange(user, newRole, existsInDb);
+                }
+            } catch (err) {
+                console.error("Change Role Logic Error:", err);
+                msgBox.innerHTML = `⚠️ 系統發生錯誤。`;
+                msgBox.classList.add('flex', 'bg-red-50', 'text-red-700');
+            }
+        }
+
+        // --- 彈跳視窗取消按鈕 ---
+        window.cancelChangeRole = function() {
+            playClickSound();
+            document.getElementById('modal-confirm').classList.add('hidden');
+            state.pendingRoleChange = null; // 清除暫存
+        }
+
+        // --- 彈跳視窗確認按鈕 ---
+        window.confirmChangeRole = async function() {
+            playClickSound();
+            if (state.pendingRoleChange) {
+                const { username, newRole, existsInDb } = state.pendingRoleChange;
+                document.getElementById('modal-confirm').classList.add('hidden');
+                await executeRoleChange(username, newRole, existsInDb);
+                state.pendingRoleChange = null;
+            }
+        }
+
+        // --- 真正執行變更並同步 Firebase 的函式 ---
+        window.executeRoleChange = async function(user, newRole, existsInDb) {
+            const msgBox = document.getElementById('change-acc-msg');
+            const dict = dictionaries[state.currentLang];
+            
+            try {
+                const userRef = doc(db, "students", user);
+                if (existsInDb) {
+                     // 只更新 Firebase 的 role 欄位 (merge: true)
+                     await setDoc(userRef, { role: newRole }, { merge: true });
+                } else {
+                     // 處理極端情況：使用者在 local 端但未曾登入雲端，幫他建立完整資料
+                     await setDoc(userRef, {
+                        username: user,
+                        role: newRole,
+                        avgScore: 0,
+                        completedLessons: 0,
+                        lastLogin: null,
+                        lastActive: null,
+                        status: 'offline'
+                     });
+                }
+                
+                msgBox.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    ${dict.changeAccSuccess}
+                `;
+                msgBox.classList.add('flex', 'bg-green-50', 'text-green-700', 'dark:bg-green-900/30', 'dark:text-green-400');
+                
+                // 成功後將下拉選單歸零
+                document.getElementById('change-acc-user').value = '';
+            } catch(err) {
+                console.error("Execute Change Error:", err);
+                msgBox.innerHTML = `⚠️ 系統發生錯誤。`;
                 msgBox.classList.add('flex', 'bg-red-50', 'text-red-700');
             }
         }
@@ -1037,7 +1390,7 @@
         window.navigate = navigate; // for internal JS usage
         function navigate(page) {
             playClickSound(); 
-            if (!state.isLoggedIn && page !== 'login') { page = 'login'; }
+            if (!state.isLoggedIn && page !== 'login' && page !== 'write-letter') { page = 'login'; }
             state.currentPage = page;
 
             if (page === 'math' || page === 'math-summary' || page === 'math-category' || page === 'math-chapter') {
@@ -1052,11 +1405,27 @@
             // 進入開發者模式時，清空可能殘留的狀態訊息
             if (page === 'developer') {
                 const addMsgBox = document.getElementById('add-acc-msg');
+                const changeMsgBox = document.getElementById('change-acc-msg');
                 if(addMsgBox) {
                     addMsgBox.classList.add('hidden');
                     document.getElementById('add-acc-user').value = '';
                     document.getElementById('add-acc-pass').value = '';
                 }
+                if(changeMsgBox) {
+                    changeMsgBox.classList.add('hidden');
+                    // 當進入開發者頁面，會觸發 render 重新抓取一次下拉選單
+                }
+            }
+
+            // 貼心自動填入帳號機制：當切換至「寫信」頁面，自動將先前在登入輸入框打的字填入姓名欄
+            if (page === 'write-letter') {
+                const typedUser = document.getElementById('input-username').value.trim();
+                setTimeout(() => {
+                    const senderInput = document.getElementById('input-letter-sender');
+                    if (senderInput) {
+                        senderInput.value = typedUser;
+                    }
+                }, 50);
             }
             
             render();
@@ -1083,7 +1452,7 @@
                 btnMute.title = dict.muteTip;
                 btnMute.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 0 1 0 7.072m2.828-9.9a9 9 0 0 1 0 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                     </svg>`;
             }
         }
@@ -1110,6 +1479,8 @@
 
         // 用來追蹤 Firebase 監聽器的變數
         let unsubscribeTeacher = null;
+        let unsubscribeMailbox = null;
+        let mailboxData = {};
 
         // 4. View Rendering
         function render() {
@@ -1132,6 +1503,20 @@
             }
             document.getElementById('btn-logout').title = dict.logoutTip;
             document.getElementById('label-remember').textContent = dict.rememberMe;
+
+            // 聯絡開發者連結與寫信頁面 翻譯
+            document.getElementById('btn-login-contact-dev').textContent = dict.contactDevQuestion;
+            document.getElementById('text-write-letter-title').textContent = dict.writeLetterTitle;
+            document.getElementById('text-write-letter-desc').textContent = dict.writeLetterDesc;
+            document.getElementById('label-letter-sender').textContent = dict.senderLabel;
+            document.getElementById('label-letter-msg').textContent = dict.messageLabel;
+            document.getElementById('text-letter-success').textContent = dict.letterSuccess;
+            document.getElementById('btn-letter-back').textContent = dict.backToLogin;
+            document.getElementById('btn-letter-submit').textContent = dict.sendLetterBtn;
+
+            // 信箱與新增面板 翻譯
+            document.getElementById('text-dev-mailbox-title').textContent = dict.devInboxTitle;
+            document.getElementById('desc-dev-mailbox').textContent = dict.devInboxDesc;
 
             // 渲染頂部導覽列右側的角色標籤
             const badgeRole = document.getElementById('badge-role');
@@ -1189,7 +1574,7 @@
             document.getElementById('card-dev-desc').textContent = dict.devModeDesc;
             document.getElementById('card-dev-start').textContent = dict.devModeStart;
             
-            // 開發者內部頁面翻譯
+            // 開發者內部頁面 - 新增帳號 面板翻譯
             document.getElementById('title-dev-page').textContent = dict.devModeTitle;
             document.getElementById('desc-dev-page').textContent = dict.devModeDesc;
             document.getElementById('text-dev-add-acc-panel-title').textContent = dict.devAddAccount;
@@ -1198,13 +1583,36 @@
             document.getElementById('label-add-acc-role').textContent = dict.addAccRole;
             document.getElementById('btn-add-acc-submit').textContent = dict.addAccBtn;
 
+            // 開發者內部頁面 - 變更身分 面板翻譯
+            document.getElementById('text-dev-change-role-panel-title').textContent = dict.devChangeRoleTitle;
+            document.getElementById('label-change-acc-user').textContent = dict.changeAccUser;
+            document.getElementById('label-change-acc-role').textContent = dict.changeAccNewRole;
+            document.getElementById('btn-change-acc-submit').textContent = dict.changeAccBtn;
+            
+            // 開發者內部頁面 - 二次確認彈跳視窗 翻譯
+            document.getElementById('modal-title').textContent = dict.modalTitle;
+            document.getElementById('modal-desc').textContent = dict.modalDesc;
+            document.getElementById('btn-modal-cancel').textContent = dict.btnCancel;
+            document.getElementById('btn-modal-confirm').textContent = dict.btnConfirm;
+
             document.getElementById('title-teacher-dash').textContent = dict.teacherDashboardTitle;
             document.getElementById('desc-teacher-dash').textContent = dict.teacherDashboardDesc;
 
-            // 身分組選項的翻譯
-            document.getElementById('opt-role-student').textContent = dict.langs[state.currentLang] === 'English' ? 'Student' : (dict.langs[state.currentLang] === '简体中文' ? '学生 (Student)' : '學生 (Student)');
-            document.getElementById('opt-role-teacher').textContent = dict.langs[state.currentLang] === 'English' ? 'Teacher' : (dict.langs[state.currentLang] === '简体中文' ? '教师 (Teacher)' : '教師 (Teacher)');
-            document.getElementById('opt-role-developer').textContent = dict.langs[state.currentLang] === 'English' ? 'Developer' : (dict.langs[state.currentLang] === '简体中文' ? '开发者 (Developer)' : '開發者 (Developer)');
+            // 身分組選項的翻譯 (適用於兩個下拉選單)
+            const roleOptionsText = {
+                'zh-TW': { s: '學生 (Student)', t: '教師 (Teacher)', d: '開發者 (Developer)' },
+                'zh-CN': { s: '学生 (Student)', t: '教师 (Teacher)', d: '开发者 (Developer)' },
+                'en': { s: 'Student', t: 'Teacher', d: 'Developer' }
+            };
+            const targetText = roleOptionsText[state.currentLang];
+            
+            document.getElementById('opt-role-student').textContent = targetText.s;
+            document.getElementById('opt-role-teacher').textContent = targetText.t;
+            document.getElementById('opt-role-developer').textContent = targetText.d;
+            
+            document.getElementById('opt-change-role-student').textContent = targetText.s;
+            document.getElementById('opt-change-role-teacher').textContent = targetText.t;
+            document.getElementById('opt-change-role-developer').textContent = targetText.d;
 
             // 切換按鈕與 Tab 標題翻譯
             document.getElementById('text-tab-scores').textContent = dict.tabScores;
@@ -1241,110 +1649,184 @@
                 cardDeveloper.classList.remove('flex');
             }
 
-            // --- 教師專屬：卡片動態繪製邏輯 ---
-            if (state.currentPage === 'teacher') {
-                const studentContainer = document.getElementById('student-list-container');
+            // --- Firebase 資料監聽與重繪邏輯 ---
+            const studentContainer = document.getElementById('student-list-container');
+            const mailboxContainer = document.getElementById('dev-mailbox-container');
+
+            // 動態更新開發者頁面的「下拉選單帳號清單」
+            const updateDeveloperDropdown = () => {
+                const selectUser = document.getElementById('change-acc-user');
+                if (!selectUser) return;
                 
-                // 【核心重構：重新繪製學生資料卡片】
-                const redrawCards = () => {
-                    if (!studentContainer) return;
-                    studentContainer.innerHTML = ''; 
-                    
-                    // 將 Firebase 的資料與本地的硬編碼資料合併！
-                    const allUsersMap = {};
-                    
-                    // 1. 先把本地預設資料塞進去 (提供預設離線狀態)
-                    registeredUsers.forEach(u => {
-                        allUsersMap[u.username] = {
-                            username: u.username,
-                            role: u.role,
-                            avgScore: 0,
-                            completedLessons: 0,
-                            status: 'offline',
-                            lastActive: null
-                        };
-                    });
+                const currentVal = selectUser.value;
+                selectUser.innerHTML = '';
+                
+                // 收集所有帳號 (包含預設與雲端)
+                const allUsernames = new Set();
+                registeredUsers.forEach(u => allUsernames.add(u.username));
+                Object.keys(state.studentsData).forEach(u => allUsernames.add(u));
+                
+                // 加入預設的提示選項
+                const defaultOpt = document.createElement('option');
+                defaultOpt.value = "";
+                defaultOpt.textContent = dict.selectUserToChange || "--- 請選擇帳號 ---";
+                defaultOpt.disabled = true;
+                defaultOpt.selected = !currentVal;
+                selectUser.appendChild(defaultOpt);
 
-                    // 2. 把雲端抓下來的資料蓋過去 (包含開發者在UI動態新增的所有人！)
-                    Object.values(state.studentsData).forEach(u => {
-                        allUsersMap[u.username] = { ...allUsersMap[u.username], ...u };
-                    });
-                    
-                    // 3. 畫出所有人
-                    Object.values(allUsersMap).forEach(u => {
-                        const roleBadgeClass = u.role === 'developer' ? 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300' :
-                                               u.role === 'teacher' ? 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300' :
-                                               'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
-                        const roleText = u.role === 'developer' ? dict.roleDeveloper :
-                                         u.role === 'teacher' ? dict.roleTeacher : dict.roleStudent;
+                // 排序並生成選項
+                Array.from(allUsernames).sort().forEach(username => {
+                    const opt = document.createElement('option');
+                    opt.value = username;
+                    opt.textContent = username;
+                    selectUser.appendChild(opt);
+                });
+                
+                // 恢復剛剛選擇的值
+                if (currentVal && allUsernames.has(currentVal)) {
+                    selectUser.value = currentVal;
+                }
+            };
 
-                        const card = document.createElement('div');
-                        card.className = 'bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col transition-colors duration-300 relative overflow-hidden';
-                        
-                        // 判斷當前要顯示哪一個 Tab 的詳細資料
-                        let tabContentHTML = '';
-                        if (state.teacherTab === 'scores') {
-                            tabContentHTML = `
-                                <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
-                                    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.avgScore}</span>
-                                    <span class="text-xs font-semibold ${u.avgScore > 0 ? 'text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30' : 'text-amber-500 bg-amber-50 dark:bg-amber-900/30'} px-2 py-1 rounded-lg flex items-center gap-1">
-                                        ${u.avgScore > 0 ? u.avgScore + dict.unitScore : `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${dict.developingTag}`}
-                                    </span>
-                                </div>
-                                <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
-                                    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.completedLessons}</span>
-                                    <span class="text-xs font-semibold ${u.completedLessons > 0 ? 'text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30' : 'text-amber-500 bg-amber-50 dark:bg-amber-900/30'} px-2 py-1 rounded-lg flex items-center gap-1">
-                                        ${u.completedLessons > 0 ? u.completedLessons + dict.unitLesson : `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${dict.developingTag}`}
-                                    </span>
-                                </div>
-                            `;
-                        } else {
-                            const isOnline = u.status === 'online';
-                            const statusDotHTML = isOnline 
-                                ? `<span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span></span>`
-                                : `<span class="h-2.5 w-2.5 rounded-full bg-slate-300 dark:bg-slate-600 inline-block"></span>`;
-                            
-                            const displayTime = u.lastActive ? u.lastActive : dict.neverLoggedIn;
+            // 開發者模式：即時重繪聯絡信箱卡片邏輯
+            const redrawMailbox = () => {
+                if (!mailboxContainer) return;
+                mailboxContainer.innerHTML = '';
 
-                            tabContentHTML = `
-                                <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
-                                    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.currentStatus}</span>
-                                    <span class="text-xs font-semibold px-2 py-1 rounded-lg flex items-center gap-1.5 ${isOnline ? 'text-green-600 bg-green-50 dark:bg-green-950/30' : 'text-slate-500 bg-slate-100 dark:bg-slate-800'}">
-                                        ${statusDotHTML}
-                                        ${isOnline ? dict.statusOnline : dict.statusOffline}
-                                    </span>
-                                </div>
-                                <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex flex-col gap-1 transition-colors text-left">
-                                    <span class="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">${dict.lastActiveTime}</span>
-                                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                                        ${displayTime}
-                                    </span>
-                                </div>
-                            `;
-                        }
+                const messages = Object.values(mailboxData);
+                if (messages.length === 0) {
+                    mailboxContainer.innerHTML = `
+                        <div class="text-center py-10 text-slate-400 dark:text-slate-500 font-medium">
+                            ${dict.noMessages}
+                        </div>
+                    `;
+                    return;
+                }
 
-                        card.innerHTML = `
-                            <div class="flex items-center gap-4 mb-6">
-                                <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl transition-colors shadow-inner">
-                                    ${u.username.charAt(0).toUpperCase()}
-                                </div>
-                                <div class="text-left">
-                                    <h4 class="font-bold text-lg text-slate-900 dark:text-white transition-colors">${u.username}</h4>
-                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase transition-colors ${roleBadgeClass}">${roleText}</span>
-                                </div>
+                // 排序信件（新信在最上面）- JS 記憶體中純粹排序，符合 RULE 2 無複雜查詢限制
+                messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                messages.forEach(msg => {
+                    const msgCard = document.createElement('div');
+                    msgCard.className = 'bg-slate-50 dark:bg-slate-900/40 border border-slate-100 dark:border-slate-800/80 rounded-2xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all hover:border-indigo-100 dark:hover:border-indigo-900/50';
+                    msgCard.innerHTML = `
+                        <div class="flex-grow text-left space-y-1.5">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-slate-900 dark:text-white text-base">${msg.sender}</span>
+                                <span class="text-xs text-slate-400 dark:text-slate-500 font-medium">${msg.timestamp}</span>
+                                ${msg.unread ? '<span class="w-2 h-2 rounded-full bg-indigo-500 inline-block animate-pulse"></span>' : ''}
                             </div>
-                            <div class="space-y-3 mt-auto">
-                                ${tabContentHTML}
+                            <p class="text-sm text-slate-600 dark:text-slate-300 whitespace-pre-wrap leading-relaxed">${msg.message}</p>
+                        </div>
+                        <button onclick="window.deleteMessage('${msg.id}')" class="flex items-center gap-1 text-xs font-semibold text-rose-500 hover:text-rose-700 bg-rose-50 dark:bg-rose-950/30 hover:bg-rose-100 dark:hover:bg-rose-900/40 px-3.5 py-2 rounded-xl transition-all self-end md:self-center shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            <span>${dict.deleteBtn}</span>
+                        </button>
+                    `;
+                    mailboxContainer.appendChild(msgCard);
+                });
+            };
+
+            // 重新繪製學生資料卡片
+            const redrawCards = () => {
+                if (!studentContainer) return;
+                studentContainer.innerHTML = ''; 
+                
+                // 將 Firebase 的資料與本地的硬編碼資料合併！
+                const allUsersMap = {};
+                
+                registeredUsers.forEach(u => {
+                    allUsersMap[u.username] = {
+                        username: u.username,
+                        role: u.role,
+                        avgScore: 0,
+                        completedLessons: 0,
+                        status: 'offline',
+                        lastActive: null
+                    };
+                });
+
+                Object.values(state.studentsData).forEach(u => {
+                    allUsersMap[u.username] = { ...allUsersMap[u.username], ...u };
+                });
+                
+                Object.values(allUsersMap).forEach(u => {
+                    const roleBadgeClass = u.role === 'developer' ? 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300' :
+                                           u.role === 'teacher' ? 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300' :
+                                           'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
+                    const roleText = u.role === 'developer' ? dict.roleDeveloper :
+                                     u.role === 'teacher' ? dict.roleTeacher : dict.roleStudent;
+
+                    const card = document.createElement('div');
+                    card.className = 'bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col transition-colors duration-300 relative overflow-hidden';
+                    
+                    let tabContentHTML = '';
+                    if (state.teacherTab === 'scores') {
+                        tabContentHTML = `
+                            <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.avgScore}</span>
+                                <span class="text-xs font-semibold ${u.avgScore > 0 ? 'text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30' : 'text-amber-500 bg-amber-50 dark:bg-amber-900/30'} px-2 py-1 rounded-lg flex items-center gap-1">
+                                    ${u.avgScore > 0 ? u.avgScore + dict.unitScore : `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${dict.developingTag}`}
+                                </span>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.completedLessons}</span>
+                                <span class="text-xs font-semibold ${u.completedLessons > 0 ? 'text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30' : 'text-amber-500 bg-amber-50 dark:bg-amber-900/30'} px-2 py-1 rounded-lg flex items-center gap-1">
+                                    ${u.completedLessons > 0 ? u.completedLessons + dict.unitLesson : `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${dict.developingTag}`}
+                                </span>
                             </div>
                         `;
-                        studentContainer.appendChild(card);
-                    });
-                };
-                
-                // 如果還沒有開啟監聽，建立 Firebase 監聽器
+                    } else {
+                        const isOnline = u.status === 'online';
+                        const statusDotHTML = isOnline 
+                            ? `<span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span></span>`
+                            : `<span class="h-2.5 w-2.5 rounded-full bg-slate-300 dark:bg-slate-600 inline-block"></span>`;
+                        
+                        const displayTime = u.lastActive ? u.lastActive : dict.neverLoggedIn;
+
+                        tabContentHTML = `
+                            <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.currentStatus}</span>
+                                <span class="text-xs font-semibold px-2 py-1 rounded-lg flex items-center gap-1.5 ${isOnline ? 'text-green-600 bg-green-50 dark:bg-green-950/30' : 'text-slate-500 bg-slate-100 dark:bg-slate-800'}">
+                                    ${statusDotHTML}
+                                    ${isOnline ? dict.statusOnline : dict.statusOffline}
+                                </span>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex flex-col gap-1 transition-colors text-left">
+                                <span class="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">${dict.lastActiveTime}</span>
+                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                    ${displayTime}
+                                </span>
+                            </div>
+                        `;
+                    }
+
+                    card.innerHTML = `
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl transition-colors shadow-inner">
+                                ${u.username.charAt(0).toUpperCase()}
+                            </div>
+                            <div class="text-left">
+                                <h4 class="font-bold text-lg text-slate-900 dark:text-white transition-colors">${u.username}</h4>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase transition-colors ${roleBadgeClass}">${roleText}</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3 mt-auto">
+                            ${tabContentHTML}
+                        </div>
+                    `;
+                    studentContainer.appendChild(card);
+                });
+            };
+            
+            // 1. 學生資料追蹤監聽器 (限制在教師與開發者頁面內)
+            if (state.currentPage === 'teacher' || state.currentPage === 'developer') {
                 if (!unsubscribeTeacher) {
-                    studentContainer.innerHTML = '<p class="text-slate-500 p-4">正在連線至雲端抓取即時資料...</p>';
-                    
+                    if (state.currentPage === 'teacher' && studentContainer) {
+                        studentContainer.innerHTML = '<p class="text-slate-500 p-4">正在連線至雲端抓取即時資料...</p>';
+                    }
                     try {
                         const studentsRef = collection(db, "students");
                         unsubscribeTeacher = onSnapshot(studentsRef, (snapshot) => {
@@ -1353,22 +1835,83 @@
                                 state.studentsData[docSnap.id] = docSnap.data();
                             });
                             
-                            redrawCards(); 
+                            if (state.currentPage === 'teacher') redrawCards(); 
+                            if (state.currentPage === 'developer') updateDeveloperDropdown();
                         }, (error) => {
                             console.error("即時監聽失敗:", error);
-                            studentContainer.innerHTML = '<p class="text-red-500 font-bold p-4">無法連線至雲端。請確保在 Firebase 控制台中將「Firestore Database」設定為「測試模式」。</p>';
+                            if (state.currentPage === 'teacher' && studentContainer) {
+                                studentContainer.innerHTML = '<p class="text-red-500 font-bold p-4">無法連線至雲端。請確保在 Firebase 控制台中將「Firestore Database」設定為「測試模式」。</p>';
+                            }
                         });
                     } catch (err) {
                         console.error(err);
                     }
                 } else {
-                    // 若已連線，點切換/切換語言時強制觸發重繪
-                    redrawCards();
+                    if (state.currentPage === 'teacher') redrawCards();
+                    if (state.currentPage === 'developer') updateDeveloperDropdown();
                 }
             } else {
                 if (unsubscribeTeacher) {
                     unsubscribeTeacher();
                     unsubscribeTeacher = null;
+                }
+            }
+
+            // 2. 開發者信箱全域監聽器 (只要登入且為 developer 即啟用，首頁才能顯示紅點)
+            if (state.isLoggedIn && state.role === 'developer') {
+                if (!unsubscribeMailbox) {
+                    if (state.currentPage === 'developer' && mailboxContainer) {
+                        mailboxContainer.innerHTML = '<p class="text-slate-500 p-4">正在載入信件...</p>';
+                    }
+                    try {
+                        const mailboxRef = collection(db, "developer_messages");
+                        unsubscribeMailbox = onSnapshot(mailboxRef, (snapshot) => {
+                            let oldMessageCount = Object.keys(mailboxData).length;
+                            mailboxData = {};
+                            snapshot.forEach(docSnap => {
+                                mailboxData[docSnap.id] = docSnap.data();
+                            });
+                            
+                            const newMessageCount = Object.keys(mailboxData).length;
+                            // 有新信件進來時發出嗶聲 (避免初次載入就叫)
+                            if (newMessageCount > oldMessageCount && oldMessageCount > 0) {
+                                playClickSound();
+                            }
+                            
+                            if (state.currentPage === 'developer') redrawMailbox();
+
+                            // 更新首頁的未讀紅點
+                            const devBadge = document.getElementById('badge-dev-unread');
+                            if (devBadge) {
+                                if (newMessageCount > 0) {
+                                    devBadge.classList.remove('hidden');
+                                } else {
+                                    devBadge.classList.add('hidden');
+                                }
+                            }
+                        }, (error) => {
+                            console.error("即時信箱監聽失敗:", error);
+                        });
+                    } catch (err) {
+                        console.error(err);
+                    }
+                } else {
+                    // 若已監聽中但只是切換頁面
+                    if (state.currentPage === 'developer') redrawMailbox();
+                    
+                    const devBadge = document.getElementById('badge-dev-unread');
+                    if (devBadge) {
+                        if (Object.keys(mailboxData).length > 0) {
+                            devBadge.classList.remove('hidden');
+                        } else {
+                            devBadge.classList.add('hidden');
+                        }
+                    }
+                }
+            } else {
+                if (unsubscribeMailbox) {
+                    unsubscribeMailbox();
+                    unsubscribeMailbox = null;
                 }
             }
 
@@ -1426,7 +1969,7 @@
                 document.getElementById('btn-back').textContent = dict.btnBackSummary;
             } else if (state.currentPage === 'math-summary') {
                 document.getElementById('btn-back').textContent = dict.btnBackMath;
-            } else if (state.currentPage === 'developer' || state.currentPage === 'summary') {
+            } else if (state.currentPage === 'developer' || state.currentPage === 'summary' || state.currentPage === 'write-letter') {
                 document.getElementById('btn-back-dev') && (document.getElementById('btn-back-dev').textContent = dict.btnBackHome);
                 document.getElementById('btn-back-summary-page') && (document.getElementById('btn-back-summary-page').textContent = dict.btnBackHome);
             } else {
@@ -1462,6 +2005,7 @@
             const viewTeacherDashboard = document.getElementById('view-teacher-dashboard');
             const viewDeveloper = document.getElementById('view-developer');
             const viewSummary = document.getElementById('view-summary');
+            const viewWriteLetter = document.getElementById('view-write-letter');
             const lessonHeaderMath = document.getElementById('lesson-header-math');
             const lessonHeaderSub = document.getElementById('lesson-header-sub');
             const lessonHeaderEnglish = document.getElementById('lesson-header-english');
@@ -1484,6 +2028,9 @@
             viewDeveloper.classList.remove('fade-in');
             viewSummary.classList.add('hidden');
             viewSummary.classList.remove('fade-in');
+            viewWriteLetter.classList.add('hidden');
+            viewWriteLetter.classList.remove('flex');
+            viewWriteLetter.classList.remove('fade-in');
             
             lessonHeaderMath.classList.add('hidden');
             lessonHeaderSub.classList.add('hidden');
@@ -1519,6 +2066,7 @@
                 else if (state.currentPage === 'math-category') {
                     viewLesson.classList.remove('hidden');
                     viewLesson.classList.add('fade-in');
+                    lessonHeaderSub.svg;
                     lessonHeaderSub.classList.remove('hidden'); 
                     contentMathCategory.classList.remove('hidden'); 
                 }
@@ -1545,6 +2093,11 @@
                 else if (state.currentPage === 'summary') {
                     viewSummary.classList.remove('hidden');
                     viewSummary.classList.add('fade-in');
+                }
+                else if (state.currentPage === 'write-letter') {
+                    viewWriteLetter.classList.remove('hidden');
+                    viewWriteLetter.classList.add('flex');
+                    viewWriteLetter.classList.add('fade-in');
                 }
             }, 10);
         }
