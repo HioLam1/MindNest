@@ -36,7 +36,7 @@
     <!-- Header -->
     <header class="bg-white dark:bg-slate-800 shadow-sm sticky top-0 z-10 transition-colors duration-300">
         <div class="w-full px-4 sm:px-8 lg:px-12 xl:px-24 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="if(window.state.isLoggedIn) window.navigate('home')">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="if(window.state.isLoggedIn) window.appNavigate('home')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" />
                     <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />
@@ -55,7 +55,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
                 </button>
 
-                <button id="btn-summary" onclick="window.navigate('summary')" class="text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-rose-50 dark:hover:bg-rose-900/30 hidden">
+                <button id="btn-summary" onclick="window.appNavigate('summary')" class="text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors focus:outline-none p-1 rounded-md hover:bg-rose-50 dark:hover:bg-rose-900/30 hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                 </button>
 
@@ -101,7 +101,7 @@
                         </svg>
                         <div class="flex flex-col gap-1 w-full text-left">
                             <span id="login-error-text"></span>
-                            <button type="button" onclick="window.navigate('write-letter')" class="text-xs text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-bold underline mt-1 text-left self-start" id="btn-login-contact-dev">想聯絡開發者嗎？</button>
+                            <button type="button" onclick="window.appNavigate('write-letter')" class="text-xs text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-bold underline mt-1 text-left self-start" id="btn-login-contact-dev">想聯絡開發者嗎？</button>
                         </div>
                     </div>
 
@@ -134,7 +134,7 @@
                     </div>
 
                     <div class="flex gap-3">
-                        <button type="button" onclick="window.navigate('login')" id="btn-letter-back" class="flex-1 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-center text-sm">返回登入</button>
+                        <button type="button" onclick="window.appNavigate('login')" id="btn-letter-back" class="flex-1 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-center text-sm">返回登入</button>
                         <button type="submit" id="btn-letter-submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors shadow-sm text-sm">發送訊息</button>
                     </div>
                 </form>
@@ -150,7 +150,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full mb-8 lg:mb-12">
                 <!-- Teacher Dashboard Card -->
-                <div id="card-teacher" onclick="window.navigate('teacher')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-amber-200 dark:hover:border-amber-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
+                <div id="card-teacher" onclick="window.appNavigate('teacher')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-amber-200 dark:hover:border-amber-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
                     <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider flex items-center gap-1 shadow-sm">
                         <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> <span id="badge-teacher-only">教師專屬</span>
                     </div>
@@ -169,7 +169,7 @@
                 </div>
 
                 <!-- Developer Mode Card -->
-                <div id="card-developer" onclick="window.navigate('developer')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
+                <div id="card-developer" onclick="window.appNavigate('developer')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
                     <div id="badge-dev-unread" class="hidden absolute top-4 left-4 h-3.5 w-3.5 z-10 flex">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 shadow-sm border-2 border-white dark:border-slate-800 transition-colors"></span>
@@ -196,10 +196,10 @@
                 </div>
             </div>
 
-            <!-- 課程卡片容器：採用 lg:grid-cols-3 的三欄式排版 -->
+            <!-- 課程卡片容器：三欄式排版 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 w-full">
                 <!-- 中文卡片 (Chinese Card) -->
-                <div onclick="window.navigate('chinese')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
+                <div onclick="window.appNavigate('chinese')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
                     <div class="w-14 h-14 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 20h9"></path>
@@ -214,7 +214,7 @@
                 </div>
 
                 <!-- 英文卡片 (English Card) -->
-                <div onclick="window.navigate('english')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
+                <div onclick="window.appNavigate('english')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
                     <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-blue-500 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                     </div>
@@ -226,7 +226,7 @@
                 </div>
 
                 <!-- 數學卡片 (Math Card) -->
-                <div onclick="window.navigate('math')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
+                <div onclick="window.appNavigate('math')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
                     <div class="w-14 h-14 bg-purple-50 dark:bg-purple-900/30 text-purple-500 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><line x1="8" x2="16" y1="6" y2="6"></line><line x1="16" x2="16.01" y1="10" y2="10"></line><line x1="12" x2="12.01" y1="10" y2="10"></line><line x1="8" x2="8.01" y1="10" y2="10"></line><line x1="16" x2="16.01" y1="14" y2="14"></line><line x1="12" x2="12.01" y1="14" y2="14"></line><line x1="8" x2="8.01" y1="14" y2="14"></line><line x1="16" x2="16.01" y1="18" y2="18"></line><line x1="12" x2="12.01" y1="18" y2="18"></line><line x1="8" x2="8.01" y1="18" y2="18"></line></svg>
                     </div>
@@ -241,7 +241,7 @@
 
         <!-- Summary View (Not right time to use) -->
         <div id="view-summary" class="w-full fade-in hidden">
-            <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
+            <button onclick="window.appNavigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span id="btn-back-summary-page">返回首頁</span>
             </button>
@@ -253,9 +253,9 @@
             </div>
         </div>
 
-        <!-- Developer Mode View (ONLY ONE IN THE WHOLE FILE!) -->
+        <!-- Developer Mode View -->
         <div id="view-developer" class="w-full fade-in hidden">
-            <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
+            <button onclick="window.appNavigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span id="btn-back-dev">返回首頁</span>
             </button>
@@ -397,7 +397,7 @@
 
         <!-- Teacher Dashboard View -->
         <div id="view-teacher-dashboard" class="w-full fade-in hidden">
-            <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
+            <button onclick="window.appNavigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span id="btn-back-teacher">返回首頁</span>
             </button>
@@ -434,14 +434,14 @@
 
         <!-- Lesson View -->
         <div id="view-lesson" class="w-full fade-in hidden">
-            <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
+            <button onclick="window.appNavigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span id="btn-back">返回首頁</span>
             </button>
 
             <!-- Dynamic Headers -->
             
-            <!-- 中文課程標頭 (NEW) -->
+            <!-- 中文課程標頭 -->
             <div id="lesson-header-chinese" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
                  <div class="w-16 h-16 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -453,6 +453,7 @@
                  <p id="lesson-chinese-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors">提升你的閱讀、寫作與文言文理解能力。</p>
             </div>
 
+            <!-- 數學課程標頭 -->
             <div id="lesson-header-math" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
                  <div class="w-16 h-16 bg-purple-50 dark:bg-purple-900/30 text-purple-500 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"></rect><line x1="8" x2="16" y1="6" y2="6"></line><line x1="16" x2="16.01" y1="10" y2="10"></line><line x1="12" x2="12.01" y1="10" y2="10"></line><line x1="8" x2="8.01" y1="10" y2="10"></line><line x1="16" x2="16.01" y1="14" y2="14"></line><line x1="12" x2="12.01" y1="14" y2="14"></line><line x1="8" x2="8.01" y1="14" y2="14"></line><line x1="16" x2="16.01" y1="18" y2="18"></line><line x1="12" x2="12.01" y1="18" y2="18"></line><line x1="8" x2="8.01" y1="18" y2="18"></line></svg>
@@ -461,7 +462,7 @@
                  <p id="lesson-math-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors">探索數字、代數和幾何！</p>
             </div>
 
-            <!-- Dynamic Sub-Lesson Header -->
+            <!-- 數學子課程標頭 -->
             <div id="lesson-header-sub" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
                  <div id="header-sub-icon-box" class="transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
                     <svg id="header-sub-icon" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
@@ -470,6 +471,7 @@
                  <p id="header-sub-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors"></p>
             </div>
 
+            <!-- 英文課程標頭 -->
             <div id="lesson-header-english" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
                  <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/30 text-blue-500 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
@@ -492,7 +494,7 @@
 
             <!-- Math Main Content -->
             <div id="content-math-main" class="hidden">
-                <div onclick="window.navigate('math-summary')" class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex items-center justify-between group">
+                <div onclick="window.appNavigate('math-summary')" class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex items-center justify-between group">
                     <div class="flex items-center gap-5">
                         <div class="w-14 h-14 bg-purple-50 dark:bg-purple-900/30 text-purple-500 dark:text-purple-400 rounded-2xl flex items-center justify-center transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>
@@ -614,14 +616,10 @@
         </div>
     </main>
 
-    <!-- 改為 module 類型，才能使用 import 匯入 Firebase SDK -->
     <script type="module">
-        // --- 載入 Firebase 官方雲端 SDK ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- 寫入您的專屬 Firebase 金鑰 ---
-        // 我們將金鑰切分成三段，以避開 GitHub 的自動掃描機制
         const firebaseConfig = {
             apiKey: "AIzaSy" + "DInloVr6k4" + "iy5674Ubwfeo79HXQv89Dag",
             authDomain: "mindnest-hio.firebaseapp.com",
@@ -632,11 +630,9 @@
             measurementId: "G-GXVV6RHW92"
         };
 
-        // 啟動 Firebase 雲端資料庫
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 1. Dictionaries for 3 languages
         const dictionaries = {
             'zh-TW': {
                 appTitle: 'MindNest',
@@ -700,7 +696,6 @@
                 filterRole: '身分篩選：',
                 roleAll: '全部',
                 teacherOnly: '教師專屬',
-                // 開發者模式專屬翻譯
                 devModeTitle: '開發者模式',
                 devModeDesc: '管理系統帳號、設定與底層資料庫。',
                 devModeStart: '進入系統',
@@ -711,7 +706,6 @@
                 addAccBtn: '立即新增',
                 addAccSuccess: '帳號新增成功！可以立即登入。',
                 addAccExists: '此帳號名稱已被使用！',
-                // 變更身分系統翻譯
                 devChangeRoleTitle: '變更帳號身分',
                 changeAccUser: '使用者名稱',
                 changeAccNewRole: '新身分組',
@@ -723,13 +717,11 @@
                 modalDesc: '您即將更改一名開發者 (Developer) 的權限。這可能會影響系統管理。',
                 btnCancel: '取消',
                 btnConfirm: '確認變更',
-                // 自我降級安全防護
                 modalDemoteTitle: '確認您的密碼',
                 modalDemoteDesc: '若要變更您自己的開發者權限，請輸入您的密碼：',
                 demotePasswordError: '密碼錯誤，請重新輸入！',
                 placeholderDemotePass: '輸入密碼',
                 btnDemoteConfirm: '驗證並變更',
-                // 聯絡開發者信件系統翻譯
                 contactDevQuestion: '你想聯絡開發者嗎？',
                 writeLetterTitle: '給開發者的信',
                 writeLetterDesc: '請在下方寫下您的問題或留言，開發者收到後會盡快處理您的帳號申請！',
@@ -742,7 +734,6 @@
                 devInboxDesc: '查看所有學生或教師發送的聯絡訊息與申請。',
                 noMessages: '目前沒有任何訊息。',
                 deleteBtn: '刪除',
-                // 批次刪除系統翻譯
                 devDelAccTitle: '批次刪除帳號',
                 selectAll: '全選',
                 btnDelAcc: '刪除選取帳號',
@@ -750,7 +741,6 @@
                 delAccNoSelection: '請先選取要刪除的帳號！',
                 modalDelTitle: '確定刪除嗎？',
                 modalDelDesc: '您即將永久刪除選取的帳號，此操作無法復原。',
-                // 變更密碼系統翻譯
                 devChangePassTitle: '變更帳號密碼',
                 changePassUser: '使用者名稱',
                 changePassOld: '原密碼',
@@ -758,7 +748,6 @@
                 changePassBtn: '變更密碼',
                 changePassSuccess: '密碼變更成功！',
                 changePassErrorWrong: '原密碼錯誤！',
-                // 今日總結翻譯
                 summaryOfToday: '今日總結',
                 summaryDesc: '查看您今天的學習進度與重點。',
                 summaryStart: '查看總結',
@@ -853,13 +842,11 @@
                 modalDesc: '您即将更改一名开发者 (Developer) 的权限。这可能会影响系统管理。',
                 btnCancel: '取消',
                 btnConfirm: '确认变更',
-                // 自我降级安全防护
                 modalDemoteTitle: '确认您的密码',
                 modalDemoteDesc: '若要变更您自己的开发者权限，请输入您的密码：',
                 demotePasswordError: '密码错误，请重新输入！',
                 placeholderDemotePass: '输入密码',
                 btnDemoteConfirm: '验证并变更',
-                // 联络开发者信件系统翻译
                 contactDevQuestion: '你想联系开发者吗？',
                 writeLetterTitle: '给开发者的信',
                 writeLetterDesc: '请在下方写下您的问题 or 留言，开发者收到后会尽快处理您的账号申请！',
@@ -872,7 +859,6 @@
                 devInboxDesc: '查看所有学生 or 教师发送的联络消息与申请。',
                 noMessages: '目前没有任何消息。',
                 deleteBtn: '删除',
-                // 批次刪除系統翻譯
                 devDelAccTitle: '批次删除账号',
                 selectAll: '全选',
                 btnDelAcc: '删除选定账号',
@@ -880,7 +866,6 @@
                 delAccNoSelection: '请先选择要删除的账号！',
                 modalDelTitle: '确定删除吗？',
                 modalDelDesc: '您即将永久删除选定的账号，此操作无法恢复。',
-                // 变更密码系统翻译
                 devChangePassTitle: '变更账号密码',
                 changePassUser: '用户名',
                 changePassOld: '原密码',
@@ -982,13 +967,11 @@
                 modalDesc: 'You are about to change the permissions of a Developer. This may affect system management.',
                 btnCancel: 'Cancel',
                 btnConfirm: 'Confirm Change',
-                // Self Demotion
                 modalDemoteTitle: 'Confirm Your Password',
                 modalDemoteDesc: 'If you want to demote yourself, please enter your password:',
                 demotePasswordError: 'Incorrect password, please try again!',
                 placeholderDemotePass: 'Enter password',
                 btnDemoteConfirm: 'Verify & Change',
-                // Write Letter Section translation
                 contactDevQuestion: 'Would you like to contact the developer?',
                 writeLetterTitle: 'Write to the Developer',
                 writeLetterDesc: 'Please write your issue or message below. The developer will process your account application as soon as possible!',
@@ -1001,7 +984,6 @@
                 devInboxDesc: 'View all contact messages and applications sent by students or teachers.',
                 noMessages: 'No messages currently.',
                 deleteBtn: 'Delete',
-                // New: Batch Delete translation
                 devDelAccTitle: 'Batch Delete Accounts',
                 selectAll: 'Select All',
                 btnDelAcc: 'Delete Selected',
@@ -1009,7 +991,6 @@
                 delAccNoSelection: 'Please select accounts to delete!',
                 modalDelTitle: 'Are you sure?',
                 modalDelDesc: 'You are about to permanently delete the selected accounts. This cannot be undone.',
-                // Change Password translation
                 devChangePassTitle: 'Change Account Password',
                 changePassUser: 'Username',
                 changePassOld: 'Original Password',
@@ -1030,13 +1011,11 @@
             }
         };
 
-        // 預設的帳號驗證清單 (Fallback)
         const registeredUsers = [
             { username: 'Hio_Lam1', password: 'Bedwars$20130630', role: 'developer' },
             { username: 'Hio_Lam2', password: 'Bedwars$20130630', role: 'student' }
         ];
 
-        // 2. Application State
         let state = {
             currentLang: 'zh-TW', 
             lastChineseLang: 'zh-TW', 
@@ -1056,11 +1035,9 @@
         };
         
         window.state = state;
-
-        // Web Audio API Context (Initialized on first interaction)
         let audioCtx = null;
 
-        function playClickSound() {
+        window.playClickSound = function() {
             if (state.isMuted) return;
             if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
             if (audioCtx.state === 'suspended') { audioCtx.resume(); }
@@ -1079,14 +1056,12 @@
             oscillator.stop(audioCtx.currentTime + 0.1);
         }
 
-        // --- 將使用者資料同步寫入 Firebase 雲端資料庫 ---
         async function syncUserToFirestore(username, role, onlineStatus = "online", password = null) {
             try {
                 const userRef = doc(db, "students", username);
                 const docSnap = await getDoc(userRef);
                 const currentTime = new Date().toLocaleString();
                 
-                // 如果是第一次登入這套系統，幫他在雲端建立一個檔案
                 if (!docSnap.exists()) {
                     let newUserData = {
                         username: username,
@@ -1097,24 +1072,22 @@
                         lastActive: currentTime,
                         status: onlineStatus
                     };
-                    if (password) { newUserData.password = password; } // 儲存密碼以供日後驗證
+                    if (password) { newUserData.password = password; }
                     await setDoc(userRef, newUserData);
                 } else {
-                    // 如果已經有檔案了，更新「最後活動時間」與「在線狀態」
                     let updateData = { 
                         lastActive: currentTime,
                         role: role,
                         status: onlineStatus
                     };
-                    if (password) { updateData.password = password; } // 若有密碼也可同步更新
+                    if (password) { updateData.password = password; }
                     await setDoc(userRef, updateData, { merge: true });
                 }
             } catch (error) {
-                console.error("寫入雲端失敗 (請確認資料庫已開啟測試模式):", error);
+                console.error("寫入雲端失敗:", error);
             }
         }
 
-        // --- 核心登入驗證 ---
         window.handleLogin = async function(e) {
             e.preventDefault();
             const user = document.getElementById('input-username').value.trim();
@@ -1123,12 +1096,10 @@
             const errorMsg = document.getElementById('login-error');
             const dict = dictionaries[state.currentLang];
 
-            // 1. 先找找本地有沒有預設的資料
             let localUser = registeredUsers.find(u => u.username === user && u.password === pass);
             let finalUser = null;
 
             try {
-                // 2. 去 Firebase 雲端檢查是否有這個帳號 (以雲端身分為絕對優先)
                 const userRef = doc(db, "students", user);
                 const docSnap = await getDoc(userRef);
                 
@@ -1154,7 +1125,6 @@
                 state.role = finalUser.role; 
                 state.username = finalUser.username; 
                 
-                // 記住我：安全預填模式
                 if (remember) {
                     localStorage.setItem('mindnest_remember', 'true');
                     localStorage.setItem('mindnest_username', user);
@@ -1172,7 +1142,7 @@
                 document.getElementById('input-password').value = ''; 
                 
                 await syncUserToFirestore(user, state.role, "online", pass);
-                appNavigate('home');
+                window.appNavigate('home');
             } else {
                 document.getElementById('login-error-text').textContent = dict.loginError;
                 errorMsg.classList.remove('hidden');
@@ -1180,7 +1150,6 @@
             }
         }
 
-        // --- 開發者專屬：新增帳號 ---
         window.handleAddAccount = async function(e) {
             e.preventDefault();
             const user = document.getElementById('add-acc-user').value.trim();
@@ -1233,7 +1202,6 @@
             }
         }
 
-        // --- 學生/未註冊者：撰寫信件 ---
         window.handleSendLetter = async function(e) {
             e.preventDefault();
             const sender = document.getElementById('input-letter-sender').value.trim();
@@ -1255,7 +1223,7 @@
                     unread: true
                 });
 
-                playClickSound();
+                window.playClickSound();
                 successBox.classList.remove('hidden');
                 successBox.classList.add('flex');
                 document.getElementById('input-letter-msg').value = '';
@@ -1264,7 +1232,7 @@
                     successBox.classList.add('hidden');
                     successBox.classList.remove('flex');
                     submitBtn.disabled = false;
-                    appNavigate('login');
+                    window.appNavigate('login');
                 }, 2500);
 
             } catch (err) {
@@ -1273,9 +1241,8 @@
             }
         }
 
-        // --- 開發者：刪除特定信件功能 ---
         window.deleteMessage = async function(msgId) {
-            playClickSound();
+            window.playClickSound();
             try {
                 await deleteDoc(doc(db, "developer_messages", msgId));
             } catch (err) {
@@ -1283,7 +1250,6 @@
             }
         }
 
-        // --- 開發者專屬：變更帳號身分功能 ---
         window.handleChangeRole = async function(e) {
             e.preventDefault();
             const user = document.getElementById('change-acc-user').value.trim();
@@ -1323,7 +1289,6 @@
                     return;
                 }
 
-                // 安全自我降級防護系統
                 const currentLoggedUser = localStorage.getItem('mindnest_username') || state.username;
                 if (user === currentLoggedUser && currentRole === 'developer' && newRole !== 'developer') {
                     state.pendingRoleChange = { username: user, newRole: newRole, existsInDb: existsInDb };
@@ -1345,13 +1310,13 @@
         }
 
         window.cancelDemoteVerify = function() {
-            playClickSound();
+            window.playClickSound();
             document.getElementById('modal-demote-verify').classList.add('hidden');
             state.pendingRoleChange = null;
         }
 
         window.confirmDemoteVerify = async function() {
-            playClickSound();
+            window.playClickSound();
             const typedPassword = document.getElementById('input-demote-password').value.trim();
             const errorLabel = document.getElementById('demote-password-error');
 
@@ -1370,13 +1335,13 @@
         }
 
         window.cancelChangeRole = function() {
-            playClickSound();
+            window.playClickSound();
             document.getElementById('modal-confirm').classList.add('hidden');
             state.pendingRoleChange = null; 
         }
 
         window.confirmChangeRole = async function() {
-            playClickSound();
+            window.playClickSound();
             if (state.pendingRoleChange) {
                 const { username, newRole, existsInDb } = state.pendingRoleChange;
                 document.getElementById('modal-confirm').classList.add('hidden');
@@ -1412,7 +1377,7 @@
                     state.role = newRole;
                     localStorage.setItem('mindnest_role', newRole);
                     if (newRole !== 'developer' && state.currentPage === 'developer') {
-                        setTimeout(() => { appNavigate('home'); }, 1500);
+                        setTimeout(() => { window.appNavigate('home'); }, 1500);
                     }
                     render();
                 }
@@ -1431,7 +1396,6 @@
             }
         }
 
-        // --- 變更密碼相關邏輯 ---
         window.handleChangePassword = async function(e) {
             e.preventDefault();
             const user = document.getElementById('change-pass-user').value.trim();
@@ -1506,15 +1470,14 @@
             }
         }
 
-        // --- 批次刪除帳號相關邏輯 ---
         window.toggleSelectAllDelete = function(checkbox) {
-            playClickSound();
+            window.playClickSound();
             const checkboxes = document.querySelectorAll('.delete-checkbox');
             checkboxes.forEach(cb => cb.checked = checkbox.checked);
         }
 
         window.initiateDeleteAccounts = function() {
-            playClickSound();
+            window.playClickSound();
             const dict = dictionaries[state.currentLang];
             const checkboxes = document.querySelectorAll('.delete-checkbox:checked');
             const msgBox = document.getElementById('del-acc-msg');
@@ -1531,13 +1494,13 @@
         }
 
         window.cancelDeleteAccounts = function() {
-            playClickSound();
+            window.playClickSound();
             document.getElementById('modal-delete-verify').classList.add('hidden');
             state.pendingDeletions = [];
         }
 
         window.confirmDeleteAccounts = async function() {
-            playClickSound();
+            window.playClickSound();
             document.getElementById('modal-delete-verify').classList.add('hidden');
             const msgBox = document.getElementById('del-acc-msg');
             const dict = dictionaries[state.currentLang];
@@ -1556,7 +1519,6 @@
                     
                     document.getElementById('checkbox-select-all').checked = false;
                     
-                    // 如果自己刪除了自己，直接登出踢出系統
                     const currentLoggedUser = localStorage.getItem('mindnest_username') || state.username;
                     if (state.pendingDeletions.includes(currentLoggedUser)) {
                         setTimeout(() => { window.logout(); }, 1500);
@@ -1586,7 +1548,7 @@
             state.role = 'student';
             state.username = '';
             
-            appNavigate('login');
+            window.appNavigate('login');
         }
 
         window.addEventListener('beforeunload', function() {
@@ -1600,7 +1562,7 @@
         });
 
         window.toggleTheme = function() {
-            playClickSound();
+            window.playClickSound();
             state.isDarkMode = !state.isDarkMode;
             if (state.isDarkMode) {
                 document.documentElement.classList.add('dark');
@@ -1615,46 +1577,44 @@
         window.toggleMute = function() {
             state.isMuted = !state.isMuted;
             renderMuteButton(); 
-            if (!state.isMuted) { playClickSound(); }
+            if (!state.isMuted) { window.playClickSound(); }
         }
 
-        window.navigateBack = function() {
-            if (state.currentPage === 'math-chapter') { appNavigate('math-category'); }
-            else if (state.currentPage === 'math-category') { appNavigate('math-summary'); }
-            else if (state.currentPage === 'math-summary') { appNavigate('math'); }
-            else if (state.currentPage === 'summary') { appNavigate('home'); }
-            else { appNavigate('home'); }
+        window.appNavigateBack = function() {
+            if (state.currentPage === 'math-chapter') { window.appNavigate('math-category'); }
+            else if (state.currentPage === 'math-category') { window.appNavigate('math-summary'); }
+            else if (state.currentPage === 'math-summary') { window.appNavigate('math'); }
+            else if (state.currentPage === 'summary') { window.appNavigate('home'); }
+            else { window.appNavigate('home'); }
         }
 
         window.navigateCategory = function(cat) {
             state.selectedCategory = cat;
-            appNavigate('math-category');
+            window.appNavigate('math-category');
         }
 
         window.navigateChapter = function(chap) {
             state.selectedChapter = chap;
-            appNavigate('math-chapter');
+            window.appNavigate('math-chapter');
         }
 
         window.setTeacherTab = function(tabName) {
-            playClickSound();
+            window.playClickSound();
             state.teacherTab = tabName;
             render(); 
         }
 
         window.setRoleFilter = function(roleName) {
-            playClickSound();
+            window.playClickSound();
             state.teacherRoleFilter = roleName;
             render(); 
         }
 
-        window.navigate = appNavigate; 
-        function appNavigate(page) {
-            playClickSound(); 
+        window.appNavigate = function(page) {
+            window.playClickSound(); 
             if (!state.isLoggedIn && page !== 'login' && page !== 'write-letter') { page = 'login'; }
             state.currentPage = page;
 
-            // 切換時允許中文、數學等使用中文語系，英文使用英文語系
             if (page === 'math' || page === 'math-summary' || page === 'math-category' || page === 'math-chapter' || page === 'chinese') {
                 if (state.currentLang === 'en') { state.currentLang = state.lastChineseLang; }
             } else if (page === 'english') {
@@ -1700,8 +1660,10 @@
             render();
         }
 
+        window.navigate = window.appNavigate;
+
         window.changeLanguage = function(langCode) {
-            playClickSound(); 
+            window.playClickSound(); 
             state.currentLang = langCode;
             if (langCode === 'zh-TW' || langCode === 'zh-CN') { state.lastChineseLang = langCode; }
             render();
@@ -1799,57 +1761,72 @@
             document.getElementById('home-title').textContent = dict.homeTitle;
             document.getElementById('home-subtitle').textContent = dict.homeSubtitle;
             
-            // 課程卡片的多語系更新
-            document.getElementById('card-chinese-title').textContent = dict.chinese;
-            document.getElementById('card-chinese-desc').textContent = dict.chineseDesc;
-            document.getElementById('card-chinese-start').textContent = dict.startCourse;
+            if (document.getElementById('card-chinese-title')) {
+                document.getElementById('card-chinese-title').textContent = dict.chinese;
+                document.getElementById('card-chinese-desc').textContent = dict.chineseDesc;
+                document.getElementById('card-chinese-start').textContent = dict.startCourse;
+            }
 
-            document.getElementById('card-math-title').textContent = dict.math;
-            document.getElementById('card-math-desc').textContent = dict.mathDesc;
-            document.getElementById('card-english-title').textContent = dict.english;
-            document.getElementById('card-english-desc').textContent = dict.englishDesc;
-            document.getElementById('card-math-start').textContent = dict.startCourse;
-            document.getElementById('card-english-start').textContent = dict.startCourse;
+            if (document.getElementById('card-math-title')) {
+                document.getElementById('card-math-title').textContent = dict.math;
+                document.getElementById('card-math-desc').textContent = dict.mathDesc;
+                document.getElementById('card-english-title').textContent = dict.english;
+                document.getElementById('card-english-desc').textContent = dict.englishDesc;
+                document.getElementById('card-math-start').textContent = dict.startCourse;
+                document.getElementById('card-english-start').textContent = dict.startCourse;
+            }
 
-            document.getElementById('card-teacher-title').textContent = dict.teacherDashboard;
-            document.getElementById('card-teacher-desc').textContent = dict.teacherDesc;
-            document.getElementById('card-teacher-start').textContent = dict.viewProgress;
+            if (document.getElementById('card-teacher-title')) {
+                document.getElementById('card-teacher-title').textContent = dict.teacherDashboard;
+                document.getElementById('card-teacher-desc').textContent = dict.teacherDesc;
+                document.getElementById('card-teacher-start').textContent = dict.viewProgress;
+            }
             
             btnSummary.title = dict.summaryOfToday;
             
             document.querySelectorAll('.not-right-time-text').forEach(el => el.textContent = dict.notRightTime);
             document.querySelectorAll('.dev-not-right-time').forEach(el => el.textContent = dict.notRightTime);
-            document.getElementById('text-dev-edit-summary-title').textContent = dict.devEditSummary;
-            document.getElementById('btn-back-summary-page').textContent = dict.btnBackHome;
+            if (document.getElementById('text-dev-edit-summary-title')) document.getElementById('text-dev-edit-summary-title').textContent = dict.devEditSummary;
+            if (document.getElementById('btn-back-summary-page')) document.getElementById('btn-back-summary-page').textContent = dict.btnBackHome;
 
-            document.getElementById('card-dev-title').textContent = dict.devModeTitle;
-            document.getElementById('card-dev-desc').textContent = dict.devModeDesc;
-            document.getElementById('card-dev-start').textContent = dict.devModeStart;
+            if (document.getElementById('card-dev-title')) {
+                document.getElementById('card-dev-title').textContent = dict.devModeTitle;
+                document.getElementById('card-dev-desc').textContent = dict.devModeDesc;
+                document.getElementById('card-dev-start').textContent = dict.devModeStart;
+            }
             
-            document.getElementById('title-dev-page').textContent = dict.devModeTitle;
-            document.getElementById('desc-dev-page').textContent = dict.devModeDesc;
-            document.getElementById('text-dev-add-acc-panel-title').textContent = dict.devAddAccount;
-            document.getElementById('label-add-acc-user').textContent = dict.addAccUser;
-            document.getElementById('label-add-acc-pass').textContent = dict.addAccPass;
-            document.getElementById('label-add-acc-role').textContent = dict.addAccRole;
-            document.getElementById('btn-add-acc-submit').textContent = dict.addAccBtn;
+            if (document.getElementById('title-dev-page')) {
+                document.getElementById('title-dev-page').textContent = dict.devModeTitle;
+                document.getElementById('desc-dev-page').textContent = dict.devModeDesc;
+                document.getElementById('text-dev-add-acc-panel-title').textContent = dict.devAddAccount;
+                document.getElementById('label-add-acc-user').textContent = dict.addAccUser;
+                document.getElementById('label-add-acc-pass').textContent = dict.addAccPass;
+                document.getElementById('label-add-acc-role').textContent = dict.addAccRole;
+                document.getElementById('btn-add-acc-submit').textContent = dict.addAccBtn;
+            }
 
-            document.getElementById('text-dev-change-role-panel-title').textContent = dict.devChangeRoleTitle;
-            document.getElementById('label-change-acc-user').textContent = dict.changeAccUser;
-            document.getElementById('label-change-acc-role').textContent = dict.changeAccNewRole;
-            document.getElementById('btn-change-acc-submit').textContent = dict.changeAccBtn;
+            if (document.getElementById('text-dev-change-role-panel-title')) {
+                document.getElementById('text-dev-change-role-panel-title').textContent = dict.devChangeRoleTitle;
+                document.getElementById('label-change-acc-user').textContent = dict.changeAccUser;
+                document.getElementById('label-change-acc-role').textContent = dict.changeAccNewRole;
+                document.getElementById('btn-change-acc-submit').textContent = dict.changeAccBtn;
+            }
             
-            document.getElementById('modal-title').textContent = dict.modalTitle;
-            document.getElementById('modal-desc').textContent = dict.modalDesc;
-            document.getElementById('btn-modal-cancel').textContent = dict.btnCancel;
-            document.getElementById('btn-modal-confirm').textContent = dict.btnConfirm;
+            if (document.getElementById('modal-title')) {
+                document.getElementById('modal-title').textContent = dict.modalTitle;
+                document.getElementById('modal-desc').textContent = dict.modalDesc;
+                document.getElementById('btn-modal-cancel').textContent = dict.btnCancel;
+                document.getElementById('btn-modal-confirm').textContent = dict.btnConfirm;
+            }
 
-            document.getElementById('modal-demote-title').textContent = dict.modalDemoteTitle;
-            document.getElementById('modal-demote-desc').textContent = dict.modalDemoteDesc;
-            document.getElementById('input-demote-password').placeholder = dict.placeholderDemotePass;
-            document.getElementById('demote-password-error').textContent = dict.demotePasswordError;
-            document.getElementById('btn-modal-demote-cancel').textContent = dict.btnCancel;
-            document.getElementById('btn-modal-demote-confirm').textContent = dict.btnDemoteConfirm;
+            if (document.getElementById('modal-demote-title')) {
+                document.getElementById('modal-demote-title').textContent = dict.modalDemoteTitle;
+                document.getElementById('modal-demote-desc').textContent = dict.modalDemoteDesc;
+                document.getElementById('input-demote-password').placeholder = dict.placeholderDemotePass;
+                document.getElementById('demote-password-error').textContent = dict.demotePasswordError;
+                document.getElementById('btn-modal-demote-cancel').textContent = dict.btnCancel;
+                document.getElementById('btn-modal-demote-confirm').textContent = dict.btnDemoteConfirm;
+            }
 
             if (document.getElementById('text-dev-del-acc-title')) {
                 document.getElementById('text-dev-del-acc-title').textContent = dict.devDelAccTitle;
@@ -1869,8 +1846,10 @@
                 document.getElementById('btn-change-pass-submit').textContent = dict.changePassBtn;
             }
 
-            document.getElementById('title-teacher-dash').textContent = dict.teacherDashboardTitle;
-            document.getElementById('desc-teacher-dash').textContent = dict.teacherDashboardDesc;
+            if (document.getElementById('title-teacher-dash')) {
+                document.getElementById('title-teacher-dash').textContent = dict.teacherDashboardTitle;
+                document.getElementById('desc-teacher-dash').textContent = dict.teacherDashboardDesc;
+            }
 
             const roleOptionsText = {
                 'zh-TW': { s: '學生 (Student)', t: '教師 (Teacher)', d: '開發者 (Developer)' },
@@ -1879,19 +1858,23 @@
             };
             const targetText = roleOptionsText[state.currentLang];
             
-            document.getElementById('opt-role-student').textContent = targetText.s;
-            document.getElementById('opt-role-teacher').textContent = targetText.t;
-            document.getElementById('opt-role-developer').textContent = targetText.d;
-            
-            document.getElementById('opt-change-role-student').textContent = targetText.s;
-            document.getElementById('opt-change-role-teacher').textContent = targetText.t;
-            document.getElementById('opt-change-role-developer').textContent = targetText.d;
+            if (document.getElementById('opt-role-student')) {
+                document.getElementById('opt-role-student').textContent = targetText.s;
+                document.getElementById('opt-role-teacher').textContent = targetText.t;
+                document.getElementById('opt-role-developer').textContent = targetText.d;
+                
+                document.getElementById('opt-change-role-student').textContent = targetText.s;
+                document.getElementById('opt-change-role-teacher').textContent = targetText.t;
+                document.getElementById('opt-change-role-developer').textContent = targetText.d;
+            }
 
-            document.getElementById('text-filter-role').textContent = dict.filterRole;
-            document.getElementById('filter-all').textContent = dict.roleAll;
-            document.getElementById('filter-developer').textContent = targetText.d;
-            document.getElementById('filter-teacher').textContent = targetText.t;
-            document.getElementById('filter-student').textContent = targetText.s;
+            if (document.getElementById('text-filter-role')) {
+                document.getElementById('text-filter-role').textContent = dict.filterRole;
+                document.getElementById('filter-all').textContent = dict.roleAll;
+                document.getElementById('filter-developer').textContent = targetText.d;
+                document.getElementById('filter-teacher').textContent = targetText.t;
+                document.getElementById('filter-student').textContent = targetText.s;
+            }
 
             if (document.getElementById('badge-teacher-only')) {
                 document.getElementById('badge-teacher-only').textContent = dict.teacherOnly;
@@ -1914,130 +1897,473 @@
             else if (state.teacherRoleFilter === 'teacher' && filterTeacher) filterTeacher.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
             else if (state.teacherRoleFilter === 'student' && filterStudent) filterStudent.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
 
-            document.getElementById('text-tab-scores').textContent = dict.tabScores;
-            document.getElementById('text-tab-status').textContent = dict.tabStatus;
+            if (document.getElementById('text-tab-scores')) {
+                document.getElementById('text-tab-scores').textContent = dict.tabScores;
+                document.getElementById('text-tab-status').textContent = dict.tabStatus;
+            }
 
             const tabScores = document.getElementById('tab-teacher-scores');
             const tabStatus = document.getElementById('tab-teacher-status');
-            if (state.teacherTab === 'scores') {
-                tabScores.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 outline-none flex items-center gap-2';
-                tabStatus.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white outline-none flex items-center gap-2';
-            } else {
-                tabStatus.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 outline-none flex items-center gap-2';
-                tabScores.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white outline-none flex items-center gap-2';
+            if (tabScores && tabStatus) {
+                if (state.teacherTab === 'scores') {
+                    tabScores.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 outline-none flex items-center gap-2';
+                    tabStatus.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white outline-none flex items-center gap-2';
+                } else {
+                    tabStatus.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 outline-none flex items-center gap-2';
+                    tabScores.className = 'px-5 py-3 font-semibold text-sm transition-all duration-200 border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white outline-none flex items-center gap-2';
+                }
             }
 
             const cardTeacher = document.getElementById('card-teacher');
             const cardDeveloper = document.getElementById('card-developer');
             
-            if (state.role === 'developer' || state.role === 'teacher') {
-                cardTeacher.classList.remove('hidden');
-                cardTeacher.classList.add('flex');
-                
-                if (state.role === 'teacher') {
-                    cardTeacher.classList.add('md:col-span-2');
+            if (cardTeacher) {
+                if (state.role === 'developer' || state.role === 'teacher') {
+                    cardTeacher.classList.remove('hidden');
+                    cardTeacher.classList.add('flex');
+                    
+                    if (state.role === 'teacher') {
+                        cardTeacher.classList.add('md:col-span-2', 'lg:col-span-3');
+                    } else {
+                        cardTeacher.classList.remove('md:col-span-2', 'lg:col-span-3');
+                    }
                 } else {
-                    cardTeacher.classList.remove('md:col-span-2');
+                    cardTeacher.classList.add('hidden');
+                    cardTeacher.classList.remove('flex', 'md:col-span-2', 'lg:col-span-3');
                 }
-            } else {
-                cardTeacher.classList.add('hidden');
-                cardTeacher.classList.remove('flex', 'md:col-span-2');
             }
 
-            if (state.role === 'developer') {
-                cardDeveloper.classList.remove('hidden');
-                cardDeveloper.classList.add('flex');
-            } else {
-                cardDeveloper.classList.add('hidden');
-                cardDeveloper.classList.remove('flex');
+            if (cardDeveloper) {
+                if (state.role === 'developer') {
+                    cardDeveloper.classList.remove('hidden');
+                    cardDeveloper.classList.add('flex');
+                } else {
+                    cardDeveloper.classList.add('hidden');
+                    cardDeveloper.classList.remove('flex');
+                }
             }
 
             // 更新中文課程內部的翻譯文字
-            document.getElementById('lesson-chinese-title').textContent = dict.chinese;
-            document.getElementById('lesson-chinese-desc').textContent = dict.chineseDesc;
-
-            document.getElementById('lesson-math-title').textContent = dict.math;
-            document.getElementById('lesson-math-desc').textContent = dict.mathDesc;
-            document.getElementById('lesson-english-title').textContent = dict.english;
-            document.getElementById('lesson-english-desc').textContent = dict.englishDesc;
+            if (document.getElementById('lesson-chinese-title')) {
+                document.getElementById('lesson-chinese-title').textContent = dict.chinese;
+                document.getElementById('lesson-chinese-desc').textContent = dict.chineseDesc;
+                document.getElementById('lesson-math-title').textContent = dict.math;
+                document.getElementById('lesson-math-desc').textContent = dict.mathDesc;
+                document.getElementById('lesson-english-title').textContent = dict.english;
+                document.getElementById('lesson-english-desc').textContent = dict.englishDesc;
+            }
             
             const headerSubIconBox = document.getElementById('header-sub-icon-box');
             const headerSubIcon = document.getElementById('header-sub-icon');
             const headerSubTitle = document.getElementById('header-sub-title');
             const headerSubDesc = document.getElementById('header-sub-desc');
 
-            if (state.currentPage === 'math-summary') {
-                headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-purple-50 text-purple-500';
-                headerSubIcon.innerHTML = '<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>';
-                headerSubTitle.textContent = dict.mathSummary;
-                headerSubDesc.textContent = dict.mathSummaryDesc;
-            } else if (state.currentPage === 'math-category') {
-                if (state.selectedCategory === 'geometry') {
-                    headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-pink-50 text-pink-500';
-                    headerSubIcon.innerHTML = '<rect x="3" y="3" width="8" height="8" rx="2"></rect><circle cx="17" cy="7" r="4"></circle><polygon points="12 21 7 13 17 13"></polygon>';
-                    headerSubTitle.textContent = dict.geometry;
-                    headerSubDesc.textContent = dict.geometryDesc;
-                } else {
-                    headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-emerald-50 text-emerald-500';
-                    headerSubIcon.innerHTML = '<path d="M7 4v16"></path><path d="M5 6l2-2"></path><path d="M13 8a3 3 0 0 1 6 0c0 2-6 5.5-6 8h6"></path>';
-                    headerSubTitle.textContent = dict.algebra;
-                    headerSubDesc.textContent = dict.algebraDesc;
+            if (headerSubTitle) {
+                if (state.currentPage === 'math-summary') {
+                    headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-purple-50 text-purple-500';
+                    headerSubIcon.innerHTML = '<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>';
+                    headerSubTitle.textContent = dict.mathSummary;
+                    headerSubDesc.textContent = dict.mathSummaryDesc;
+                } else if (state.currentPage === 'math-category') {
+                    if (state.selectedCategory === 'geometry') {
+                        headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-pink-50 text-pink-500';
+                        headerSubIcon.innerHTML = '<rect x="3" y="3" width="8" height="8" rx="2"></rect><circle cx="17" cy="7" r="4"></circle><polygon points="12 21 7 13 17 13"></polygon>';
+                        headerSubTitle.textContent = dict.geometry;
+                        headerSubDesc.textContent = dict.geometryDesc;
+                    } else {
+                        headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-emerald-50 text-emerald-500';
+                        headerSubIcon.innerHTML = '<path d="M7 4v16"></path><path d="M5 6l2-2"></path><path d="M13 8a3 3 0 0 1 6 0c0 2-6 5.5-6 8h6"></path>';
+                        headerSubTitle.textContent = dict.algebra;
+                        headerSubDesc.textContent = dict.algebraDesc;
+                    }
+                } else if (state.currentPage === 'math-chapter') {
+                    headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-indigo-50 text-indigo-500';
+                    headerSubIcon.innerHTML = '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>'; 
+                    headerSubTitle.textContent = state.selectedChapter === 1 ? dict.chapter1 : dict.chapter2;
+                    headerSubDesc.textContent = state.selectedCategory === 'geometry' ? dict.geometry : dict.algebra;
                 }
-            } else if (state.currentPage === 'math-chapter') {
-                headerSubIconBox.className = 'transition-colors w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-indigo-50 text-indigo-500';
-                headerSubIcon.innerHTML = '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>'; 
-                headerSubTitle.textContent = state.selectedChapter === 1 ? dict.chapter1 : dict.chapter2;
-                headerSubDesc.textContent = state.selectedCategory === 'geometry' ? dict.geometry : dict.algebra;
             }
 
-            document.getElementById('text-math-summary').textContent = dict.mathSummary;
-            document.getElementById('text-math-summary-desc').textContent = dict.mathSummaryDesc;
-            
-            document.getElementById('text-geometry').textContent = dict.geometry;
-            document.getElementById('text-geometry-desc').textContent = dict.geometryDesc;
-            document.getElementById('text-algebra').textContent = dict.algebra;
-            document.getElementById('text-algebra-desc').textContent = dict.algebraDesc;
-            
-            document.getElementById('text-chapter-1').textContent = dict.chapter1;
-            document.getElementById('text-chapter-2').textContent = dict.chapter2;
+            if (document.getElementById('text-math-summary')) {
+                document.getElementById('text-math-summary').textContent = dict.mathSummary;
+                document.getElementById('text-math-summary-desc').textContent = dict.mathSummaryDesc;
+                document.getElementById('text-geometry').textContent = dict.geometry;
+                document.getElementById('text-geometry-desc').textContent = dict.geometryDesc;
+                document.getElementById('text-algebra').textContent = dict.algebra;
+                document.getElementById('text-algebra-desc').textContent = dict.algebraDesc;
+                document.getElementById('text-chapter-1').textContent = dict.chapter1;
+                document.getElementById('text-chapter-2').textContent = dict.chapter2;
+            }
             
             document.querySelectorAll('.dev-title-text').forEach(el => el.textContent = dict.devTitle);
             document.querySelectorAll('.dev-msg-text').forEach(el => el.textContent = dict.devMsg);
 
-            if (state.currentPage === 'math-chapter') {
-                document.getElementById('btn-back').textContent = dict.btnBackCategory;
-            } else if (state.currentPage === 'math-category') {
-                document.getElementById('btn-back').textContent = dict.btnBackSummary;
-            } else if (state.currentPage === 'math-summary') {
-                document.getElementById('btn-back').textContent = dict.btnBackMath;
-            } else if (state.currentPage === 'developer' || state.currentPage === 'summary' || state.currentPage === 'write-letter') {
-                document.getElementById('btn-back-dev') && (document.getElementById('btn-back-dev').textContent = dict.btnBackHome);
-                document.getElementById('btn-back-summary-page') && (document.getElementById('btn-back-summary-page').textContent = dict.btnBackHome);
-            } else {
-                document.getElementById('btn-back') && (document.getElementById('btn-back').textContent = dict.btnBackHome);
-                document.getElementById('btn-back-teacher') && (document.getElementById('btn-back-teacher').textContent = dict.btnBackHome);
+            if (document.getElementById('btn-back')) {
+                if (state.currentPage === 'math-chapter') {
+                    document.getElementById('btn-back').textContent = dict.btnBackCategory;
+                } else if (state.currentPage === 'math-category') {
+                    document.getElementById('btn-back').textContent = dict.btnBackSummary;
+                } else if (state.currentPage === 'math-summary') {
+                    document.getElementById('btn-back').textContent = dict.btnBackMath;
+                } else {
+                    document.getElementById('btn-back').textContent = dict.btnBackHome;
+                }
             }
+            
+            if (document.getElementById('btn-back-dev')) document.getElementById('btn-back-dev').textContent = dict.btnBackHome;
+            if (document.getElementById('btn-back-summary-page')) document.getElementById('btn-back-summary-page').textContent = dict.btnBackHome;
+            if (document.getElementById('btn-back-teacher')) document.getElementById('btn-back-teacher').textContent = dict.btnBackHome;
 
             renderMuteButton();
             renderThemeButton();
 
             const select = document.getElementById('lang-selector');
-            select.innerHTML = ''; 
-            let allowedLangs = ['zh-TW', 'zh-CN', 'en'];
-            
-            if (state.currentPage === 'math' || state.currentPage === 'math-summary' || state.currentPage === 'math-category' || state.currentPage === 'math-chapter' || state.currentPage === 'chinese') {
-                allowedLangs = ['zh-TW', 'zh-CN']; 
-            } else if (state.currentPage === 'english') {
-                allowedLangs = ['en']; 
+            if (select) {
+                select.innerHTML = ''; 
+                let allowedLangs = ['zh-TW', 'zh-CN', 'en'];
+                
+                if (state.currentPage === 'math' || state.currentPage === 'math-summary' || state.currentPage === 'math-category' || state.currentPage === 'math-chapter' || state.currentPage === 'chinese') {
+                    allowedLangs = ['zh-TW', 'zh-CN']; 
+                } else if (state.currentPage === 'english') {
+                    allowedLangs = ['en']; 
+                }
+
+                allowedLangs.forEach(langCode => {
+                    const option = document.createElement('option');
+                    option.value = langCode;
+                    option.textContent = dict.langs[langCode];
+                    if (langCode === state.currentLang) { option.selected = true; }
+                    select.appendChild(option);
+                });
             }
 
-            allowedLangs.forEach(langCode => {
-                const option = document.createElement('option');
-                option.value = langCode;
-                option.textContent = dict.langs[langCode];
-                if (langCode === state.currentLang) { option.selected = true; }
-                select.appendChild(option);
-            });
+            // --- 學生進度追蹤及開發者信箱更新邏輯 ---
+            const studentContainer = document.getElementById('student-list-container');
+            const mailboxContainer = document.getElementById('dev-mailbox-container');
+
+            const updateDeveloperDropdown = () => {
+                const selectUser = document.getElementById('change-acc-user');
+                const selectPassUser = document.getElementById('change-pass-user');
+                const listContainer = document.getElementById('delete-user-list');
+                
+                const allUsernames = new Set();
+                registeredUsers.forEach(u => allUsernames.add(u.username));
+                Object.keys(state.studentsData).forEach(u => allUsernames.add(u));
+                
+                const allUsersMap = {};
+                registeredUsers.forEach(u => {
+                    allUsersMap[u.username] = { username: u.username, role: u.role };
+                });
+                Object.values(state.studentsData).forEach(u => {
+                    allUsersMap[u.username] = { ...allUsersMap[u.username], ...u };
+                });
+                
+                let allUsersArr = Object.values(allUsersMap);
+                
+                const rolePriority = { 'developer': 1, 'teacher': 2, 'student': 3 };
+                allUsersArr.sort((a, b) => {
+                    if (rolePriority[a.role] !== rolePriority[b.role]) {
+                        return rolePriority[a.role] - rolePriority[b.role];
+                    }
+                    return a.username.localeCompare(b.username);
+                });
+
+                if (selectUser) {
+                    const currentVal = selectUser.value;
+                    selectUser.innerHTML = '';
+                    const defaultOpt = document.createElement('option');
+                    defaultOpt.value = "";
+                    defaultOpt.textContent = dict.selectUserToChange || "--- 請選擇帳號 ---";
+                    defaultOpt.disabled = true;
+                    defaultOpt.selected = !currentVal;
+                    selectUser.appendChild(defaultOpt);
+
+                    allUsersArr.forEach(u => {
+                        const opt = document.createElement('option');
+                        opt.value = u.username;
+                        opt.textContent = u.username;
+                        selectUser.appendChild(opt);
+                    });
+                    
+                    if (currentVal && allUsersMap[currentVal]) selectUser.value = currentVal;
+                }
+                
+                if (selectPassUser) {
+                    const currentPassVal = selectPassUser.value;
+                    selectPassUser.innerHTML = '';
+                    const defaultOpt2 = document.createElement('option');
+                    defaultOpt2.value = "";
+                    defaultOpt2.textContent = dict.selectUserToChange || "--- 請選擇帳號 ---";
+                    defaultOpt2.disabled = true;
+                    defaultOpt2.selected = !currentPassVal;
+                    selectPassUser.appendChild(defaultOpt2);
+
+                    allUsersArr.forEach(u => {
+                        const opt = document.createElement('option');
+                        opt.value = u.username;
+                        opt.textContent = u.username;
+                        selectPassUser.appendChild(opt);
+                    });
+                    
+                    if (currentPassVal && allUsersMap[currentPassVal]) selectPassUser.value = currentPassVal;
+                }
+                
+                if (listContainer) {
+                    const checkedBoxes = Array.from(document.querySelectorAll('.delete-checkbox:checked')).map(cb => cb.value);
+                    listContainer.innerHTML = '';
+                    const roleOptionsText = {
+                        'zh-TW': { s: '學生', t: '教師', d: '開發者' },
+                        'zh-CN': { s: '学生', t: '教师', d: '开发者' },
+                        'en': { s: 'Student', t: 'Teacher', d: 'Developer' }
+                    };
+                    const tText = roleOptionsText[state.currentLang] || roleOptionsText['en'];
+
+                    allUsersArr.forEach(u => {
+                        const roleName = u.role === 'developer' ? tText.d : (u.role === 'teacher' ? tText.t : tText.s);
+                        const isChecked = checkedBoxes.includes(u.username) ? 'checked' : '';
+                        const label = document.createElement('label');
+                        label.className = "flex items-center gap-3 p-3 hover:bg-red-100/50 dark:hover:bg-red-900/30 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-red-200 dark:hover:border-red-800/50";
+                        label.innerHTML = `
+                            <input type="checkbox" value="${u.username}" class="delete-checkbox w-4 h-4 text-red-600 border-red-300 rounded focus:ring-red-500 bg-white dark:bg-slate-700 cursor-pointer transition-all" ${isChecked}>
+                            <span class="text-sm font-bold text-slate-700 dark:text-slate-300">${u.username} <span class="text-xs font-semibold text-slate-400 dark:text-slate-500 ml-1">(${roleName})</span></span>
+                        `;
+                        listContainer.appendChild(label);
+                    });
+                }
+            };
+
+            const redrawMailbox = () => {
+                if (!mailboxContainer) return;
+                mailboxContainer.innerHTML = '';
+
+                const messages = Object.values(mailboxData);
+                if (messages.length === 0) {
+                    mailboxContainer.innerHTML = `
+                        <div class="text-center py-10 text-slate-400 dark:text-slate-500 font-medium">
+                            ${dict.noMessages}
+                        </div>
+                    `;
+                    return;
+                }
+
+                messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                messages.forEach(msg => {
+                    const msgCard = document.createElement('div');
+                    msgCard.className = 'bg-slate-50 dark:bg-slate-900/40 border border-slate-100 dark:border-slate-800/80 rounded-2xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all hover:border-indigo-100 dark:hover:border-indigo-900/50';
+                    msgCard.innerHTML = `
+                        <div class="flex-grow text-left space-y-1.5">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-slate-900 dark:text-white text-base">${msg.sender}</span>
+                                <span class="text-xs text-slate-400 dark:text-slate-500 font-medium">${msg.timestamp}</span>
+                                ${msg.unread ? '<span class="w-2 h-2 rounded-full bg-indigo-500 inline-block animate-pulse"></span>' : ''}
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 whitespace-pre-wrap leading-relaxed">${msg.message}</p>
+                        </div>
+                        <button onclick="window.deleteMessage('${msg.id}')" class="flex items-center gap-1 text-xs font-semibold text-rose-500 hover:text-rose-700 bg-rose-50 dark:bg-rose-950/30 hover:bg-rose-100 dark:hover:bg-rose-900/40 px-3.5 py-2 rounded-xl transition-all self-end md:self-center shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                            <span>${dict.deleteBtn}</span>
+                        </button>
+                    `;
+                    mailboxContainer.appendChild(msgCard);
+                });
+            };
+
+            const redrawCards = () => {
+                if (!studentContainer) return;
+                studentContainer.innerHTML = ''; 
+                
+                const allUsersMap = {};
+                
+                registeredUsers.forEach(u => {
+                    allUsersMap[u.username] = {
+                        username: u.username,
+                        role: u.role,
+                        avgScore: 0,
+                        completedLessons: 0,
+                        status: 'offline',
+                        lastActive: null
+                    };
+                });
+
+                Object.values(state.studentsData).forEach(u => {
+                    allUsersMap[u.username] = { ...allUsersMap[u.username], ...u };
+                });
+
+                let filteredUsers = Object.values(allUsersMap);
+                if (state.teacherRoleFilter !== 'all') {
+                    filteredUsers = filteredUsers.filter(u => u.role === state.teacherRoleFilter);
+                }
+                
+                const rolePriority = { 'developer': 1, 'teacher': 2, 'student': 3 };
+                filteredUsers.sort((a, b) => {
+                    const aIsOnline = a.status === 'online' ? 1 : 0;
+                    const bIsOnline = b.status === 'online' ? 1 : 0;
+                    if (aIsOnline !== bIsOnline) {
+                        return bIsOnline - aIsOnline;
+                    }
+
+                    if (rolePriority[a.role] !== rolePriority[b.role]) {
+                        return rolePriority[a.role] - rolePriority[b.role];
+                    }
+                    return a.username.localeCompare(b.username);
+                });
+                
+                filteredUsers.forEach(u => {
+                    const isOnline = u.status === 'online';
+                    
+                    const roleBadgeClass = u.role === 'developer' ? 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300' :
+                                           u.role === 'teacher' ? 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300' :
+                                           'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
+                    const roleText = u.role === 'developer' ? dict.roleDeveloper :
+                                     u.role === 'teacher' ? dict.roleTeacher : dict.roleStudent;
+
+                    const cardBorderClass = isOnline 
+                        ? 'border-2 border-green-400 dark:border-green-500 shadow-[0_0_15px_rgba(74,222,128,0.15)] scale-[1.02]' 
+                        : 'border border-slate-100 dark:border-slate-700 shadow-[0_2px_12px_rgb(0,0,0,0.04)]';
+
+                    const card = document.createElement('div');
+                    card.className = `bg-white dark:bg-slate-800 rounded-3xl p-6 flex flex-col transition-all duration-500 relative overflow-hidden ${cardBorderClass}`;
+                    
+                    let tabContentHTML = '';
+                    if (state.teacherTab === 'scores') {
+                        tabContentHTML = `
+                            <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.avgScore}</span>
+                                <span class="text-xs font-semibold ${u.avgScore > 0 ? 'text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30' : 'text-amber-500 bg-amber-50 dark:bg-amber-900/30'} px-2 py-1 rounded-lg flex items-center gap-1">
+                                    ${u.avgScore > 0 ? u.avgScore + dict.unitScore : `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${dict.developingTag}`}
+                                </span>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.completedLessons}</span>
+                                <span class="text-xs font-semibold ${u.completedLessons > 0 ? 'text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30' : 'text-amber-500 bg-amber-50 dark:bg-amber-900/30'} px-2 py-1 rounded-lg flex items-center gap-1">
+                                    ${u.completedLessons > 0 ? u.completedLessons + dict.unitLesson : `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${dict.developingTag}`}
+                                </span>
+                            </div>
+                        `;
+                    } else {
+                        const statusDotHTML = isOnline 
+                            ? `<span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span></span>`
+                            : `<span class="h-2.5 w-2.5 rounded-full bg-slate-300 dark:bg-slate-600 inline-block"></span>`;
+                        
+                        const displayTime = u.lastActive ? u.lastActive : dict.neverLoggedIn;
+
+                        tabContentHTML = `
+                            <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex justify-between items-center transition-colors">
+                                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">${dict.currentStatus}</span>
+                                <span class="text-xs font-semibold px-2 py-1 rounded-lg flex items-center gap-1.5 ${isOnline ? 'text-green-600 bg-green-50 dark:bg-green-950/30' : 'text-slate-500 bg-slate-100 dark:bg-slate-800'}">
+                                    ${statusDotHTML}
+                                    ${isOnline ? dict.statusOnline : dict.statusOffline}
+                                </span>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700/50 flex flex-col gap-1 transition-colors text-left">
+                                <span class="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">${dict.lastActiveTime}</span>
+                                <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                    ${displayTime}
+                                </span>
+                            </div>
+                        `;
+                    }
+
+                    card.innerHTML = `
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="relative w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl transition-colors shadow-inner">
+                                ${u.username.charAt(0).toUpperCase()}
+                                ${isOnline ? '<span class="absolute -top-1 -right-1 flex h-3.5 w-3.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-green-500 border-2 border-white dark:border-slate-800"></span></span>' : ''}
+                            </div>
+                            <div class="text-left">
+                                <h4 class="font-bold text-lg text-slate-900 dark:text-white transition-colors">${u.username}</h4>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase transition-colors ${roleBadgeClass}">${roleText}</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3 mt-auto">
+                            ${tabContentHTML}
+                        </div>
+                    `;
+                    studentContainer.appendChild(card);
+                });
+            };
+            
+            // 強制先執行本地畫面渲染，再執行 Firebase 連線，避免斷網或連線錯誤導致畫面空白
+            if (state.currentPage === 'teacher' || state.currentPage === 'developer') {
+                if (state.currentPage === 'teacher') redrawCards();
+                if (state.currentPage === 'developer') updateDeveloperDropdown();
+
+                if (!unsubscribeTeacher) {
+                    try {
+                        const studentsRef = collection(db, "students");
+                        unsubscribeTeacher = onSnapshot(studentsRef, (snapshot) => {
+                            state.studentsData = {};
+                            snapshot.forEach(docSnap => {
+                                state.studentsData[docSnap.id] = docSnap.data();
+                            });
+                            
+                            if (state.currentPage === 'teacher') redrawCards(); 
+                            if (state.currentPage === 'developer') updateDeveloperDropdown();
+                        }, (error) => {
+                            console.error("即時監聽失敗（測試模式權限異常或斷網）:", error);
+                        });
+                    } catch (err) {
+                        console.error(err);
+                    }
+                }
+            } else {
+                if (unsubscribeTeacher) {
+                    unsubscribeTeacher();
+                    unsubscribeTeacher = null;
+                }
+            }
+
+            if (state.isLoggedIn && state.role === 'developer') {
+                if (!unsubscribeMailbox) {
+                    try {
+                        const mailboxRef = collection(db, "developer_messages");
+                        unsubscribeMailbox = onSnapshot(mailboxRef, (snapshot) => {
+                            let oldMessageCount = Object.keys(mailboxData).length;
+                            mailboxData = {};
+                            snapshot.forEach(docSnap => {
+                                mailboxData[docSnap.id] = docSnap.data();
+                            });
+                            
+                            const newMessageCount = Object.keys(mailboxData).length;
+                            if (newMessageCount > oldMessageCount && oldMessageCount > 0) {
+                                window.playClickSound();
+                            }
+                            
+                            if (state.currentPage === 'developer') redrawMailbox();
+
+                            const devBadge = document.getElementById('badge-dev-unread');
+                            if (devBadge) {
+                                if (newMessageCount > 0) {
+                                    devBadge.classList.remove('hidden');
+                                } else {
+                                    devBadge.classList.add('hidden');
+                                }
+                            }
+                        }, (error) => {
+                            console.error("即時信箱監聽失敗:", error);
+                        });
+                    } catch (err) {
+                        console.error(err);
+                    }
+                } else {
+                    if (state.currentPage === 'developer') redrawMailbox();
+                    
+                    const devBadge = document.getElementById('badge-dev-unread');
+                    if (devBadge) {
+                        if (Object.keys(mailboxData).length > 0) {
+                            devBadge.classList.remove('hidden');
+                        } else {
+                            devBadge.classList.add('hidden');
+                        }
+                    }
+                }
+            } else {
+                if (unsubscribeMailbox) {
+                    unsubscribeMailbox();
+                    unsubscribeMailbox = null;
+                }
+            }
 
             // --- Page Routing ---
             const viewLogin = document.getElementById('view-login');
@@ -2051,104 +2377,117 @@
             const lessonHeaderMath = document.getElementById('lesson-header-math');
             const lessonHeaderSub = document.getElementById('lesson-header-sub');
             const lessonHeaderEnglish = document.getElementById('lesson-header-english');
-            const lessonHeaderChinese = document.getElementById('lesson-header-chinese'); // NEW
+            const lessonHeaderChinese = document.getElementById('lesson-header-chinese'); 
             
             const contentMathMain = document.getElementById('content-math-main');
             const contentMathSummary = document.getElementById('content-math-summary');
             const contentMathCategory = document.getElementById('content-math-category');
             const contentMathChapter = document.getElementById('content-math-chapter');
             const contentEnglish = document.getElementById('content-english');
-            const contentChinese = document.getElementById('content-chinese'); // NEW
+            const contentChinese = document.getElementById('content-chinese'); 
 
-            viewLogin.classList.remove('flex');
-            viewLogin.classList.add('hidden');
-            viewLogin.classList.remove('fade-in');
-            viewHome.classList.add('hidden');
-            viewHome.classList.remove('fade-in');
-            viewLesson.classList.add('hidden');
-            viewLesson.classList.remove('fade-in');
-            viewTeacherDashboard.classList.add('hidden');
-            viewTeacherDashboard.classList.remove('fade-in');
-            viewDeveloper.classList.add('hidden');
-            viewDeveloper.classList.remove('fade-in');
-            viewSummary.classList.add('hidden');
-            viewSummary.classList.remove('fade-in');
-            viewWriteLetter.classList.add('hidden');
-            viewWriteLetter.classList.remove('flex');
-            viewWriteLetter.classList.remove('fade-in');
+            if (viewLogin) {
+                viewLogin.classList.remove('flex');
+                viewLogin.classList.add('hidden');
+                viewLogin.classList.remove('fade-in');
+            }
+            if (viewHome) {
+                viewHome.classList.add('hidden');
+                viewHome.classList.remove('fade-in');
+            }
+            if (viewLesson) {
+                viewLesson.classList.add('hidden');
+                viewLesson.classList.remove('fade-in');
+            }
+            if (viewTeacherDashboard) {
+                viewTeacherDashboard.classList.add('hidden');
+                viewTeacherDashboard.classList.remove('fade-in');
+            }
+            if (viewDeveloper) {
+                viewDeveloper.classList.add('hidden');
+                viewDeveloper.classList.remove('fade-in');
+            }
+            if (viewSummary) {
+                viewSummary.classList.add('hidden');
+                viewSummary.classList.remove('fade-in');
+            }
+            if (viewWriteLetter) {
+                viewWriteLetter.classList.add('hidden');
+                viewWriteLetter.classList.remove('flex');
+                viewWriteLetter.classList.remove('fade-in');
+            }
             
-            lessonHeaderMath.classList.add('hidden');
-            lessonHeaderSub.classList.add('hidden');
-            lessonHeaderEnglish.classList.add('hidden');
-            if (lessonHeaderChinese) lessonHeaderChinese.classList.add('hidden'); // NEW
+            if (lessonHeaderMath) lessonHeaderMath.classList.add('hidden');
+            if (lessonHeaderSub) lessonHeaderSub.classList.add('hidden');
+            if (lessonHeaderEnglish) lessonHeaderEnglish.classList.add('hidden');
+            if (lessonHeaderChinese) lessonHeaderChinese.classList.add('hidden'); 
             
-            contentMathMain.classList.add('hidden');
-            contentMathSummary.classList.add('hidden');
-            contentMathCategory.classList.add('hidden');
-            contentMathChapter.classList.add('hidden');
-            contentEnglish.classList.add('hidden');
-            if (contentChinese) contentChinese.classList.add('hidden'); // NEW
+            if (contentMathMain) contentMathMain.classList.add('hidden');
+            if (contentMathSummary) contentMathSummary.classList.add('hidden');
+            if (contentMathCategory) contentMathCategory.classList.add('hidden');
+            if (contentMathChapter) contentMathChapter.classList.add('hidden');
+            if (contentEnglish) contentEnglish.classList.add('hidden');
+            if (contentChinese) contentChinese.classList.add('hidden'); 
 
             setTimeout(() => {
-                if (state.currentPage === 'login') {
+                if (state.currentPage === 'login' && viewLogin) {
                     viewLogin.classList.remove('hidden');
                     viewLogin.classList.add('flex');
                     viewLogin.classList.add('fade-in');
                 }
-                else if (state.currentPage === 'home') {
+                else if (state.currentPage === 'home' && viewHome) {
                     viewHome.classList.remove('hidden');
                     viewHome.classList.add('fade-in');
                 } 
-                else if (state.currentPage === 'math') {
+                else if (state.currentPage === 'math' && viewLesson) {
                     viewLesson.classList.remove('hidden');
                     viewLesson.classList.add('fade-in');
-                    lessonHeaderMath.classList.remove('hidden');
-                    contentMathMain.classList.remove('hidden');
+                    if (lessonHeaderMath) lessonHeaderMath.classList.remove('hidden');
+                    if (contentMathMain) contentMathMain.classList.remove('hidden');
                 } 
-                else if (state.currentPage === 'math-summary') {
+                else if (state.currentPage === 'math-summary' && viewLesson) {
                     viewLesson.classList.remove('hidden');
                     viewLesson.classList.add('fade-in');
-                    lessonHeaderSub.classList.remove('hidden'); 
-                    contentMathSummary.classList.remove('hidden'); 
+                    if (lessonHeaderSub) lessonHeaderSub.classList.remove('hidden'); 
+                    if (contentMathSummary) contentMathSummary.classList.remove('hidden'); 
                 }
-                else if (state.currentPage === 'math-category') {
+                else if (state.currentPage === 'math-category' && viewLesson) {
                     viewLesson.classList.remove('hidden');
                     viewLesson.classList.add('fade-in');
-                    lessonHeaderSub.svg;
-                    lessonHeaderSub.classList.remove('hidden'); 
-                    contentMathCategory.classList.remove('hidden'); 
+                    if (lessonHeaderSub) lessonHeaderSub.classList.remove('hidden'); 
+                    if (contentMathCategory) contentMathCategory.classList.remove('hidden'); 
                 }
-                else if (state.currentPage === 'math-chapter') {
+                else if (state.currentPage === 'math-chapter' && viewLesson) {
                     viewLesson.classList.remove('hidden');
                     viewLesson.classList.add('fade-in');
-                    lessonHeaderSub.classList.remove('hidden'); 
-                    contentMathChapter.classList.remove('hidden'); 
+                    if (lessonHeaderSub) lessonHeaderSub.classList.remove('hidden'); 
+                    if (contentMathChapter) contentMathChapter.classList.remove('hidden'); 
                 }
-                else if (state.currentPage === 'english') {
+                else if (state.currentPage === 'english' && viewLesson) {
                     viewLesson.classList.remove('hidden');
                     viewLesson.classList.add('fade-in');
-                    lessonHeaderEnglish.classList.remove('hidden');
-                    contentEnglish.classList.remove('hidden');
+                    if (lessonHeaderEnglish) lessonHeaderEnglish.classList.remove('hidden');
+                    if (contentEnglish) contentEnglish.classList.remove('hidden');
                 }
-                else if (state.currentPage === 'chinese') { // NEW
+                else if (state.currentPage === 'chinese' && viewLesson) { 
                     viewLesson.classList.remove('hidden');
                     viewLesson.classList.add('fade-in');
                     if (lessonHeaderChinese) lessonHeaderChinese.classList.remove('hidden');
                     if (contentChinese) contentChinese.classList.remove('hidden');
                 }
-                else if (state.currentPage === 'teacher') {
+                else if (state.currentPage === 'teacher' && viewTeacherDashboard) {
                     viewTeacherDashboard.classList.remove('hidden');
                     viewTeacherDashboard.classList.add('fade-in');
                 }
-                else if (state.currentPage === 'developer') {
+                else if (state.currentPage === 'developer' && viewDeveloper) {
                     viewDeveloper.classList.remove('hidden');
                     viewDeveloper.classList.add('fade-in');
                 }
-                else if (state.currentPage === 'summary') {
+                else if (state.currentPage === 'summary' && viewSummary) {
                     viewSummary.classList.remove('hidden');
                     viewSummary.classList.add('fade-in');
                 }
-                else if (state.currentPage === 'write-letter') {
+                else if (state.currentPage === 'write-letter' && viewWriteLetter) {
                     viewWriteLetter.classList.remove('hidden');
                     viewWriteLetter.classList.add('flex');
                     viewWriteLetter.classList.add('fade-in');
