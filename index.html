@@ -152,7 +152,7 @@
                 <!-- Teacher Dashboard Card -->
                 <div id="card-teacher" onclick="window.navigate('teacher')" class="hidden group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-amber-200 dark:hover:border-amber-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden">
                     <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider flex items-center gap-1 shadow-sm">
-                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> 教師專屬
+                        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> <span id="badge-teacher-only">教師專屬</span>
                     </div>
                     <div class="flex items-center gap-4 mb-4 mt-2">
                         <div class="w-14 h-14 bg-amber-50 dark:bg-amber-900/30 text-amber-500 dark:text-amber-400 rounded-2xl flex items-center justify-center transition-colors">
@@ -305,7 +305,7 @@
                 <div id="change-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
             </div>
 
-            <!-- 開發者專屬：批次刪除帳號面板 (這是你找不到的功能，現在確保它在這裡！) -->
+            <!-- 開發者專屬：批次刪除帳號面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-red-200 dark:border-red-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-red-900 dark:text-red-200 mb-6 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -630,6 +630,7 @@
                 neverLoggedIn: '從未登入',
                 filterRole: '身分篩選：',
                 roleAll: '全部',
+                teacherOnly: '教師專屬',
                 // 開發者模式專屬翻譯
                 devModeTitle: '開發者模式',
                 devModeDesc: '管理系統帳號、設定與底層資料庫。',
@@ -751,6 +752,7 @@
                 neverLoggedIn: '从未登录',
                 filterRole: '身份筛选：',
                 roleAll: '全部',
+                teacherOnly: '教师专属',
                 devModeTitle: '开发者模式',
                 devModeDesc: '管理系统账号、设置 with 底层数据库。',
                 devModeStart: '进入系统',
@@ -788,7 +790,7 @@
                 letterSuccess: '发送成功！开发者已收到您的消息。',
                 backToLogin: '返回登录',
                 devInboxTitle: '开发者信箱',
-                devInboxDesc: '查看所有学生或教师发送的联络消息与申请。',
+                devInboxDesc: '查看所有学生 or 教师发送的联络消息与申请。',
                 noMessages: '目前没有任何消息。',
                 deleteBtn: '删除',
                 // 批次刪除系統翻譯
@@ -869,6 +871,7 @@
                 neverLoggedIn: 'Never Logged In',
                 filterRole: 'Filter Role:',
                 roleAll: 'All',
+                teacherOnly: 'Teachers Only',
                 devModeTitle: 'Developer Mode',
                 devModeDesc: 'Manage system accounts, settings, and database.',
                 devModeStart: 'Enter System',
@@ -1331,7 +1334,7 @@
             }
         }
 
-        // --- NEW: 批次刪除帳號相關邏輯 ---
+        // --- 批次刪除帳號相關邏輯 ---
         window.toggleSelectAllDelete = function(checkbox) {
             playClickSound();
             const checkboxes = document.querySelectorAll('.delete-checkbox');
@@ -1695,6 +1698,11 @@
             document.getElementById('filter-developer').textContent = targetText.d;
             document.getElementById('filter-teacher').textContent = targetText.t;
             document.getElementById('filter-student').textContent = targetText.s;
+
+            // 動態更新「教師專屬」標籤文字
+            if (document.getElementById('badge-teacher-only')) {
+                document.getElementById('badge-teacher-only').textContent = dict.teacherOnly;
+            }
 
             const filterAll = document.getElementById('filter-all');
             const filterDev = document.getElementById('filter-developer');
