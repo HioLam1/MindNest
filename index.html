@@ -305,6 +305,32 @@
                 <div id="change-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
             </div>
 
+            <!-- NEW: 開發者專屬：變更帳號密碼面板 (這下絕對不會漏掉了！) -->
+            <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-teal-200 dark:border-teal-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
+                <h3 class="text-xl font-bold text-teal-900 dark:text-teal-200 mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
+                    <span id="text-dev-change-pass-panel-title">變更帳號密碼</span>
+                </h3>
+                <form onsubmit="window.handleChangePassword(event)" class="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
+                    <div class="md:col-span-1">
+                        <label id="label-change-pass-user" class="block text-xs font-semibold tracking-wider text-teal-700 dark:text-teal-400 mb-2 uppercase">使用者名稱</label>
+                        <select id="change-pass-user" required class="w-full px-4 py-3 rounded-xl border border-teal-100 dark:border-teal-800/60 bg-teal-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 outline-none transition-all shadow-sm cursor-pointer"></select>
+                    </div>
+                    <div class="md:col-span-1">
+                        <label id="label-change-pass-old" class="block text-xs font-semibold tracking-wider text-teal-700 dark:text-teal-400 mb-2 uppercase">原密碼</label>
+                        <input type="text" id="change-pass-old" required class="w-full px-4 py-3 rounded-xl border border-teal-100 dark:border-teal-800/60 bg-teal-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 outline-none transition-all shadow-sm">
+                    </div>
+                    <div class="md:col-span-1">
+                        <label id="label-change-pass-new" class="block text-xs font-semibold tracking-wider text-teal-700 dark:text-teal-400 mb-2 uppercase">新密碼</label>
+                        <input type="text" id="change-pass-new" required class="w-full px-4 py-3 rounded-xl border border-teal-100 dark:border-teal-800/60 bg-teal-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 outline-none transition-all shadow-sm">
+                    </div>
+                    <div class="md:col-span-1">
+                        <button type="submit" id="btn-change-pass-submit" class="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md">變更密碼</button>
+                    </div>
+                </form>
+                <div id="change-pass-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
+            </div>
+
             <!-- 開發者專屬：批次刪除帳號面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-red-200 dark:border-red-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-red-900 dark:text-red-200 mb-6 flex items-center gap-2">
@@ -353,7 +379,7 @@
             </div>
         </div>
 
-        <!-- Teacher Dashboard View (ONLY ONE IN THE WHOLE FILE!) -->
+        <!-- Teacher Dashboard View -->
         <div id="view-teacher-dashboard" class="w-full fade-in hidden">
             <button onclick="window.navigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
@@ -681,6 +707,14 @@
                 delAccNoSelection: '請先選取要刪除的帳號！',
                 modalDelTitle: '確定刪除嗎？',
                 modalDelDesc: '您即將永久刪除選取的帳號，此操作無法復原。',
+                // 變更密碼系統翻譯
+                devChangePassTitle: '變更帳號密碼',
+                changePassUser: '使用者名稱',
+                changePassOld: '原密碼',
+                changePassNew: '新密碼',
+                changePassBtn: '變更密碼',
+                changePassSuccess: '密碼變更成功！',
+                changePassErrorWrong: '原密碼錯誤！',
                 // 今日總結翻譯
                 summaryOfToday: '今日總結',
                 summaryDesc: '查看您今天的學習進度與重點。',
@@ -801,6 +835,14 @@
                 delAccNoSelection: '请先选择要删除的账号！',
                 modalDelTitle: '确定删除吗？',
                 modalDelDesc: '您即将永久删除选定的账号，此操作无法恢复。',
+                // 变更密码系统翻译
+                devChangePassTitle: '变更账号密码',
+                changePassUser: '用户名',
+                changePassOld: '原密码',
+                changePassNew: '新密码',
+                changePassBtn: '变更密码',
+                changePassSuccess: '密码变更成功！',
+                changePassErrorWrong: '原密码错误！',
                 summaryOfToday: '今日总结',
                 summaryDesc: '查看您今天的学习进度与重点。',
                 summaryStart: '查看总结',
@@ -920,6 +962,14 @@
                 delAccNoSelection: 'Please select accounts to delete!',
                 modalDelTitle: 'Are you sure?',
                 modalDelDesc: 'You are about to permanently delete the selected accounts. This cannot be undone.',
+                // Change Password translation
+                devChangePassTitle: 'Change Account Password',
+                changePassUser: 'Username',
+                changePassOld: 'Original Password',
+                changePassNew: 'New Password',
+                changePassBtn: 'Change Password',
+                changePassSuccess: 'Password successfully changed!',
+                changePassErrorWrong: 'Incorrect original password!',
                 summaryOfToday: 'Summary of Today',
                 summaryDesc: 'Review your learning progress and key points of the day.',
                 summaryStart: 'View Summary',
@@ -1334,6 +1384,81 @@
             }
         }
 
+        // --- NEW: 變更密碼相關邏輯 ---
+        window.handleChangePassword = async function(e) {
+            e.preventDefault();
+            const user = document.getElementById('change-pass-user').value.trim();
+            const oldPass = document.getElementById('change-pass-old').value.trim();
+            const newPass = document.getElementById('change-pass-new').value.trim();
+            const msgBox = document.getElementById('change-pass-msg');
+            const dict = dictionaries[state.currentLang];
+
+            if (!user) return; 
+
+            msgBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700', 'dark:bg-green-900/30', 'dark:text-green-400', 'dark:bg-red-900/30', 'dark:text-red-400');
+            msgBox.innerHTML = '';
+
+            try {
+                const userRef = doc(db, "students", user);
+                const docSnap = await getDoc(userRef);
+                
+                let actualOldPass = null;
+                let existsInDb = false;
+
+                if (docSnap.exists()) {
+                    actualOldPass = docSnap.data().password;
+                    existsInDb = true;
+                } else {
+                    const localUser = registeredUsers.find(u => u.username === user);
+                    if (localUser) { actualOldPass = localUser.password; }
+                }
+
+                if (actualOldPass === null && !existsInDb) {
+                    msgBox.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg> ${dict.changeAccNotFound}`;
+                    msgBox.classList.add('flex', 'bg-red-50', 'text-red-700', 'dark:bg-red-900/30', 'dark:text-red-400');
+                    return;
+                }
+
+                if (actualOldPass !== oldPass) {
+                    msgBox.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg> ${dict.changePassErrorWrong}`;
+                    msgBox.classList.add('flex', 'bg-red-50', 'text-red-700', 'dark:bg-red-900/30', 'dark:text-red-400');
+                    return;
+                }
+
+                if (existsInDb) {
+                     await setDoc(userRef, { password: newPass }, { merge: true });
+                } else {
+                     const localUser = registeredUsers.find(u => u.username === user);
+                     await setDoc(userRef, {
+                        username: user,
+                        password: newPass,
+                        role: localUser ? localUser.role : 'student',
+                        avgScore: 0,
+                        completedLessons: 0,
+                        lastLogin: null,
+                        lastActive: null,
+                        status: 'offline'
+                     });
+                }
+                
+                const currentLoggedUser = localStorage.getItem('mindnest_username') || state.username;
+                if (user === currentLoggedUser && localStorage.getItem('mindnest_remember') === 'true') {
+                    localStorage.setItem('mindnest_password', newPass);
+                }
+
+                msgBox.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> ${dict.changePassSuccess}`;
+                msgBox.classList.add('flex', 'bg-green-50', 'text-green-700', 'dark:bg-green-900/30', 'dark:text-green-400');
+                
+                document.getElementById('change-pass-user').value = '';
+                document.getElementById('change-pass-old').value = '';
+                document.getElementById('change-pass-new').value = '';
+            } catch(err) {
+                console.error("Change Password Logic Error:", err);
+                msgBox.innerHTML = `⚠️ 系統發生錯誤。`;
+                msgBox.classList.add('flex', 'bg-red-50', 'text-red-700');
+            }
+        }
+
         // --- 批次刪除帳號相關邏輯 ---
         window.toggleSelectAllDelete = function(checkbox) {
             playClickSound();
@@ -1495,6 +1620,7 @@
                 const addMsgBox = document.getElementById('add-acc-msg');
                 const changeMsgBox = document.getElementById('change-acc-msg');
                 const delMsgBox = document.getElementById('del-acc-msg');
+                const passMsgBox = document.getElementById('change-pass-msg');
                 if(addMsgBox) {
                     addMsgBox.classList.add('hidden');
                     document.getElementById('add-acc-user').value = '';
@@ -1502,9 +1628,15 @@
                 }
                 if(changeMsgBox) changeMsgBox.classList.add('hidden');
                 if(delMsgBox) delMsgBox.classList.add('hidden');
+                if(passMsgBox) passMsgBox.classList.add('hidden');
                 
                 const selectAllCb = document.getElementById('checkbox-select-all');
                 if(selectAllCb) selectAllCb.checked = false;
+
+                const oldPassInput = document.getElementById('change-pass-old');
+                const newPassInput = document.getElementById('change-pass-new');
+                if(oldPassInput) oldPassInput.value = '';
+                if(newPassInput) newPassInput.value = '';
             }
 
             if (page === 'write-letter') {
@@ -1675,6 +1807,14 @@
                 document.getElementById('btn-modal-del-confirm').textContent = dict.modalDelTitle.replace('嗎？', '').replace('吗？', '').replace('?', '');
             }
 
+            if (document.getElementById('text-dev-change-pass-panel-title')) {
+                document.getElementById('text-dev-change-pass-panel-title').textContent = dict.devChangePassTitle;
+                document.getElementById('label-change-pass-user').textContent = dict.changePassUser;
+                document.getElementById('label-change-pass-old').textContent = dict.changePassOld;
+                document.getElementById('label-change-pass-new').textContent = dict.changePassNew;
+                document.getElementById('btn-change-pass-submit').textContent = dict.changePassBtn;
+            }
+
             document.getElementById('title-teacher-dash').textContent = dict.teacherDashboardTitle;
             document.getElementById('desc-teacher-dash').textContent = dict.teacherDashboardDesc;
 
@@ -1699,7 +1839,6 @@
             document.getElementById('filter-teacher').textContent = targetText.t;
             document.getElementById('filter-student').textContent = targetText.s;
 
-            // 動態更新「教師專屬」標籤文字
             if (document.getElementById('badge-teacher-only')) {
                 document.getElementById('badge-teacher-only').textContent = dict.teacherOnly;
             }
@@ -1764,6 +1903,7 @@
 
             const updateDeveloperDropdown = () => {
                 const selectUser = document.getElementById('change-acc-user');
+                const selectPassUser = document.getElementById('change-pass-user');
                 const listContainer = document.getElementById('delete-user-list');
                 
                 const allUsernames = new Set();
@@ -1808,6 +1948,29 @@
                     
                     if (currentVal && allUsersMap[currentVal]) {
                         selectUser.value = currentVal;
+                    }
+                }
+                
+                if (selectPassUser) {
+                    const currentPassVal = selectPassUser.value;
+                    selectPassUser.innerHTML = '';
+                    
+                    const defaultOpt2 = document.createElement('option');
+                    defaultOpt2.value = "";
+                    defaultOpt2.textContent = dict.selectUserToChange || "--- 請選擇帳號 ---";
+                    defaultOpt2.disabled = true;
+                    defaultOpt2.selected = !currentPassVal;
+                    selectPassUser.appendChild(defaultOpt2);
+
+                    allUsersArr.forEach(u => {
+                        const opt = document.createElement('option');
+                        opt.value = u.username;
+                        opt.textContent = u.username;
+                        selectPassUser.appendChild(opt);
+                    });
+                    
+                    if (currentPassVal && allUsersMap[currentPassVal]) {
+                        selectPassUser.value = currentPassVal;
                     }
                 }
                 
