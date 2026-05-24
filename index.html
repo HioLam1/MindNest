@@ -236,10 +236,42 @@
                         <span id="card-math-start">開始課程</span><span>&rarr;</span>
                     </div>
                 </div>
+
+                <!-- 科學卡片 (Science Card) -->
+                <div onclick="window.appNavigate('science')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
+                    <div class="w-14 h-14 bg-sky-50 dark:bg-sky-900/30 text-sky-500 dark:text-sky-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10 2v7.31L4.75 19.31a2 2 0 0 0 1.76 2.69h11a2 2 0 0 0 1.76-2.69L14 9.31V2z"></path>
+                            <path d="M8.5 2h7"></path>
+                            <path d="M7 16h10"></path>
+                        </svg>
+                    </div>
+                    <h3 id="card-science-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">科學</h3>
+                    <p id="card-science-desc" class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed transition-colors">探索大自然的奇妙與科學知識。</p>
+                    <div class="mt-auto text-teal-600 dark:text-teal-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                        <span id="card-science-start">開始課程</span><span>&rarr;</span>
+                    </div>
+                </div>
+
+                <!-- 地理卡片 (Geography Card) -->
+                <div onclick="window.appNavigate('geography')" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-300 cursor-pointer flex flex-col items-start text-left">
+                    <div class="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                            <path d="M2 12h20"></path>
+                        </svg>
+                    </div>
+                    <h3 id="card-geography-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">地理</h3>
+                    <p id="card-geography-desc" class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed transition-colors">學習地球上的氣候、人文、國家與地形環境。</p>
+                    <div class="mt-auto text-teal-600 dark:text-teal-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                        <span id="card-geography-start">開始課程</span><span>&rarr;</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Summary View (Not right time to use) -->
+        <!-- Summary View -->
         <div id="view-summary" class="w-full fade-in hidden">
             <button onclick="window.appNavigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
@@ -265,7 +297,7 @@
                 <p id="desc-dev-page" class="text-slate-500 dark:text-slate-400 transition-colors">管理系統帳號、設定與底層資料庫。</p>
             </div>
 
-            <!-- 開發者專屬：新增帳號全寬面板 -->
+            <!-- 新增帳號面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-indigo-200 dark:border-indigo-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors">
                 <h3 class="text-xl font-bold text-indigo-900 dark:text-indigo-200 mb-6 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>
@@ -295,7 +327,7 @@
                 <div id="add-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
             </div>
             
-            <!-- 開發者專屬：變更帳號身分面板 -->
+            <!-- 變更帳號身分面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-blue-200 dark:border-blue-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-blue-900 dark:text-blue-200 mb-6 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
@@ -321,7 +353,7 @@
                 <div id="change-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
             </div>
 
-            <!-- 開發者專屬：變更帳號密碼面板 -->
+            <!-- 變更帳號密碼面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-teal-200 dark:border-teal-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-teal-900 dark:text-teal-200 mb-6 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
@@ -347,7 +379,7 @@
                 <div id="change-pass-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
             </div>
 
-            <!-- 開發者專屬：批次刪除帳號面板 -->
+            <!-- 批次刪除帳號面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-red-200 dark:border-red-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-red-900 dark:text-red-200 mb-6 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -372,7 +404,7 @@
                 <div id="del-acc-msg" class="text-sm font-medium mt-6 hidden items-center gap-1.5 p-3 rounded-lg"></div>
             </div>
 
-            <!-- 開發者專屬：編輯今日總結面板 -->
+            <!-- 編輯今日總結面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-rose-200 dark:border-rose-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-rose-900 dark:text-rose-200 mb-6 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-600 dark:text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
@@ -384,7 +416,7 @@
                 </div>
             </div>
 
-            <!-- 開發者專屬：聯絡信箱 (Developer Inbox) -->
+            <!-- 聯絡信箱 (Developer Inbox) -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-indigo-200 dark:border-indigo-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-indigo-900 dark:text-indigo-200 mb-6 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 19v-8.93a2 2 0 01.89-1.664l8-5.333a2 2 0 012.22 0l8 5.333A2 2 0 0121 10.07V19a2 2 0 01-2 2H5a2 2 0 01-2-2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 9l-3 3m0 0l-3-3m3 3V3" /></svg>
@@ -480,12 +512,77 @@
                  <p id="lesson-english-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors">提升你的文法、字彙、閱讀與寫作技巧。</p>
             </div>
 
-            <!-- Chinese Content (Developing state box) -->
+            <!-- 科學課程標頭 (NEW) -->
+            <div id="lesson-header-science" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
+                 <div class="w-16 h-16 bg-sky-50 dark:bg-sky-900/30 text-sky-500 dark:text-sky-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 2v7.31L4.75 19.31a2 2 0 0 0 1.76 2.69h11a2 2 0 0 0 1.76-2.69L14 9.31V2z"></path>
+                        <path d="M8.5 2h7"></path>
+                        <path d="M7 16h10"></path>
+                    </svg>
+                 </div>
+                 <h2 id="lesson-science-title" class="text-3xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">科學</h2>
+                 <p id="lesson-science-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors">探索大自然的奇妙與科學知識。</p>
+            </div>
+
+            <!-- 地理課程標頭 (NEW) -->
+            <div id="lesson-header-geography" class="bg-white dark:bg-slate-800 rounded-3xl p-10 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 flex flex-col items-center text-center mb-8 hidden transition-colors duration-300">
+                 <div class="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                        <path d="M2 12h20"></path>
+                    </svg>
+                 </div>
+                 <h2 id="lesson-geography-title" class="text-3xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight transition-colors">地理</h2>
+                 <p id="lesson-geography-desc" class="text-slate-500 dark:text-slate-400 text-lg transition-colors">學習地球上的氣候、人文、國家與地形環境。</p>
+            </div>
+
+            <!-- Chinese Content -->
             <div id="content-chinese" class="hidden border-2 border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 rounded-3xl p-12 flex flex-col items-center text-center transition-colors duration-300">
                 <div class="mb-5 text-slate-400 dark:text-slate-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 20h9"></path>
                         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                </div>
+                <h3 class="dev-title-text text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2 transition-colors">開發中，請稍候...</h3>
+                <p class="dev-msg-text text-slate-500 dark:text-slate-400 text-lg max-w-md transition-colors">我們目前正在建立此模組的學習教材。</p>
+            </div>
+
+            <!-- English Content -->
+            <div id="content-english" class="hidden border-2 border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 rounded-3xl p-12 flex flex-col items-center text-center transition-colors duration-300">
+                <div class="mb-5 text-slate-400 dark:text-slate-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-12 md:w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                </div>
+                <h3 class="dev-title-text text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2 transition-colors">開發中，請稍候...</h3>
+                <p class="dev-msg-text text-slate-500 dark:text-slate-400 text-lg max-w-md transition-colors">我們目前正在建立此模組的學習教材。</p>
+            </div>
+
+            <!-- 科學課程內容區塊 (Science Content - NEW) -->
+            <div id="content-science" class="hidden flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm transition-colors duration-300 w-full">
+                <div class="w-16 h-16 bg-sky-50 dark:bg-sky-900/30 text-sky-500 dark:text-sky-400 rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 2v7.31L4.75 19.31a2 2 0 0 0 1.76 2.69h11a2 2 0 0 0 1.76-2.69L14 9.31V2z"></path>
+                        <path d="M8.5 2h7"></path>
+                        <path d="M7 16h10"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-slate-900 dark:text-white" id="text-science-app-title">S1 科學外部系統</h3>
+                <p class="text-slate-500 dark:text-slate-400 mb-8 max-w-md text-center" id="text-science-app-desc">請點擊下方按鈕，前往我們的 S1 科學專屬學習平台進行深度探索。</p>
+                <a href="https://keyword.toukinxi.top/" target="_blank" class="px-8 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 inline-block" id="btn-science-link-text">
+                    前往科學平台 &rarr;
+                </a>
+                <span class="text-xs text-rose-500 dark:text-rose-400 font-semibold mt-6 italic" id="text-science-s1-tip">*This is now a S1 app</span>
+            </div>
+
+            <!-- 地理課程內容區塊 (Geography Content - NEW) -->
+            <div id="content-geography" class="hidden border-2 border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 rounded-3xl p-12 flex flex-col items-center text-center transition-colors duration-300 w-full">
+                <div class="mb-5 text-slate-400 dark:text-slate-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                        <path d="M2 12h20"></path>
                     </svg>
                 </div>
                 <h3 class="dev-title-text text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2 transition-colors">開發中，請稍候...</h3>
@@ -553,15 +650,6 @@
                 <h3 class="dev-title-text text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2 transition-colors">開發中，請稍候...</h3>
                 <p class="dev-msg-text text-slate-500 dark:text-slate-400 text-lg max-w-md transition-colors">我們目前正在建立此模組的學習教材。</p>
             </div>
-
-            <!-- English Content -->
-            <div id="content-english" class="hidden border-2 border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 rounded-3xl p-12 flex flex-col items-center text-center transition-colors duration-300">
-                <div class="mb-5 text-slate-400 dark:text-slate-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-12 md:w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-                </div>
-                <h3 class="dev-title-text text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2 transition-colors">開發中，請稍候...</h3>
-                <p class="dev-msg-text text-slate-500 dark:text-slate-400 text-lg max-w-md transition-colors">我們目前正在建立此模組的學習教材。</p>
-            </div>
         </div>
         
         <!-- Modals -->
@@ -581,7 +669,7 @@
             </div>
         </div>
 
-        <!-- Password Verification Modal for Self Demotion (安全自我降級防護彈窗) -->
+        <!-- Password Verification Modal for Self Demotion -->
         <div id="modal-demote-verify" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in transition-opacity duration-300">
             <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-slate-100 dark:border-slate-700 text-center">
                 <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-5">
@@ -600,7 +688,7 @@
             </div>
         </div>
 
-        <!-- Batch Delete Confirmation Modal (刪除確認彈窗) -->
+        <!-- Batch Delete Confirmation Modal -->
         <div id="modal-delete-verify" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in transition-opacity duration-300">
             <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-slate-100 dark:border-slate-700 text-center">
                 <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-5">
@@ -645,6 +733,10 @@
                 mathDesc: '探索數字、代數和幾何！',
                 english: '英文',
                 englishDesc: '提升你的文法、字彙、閱讀與寫作技巧。',
+                science: '科學',
+                scienceDesc: '探索大自然的奇妙與科學知識。',
+                geography: '地理',
+                geographyDesc: '學習地球上的氣候、人文、國家與地形環境。',
                 startCourse: '開始課程',
                 mathSummary: '全課總結',
                 mathSummaryDesc: '複習所有章節的核心概念。',
@@ -748,6 +840,10 @@
                 changePassBtn: '變更密碼',
                 changePassSuccess: '密碼變更成功！',
                 changePassErrorWrong: '原密碼錯誤！',
+                scienceAppTitle: 'S1 科學外部系統',
+                scienceAppDesc: '請點擊下方按鈕，安全前往我們的 S1 科學專屬學習平台進行深度探索。',
+                scienceLinkBtn: '前往科學平台 →',
+                scienceS1Tip: '*This is now a S1 app',
                 summaryOfToday: '今日總結',
                 summaryDesc: '查看您今天的學習進度與重點。',
                 summaryStart: '查看總結',
@@ -770,7 +866,11 @@
                 mathDesc: '探索数字、代数和几何！',
                 english: '英文',
                 englishDesc: '提升你的语法、词汇、阅读与写作技巧。',
-                startCourse: '开始课程',
+                science: '科学',
+                scienceDesc: '探索大自然的奇妙与科学知识。',
+                geography: '地理',
+                geographyDesc: '学习地球上的气候、人文、国家与地形环境。',
+                startCourse: '開始課程',
                 mathSummary: '全课总结',
                 mathSummaryDesc: '复习所有章节的核心概念。',
                 geometry: '几何',
@@ -873,10 +973,14 @@
                 changePassBtn: '变更密码',
                 changePassSuccess: '密码变更成功！',
                 changePassErrorWrong: '原密码错误！',
+                scienceAppTitle: 'S1 科学外部系统',
+                scienceAppDesc: '请点击下方按钮，前往我们的 S1 科学专属学习平台进行深度探索。',
+                scienceLinkBtn: '前往科学平台 →',
+                scienceS1Tip: '*This is now a S1 app',
                 summaryOfToday: '今日总结',
                 summaryDesc: '查看您今天的学习进度与重点。',
                 summaryStart: '查看总结',
-                notRightTime: '目前还不是使用的时机',
+                notRightTime: '目前还不是使用的时機',
                 devEditSummary: '编辑今日总结',
                 langs: {
                     'zh-TW': '繁体中文',
@@ -895,6 +999,10 @@
                 mathDesc: 'Explore numbers, algebra, and geometry!',
                 english: 'English',
                 englishDesc: 'Improve your grammar, vocabulary, reading, and writing skills.',
+                science: 'Science',
+                scienceDesc: 'Explore the wonderful world of nature and science.',
+                geography: 'Geography',
+                geographyDesc: 'Learn about Earth, climate, and human geography.',
                 startCourse: 'Start Course',
                 mathSummary: 'All Lesson Summary',
                 mathSummaryDesc: 'Review core concepts from all chapters.',
@@ -998,6 +1106,10 @@
                 changePassBtn: 'Change Password',
                 changePassSuccess: 'Password successfully changed!',
                 changePassErrorWrong: 'Incorrect original password!',
+                scienceAppTitle: 'S1 Science External System',
+                scienceAppDesc: 'Please click the button below to safely visit our dedicated S1 Science learning platform.',
+                scienceLinkBtn: 'Go to Science Platform →',
+                scienceS1Tip: '*This is now a S1 app',
                 summaryOfToday: 'Summary of Today',
                 summaryDesc: 'Review your learning progress and key points of the day.',
                 summaryStart: 'View Summary',
@@ -1615,7 +1727,7 @@
             if (!state.isLoggedIn && page !== 'login' && page !== 'write-letter') { page = 'login'; }
             state.currentPage = page;
 
-            if (page === 'math' || page === 'math-summary' || page === 'math-category' || page === 'math-chapter' || page === 'chinese') {
+            if (page === 'math' || page === 'math-summary' || page === 'math-category' || page === 'math-chapter' || page === 'chinese' || page === 'science' || page === 'geography') {
                 if (state.currentLang === 'en') { state.currentLang = state.lastChineseLang; }
             } else if (page === 'english') {
                 if (state.currentLang === 'zh-TW' || state.currentLang === 'zh-CN') {
@@ -1672,6 +1784,7 @@
         function renderMuteButton() {
             const dict = dictionaries[state.currentLang];
             const btnMute = document.getElementById('btn-mute');
+            if (!btnMute) return;
             if (state.isMuted) {
                 btnMute.title = dict.unmuteTip;
                 btnMute.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>`;
@@ -1707,60 +1820,80 @@
             document.getElementById('badge-s2').textContent = dict.s2Badge;
             document.title = dict.appTitle;
             
-            document.getElementById('text-login-title').textContent = dict.loginTitle;
-            document.getElementById('text-login-subtitle').textContent = dict.loginSubtitle;
-            document.getElementById('label-username').textContent = dict.labelUsername;
-            document.getElementById('label-password').textContent = dict.labelPassword;
-            document.getElementById('btn-login-submit').textContent = dict.loginBtn;
-            if(!document.getElementById('login-error').classList.contains('hidden')) {
+            const textLoginTitle = document.getElementById('text-login-title');
+            if (textLoginTitle) {
+                textLoginTitle.textContent = dict.loginTitle;
+                document.getElementById('text-login-subtitle').textContent = dict.loginSubtitle;
+                document.getElementById('label-username').textContent = dict.labelUsername;
+                document.getElementById('label-password').textContent = dict.labelPassword;
+                document.getElementById('btn-login-submit').textContent = dict.loginBtn;
+                document.getElementById('label-remember').textContent = dict.rememberMe;
+            }
+            
+            const loginError = document.getElementById('login-error');
+            if(loginError && !loginError.classList.contains('hidden')) {
                 document.getElementById('login-error-text').textContent = dict.loginError;
             }
-            document.getElementById('btn-logout').title = dict.logoutTip;
-            document.getElementById('label-remember').textContent = dict.rememberMe;
+            
+            const btnLogout = document.getElementById('btn-logout');
+            if (btnLogout) btnLogout.title = dict.logoutTip;
 
-            document.getElementById('btn-login-contact-dev').textContent = dict.contactDevQuestion;
-            document.getElementById('text-write-letter-title').textContent = dict.writeLetterTitle;
-            document.getElementById('text-write-letter-desc').textContent = dict.writeLetterDesc;
-            document.getElementById('label-letter-sender').textContent = dict.senderLabel;
-            document.getElementById('label-letter-msg').textContent = dict.messageLabel;
-            document.getElementById('text-letter-success').textContent = dict.letterSuccess;
-            document.getElementById('btn-letter-back').textContent = dict.backToLogin;
-            document.getElementById('btn-letter-submit').textContent = dict.sendLetterBtn;
+            const contactDevQuestion = document.getElementById('btn-login-contact-dev');
+            if (contactDevQuestion) {
+                contactDevQuestion.textContent = dict.contactDevQuestion;
+                document.getElementById('text-write-letter-title').textContent = dict.writeLetterTitle;
+                document.getElementById('text-write-letter-desc').textContent = dict.writeLetterDesc;
+                document.getElementById('label-letter-sender').textContent = dict.senderLabel;
+                document.getElementById('label-letter-msg').textContent = dict.messageLabel;
+                document.getElementById('text-letter-success').textContent = dict.letterSuccess;
+                document.getElementById('btn-letter-back').textContent = dict.backToLogin;
+                document.getElementById('btn-letter-submit').textContent = dict.sendLetterBtn;
+            }
 
-            document.getElementById('text-dev-mailbox-title').textContent = dict.devInboxTitle;
-            document.getElementById('desc-dev-mailbox').textContent = dict.devInboxDesc;
+            const textDevMailboxTitle = document.getElementById('text-dev-mailbox-title');
+            if (textDevMailboxTitle) {
+                textDevMailboxTitle.textContent = dict.devInboxTitle;
+                document.getElementById('desc-dev-mailbox').textContent = dict.devInboxDesc;
+            }
 
             const badgeRole = document.getElementById('badge-role');
-            if (state.isLoggedIn) {
-                badgeRole.classList.remove('hidden');
-                if (state.role === 'developer') {
-                    badgeRole.textContent = dict.roleDeveloper;
-                    badgeRole.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 tracking-wider uppercase';
-                } else if (state.role === 'teacher') {
-                    badgeRole.textContent = dict.roleTeacher;
-                    badgeRole.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 tracking-wider uppercase';
+            if (badgeRole) {
+                if (state.isLoggedIn) {
+                    badgeRole.classList.remove('hidden');
+                    if (state.role === 'developer') {
+                        badgeRole.textContent = dict.roleDeveloper;
+                        badgeRole.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 tracking-wider uppercase';
+                    } else if (state.role === 'teacher') {
+                        badgeRole.textContent = dict.roleTeacher;
+                        badgeRole.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 tracking-wider uppercase';
+                    } else {
+                        badgeRole.textContent = dict.roleStudent;
+                        badgeRole.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 tracking-wider uppercase';
+                    }
                 } else {
-                    badgeRole.textContent = dict.roleStudent;
-                    badgeRole.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 tracking-wider uppercase';
+                    badgeRole.classList.add('hidden');
                 }
-            } else {
-                badgeRole.classList.add('hidden');
             }
 
-            const btnLogout = document.getElementById('btn-logout');
             const btnSummary = document.getElementById('btn-summary');
-            
-            if (state.isLoggedIn) { 
-                btnLogout.classList.remove('hidden'); 
-                btnSummary.classList.remove('hidden'); 
-            } else { 
-                btnLogout.classList.add('hidden'); 
-                btnSummary.classList.add('hidden'); 
+            if (btnLogout && btnSummary) {
+                if (state.isLoggedIn) { 
+                    btnLogout.classList.remove('hidden'); 
+                    btnSummary.classList.remove('hidden'); 
+                } else { 
+                    btnLogout.classList.add('hidden'); 
+                    btnSummary.classList.add('hidden'); 
+                }
+                btnSummary.title = dict.summaryOfToday;
             }
 
-            document.getElementById('home-title').textContent = dict.homeTitle;
-            document.getElementById('home-subtitle').textContent = dict.homeSubtitle;
+            const homeTitle = document.getElementById('home-title');
+            if (homeTitle) {
+                homeTitle.textContent = dict.homeTitle;
+                document.getElementById('home-subtitle').textContent = dict.homeSubtitle;
+            }
             
+            // 課程卡片的多語系更新
             if (document.getElementById('card-chinese-title')) {
                 document.getElementById('card-chinese-title').textContent = dict.chinese;
                 document.getElementById('card-chinese-desc').textContent = dict.chineseDesc;
@@ -1776,19 +1909,31 @@
                 document.getElementById('card-english-start').textContent = dict.startCourse;
             }
 
+            // 新課程卡片多語系更新
+            if (document.getElementById('card-science-title')) {
+                document.getElementById('card-science-title').textContent = dict.science;
+                document.getElementById('card-science-desc').textContent = dict.scienceDesc;
+                document.getElementById('card-science-start').textContent = dict.startCourse;
+            }
+            if (document.getElementById('card-geography-title')) {
+                document.getElementById('card-geography-title').textContent = dict.geography;
+                document.getElementById('card-geography-desc').textContent = dict.geographyDesc;
+                document.getElementById('card-geography-start').textContent = dict.startCourse;
+            }
+
             if (document.getElementById('card-teacher-title')) {
                 document.getElementById('card-teacher-title').textContent = dict.teacherDashboard;
                 document.getElementById('card-teacher-desc').textContent = dict.teacherDesc;
                 document.getElementById('card-teacher-start').textContent = dict.viewProgress;
             }
             
-            btnSummary.title = dict.summaryOfToday;
-            
             document.querySelectorAll('.not-right-time-text').forEach(el => el.textContent = dict.notRightTime);
             document.querySelectorAll('.dev-not-right-time').forEach(el => el.textContent = dict.notRightTime);
-            if (document.getElementById('text-dev-edit-summary-title')) document.getElementById('text-dev-edit-summary-title').textContent = dict.devEditSummary;
-            if (document.getElementById('btn-back-summary-page')) document.getElementById('btn-back-summary-page').textContent = dict.btnBackHome;
-
+            
+            if (document.getElementById('text-dev-edit-summary-title')) {
+                document.getElementById('text-dev-edit-summary-title').textContent = dict.devEditSummary;
+            }
+            
             if (document.getElementById('card-dev-title')) {
                 document.getElementById('card-dev-title').textContent = dict.devModeTitle;
                 document.getElementById('card-dev-desc').textContent = dict.devModeDesc;
@@ -1888,14 +2033,16 @@
             const activeFilterClass = "bg-indigo-600 text-white shadow-md dark:bg-indigo-500";
             const inactiveFilterClass = "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700";
 
-            [filterAll, filterDev, filterTeacher, filterStudent].forEach(el => {
-                if (el) el.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${inactiveFilterClass}`;
-            });
+            if (filterAll) {
+                [filterAll, filterDev, filterTeacher, filterStudent].forEach(el => {
+                    if (el) el.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${inactiveFilterClass}`;
+                });
 
-            if (state.teacherRoleFilter === 'all' && filterAll) filterAll.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
-            else if (state.teacherRoleFilter === 'developer' && filterDev) filterDev.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
-            else if (state.teacherRoleFilter === 'teacher' && filterTeacher) filterTeacher.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
-            else if (state.teacherRoleFilter === 'student' && filterStudent) filterStudent.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
+                if (state.teacherRoleFilter === 'all' && filterAll) filterAll.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
+                else if (state.teacherRoleFilter === 'developer' && filterDev) filterDev.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
+                else if (state.teacherRoleFilter === 'teacher' && filterTeacher) filterTeacher.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
+                else if (state.teacherRoleFilter === 'student' && filterStudent) filterStudent.className = `px-4 py-1.5 rounded-xl text-sm font-semibold transition-all ${activeFilterClass}`;
+            }
 
             if (document.getElementById('text-tab-scores')) {
                 document.getElementById('text-tab-scores').textContent = dict.tabScores;
@@ -1923,9 +2070,9 @@
                     cardTeacher.classList.add('flex');
                     
                     if (state.role === 'teacher') {
-                        cardTeacher.classList.add('md:col-span-2', 'lg:col-span-3');
+                        cardTeacher.className = 'group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-amber-200 dark:hover:border-amber-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden md:col-span-2 lg:col-span-3';
                     } else {
-                        cardTeacher.classList.remove('md:col-span-2', 'lg:col-span-3');
+                        cardTeacher.className = 'group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-[0_2px_12px_rgb(0,0,0,0.04)] border border-slate-100 dark:border-slate-700 hover:shadow-[0_8px_24px_rgb(0,0,0,0.08)] hover:border-amber-200 dark:hover:border-amber-700 transition-all duration-300 cursor-pointer flex-col items-start text-left w-full relative overflow-hidden';
                     }
                 } else {
                     cardTeacher.classList.add('hidden');
@@ -1951,6 +2098,20 @@
                 document.getElementById('lesson-math-desc').textContent = dict.mathDesc;
                 document.getElementById('lesson-english-title').textContent = dict.english;
                 document.getElementById('lesson-english-desc').textContent = dict.englishDesc;
+            }
+
+            // 科學、地理翻譯更新
+            if (document.getElementById('lesson-science-title')) {
+                document.getElementById('lesson-science-title').textContent = dict.science;
+                document.getElementById('lesson-science-desc').textContent = dict.scienceDesc;
+                document.getElementById('text-science-app-title').textContent = dict.scienceAppTitle;
+                document.getElementById('text-science-app-desc').textContent = dict.scienceAppDesc;
+                document.getElementById('btn-science-link-text').innerHTML = dict.scienceLinkBtn;
+                document.getElementById('text-science-s1-tip').textContent = dict.scienceS1Tip;
+            }
+            if (document.getElementById('lesson-geography-title')) {
+                document.getElementById('lesson-geography-title').textContent = dict.geography;
+                document.getElementById('lesson-geography-desc').textContent = dict.geographyDesc;
             }
             
             const headerSubIconBox = document.getElementById('header-sub-icon-box');
@@ -1998,15 +2159,16 @@
             document.querySelectorAll('.dev-title-text').forEach(el => el.textContent = dict.devTitle);
             document.querySelectorAll('.dev-msg-text').forEach(el => el.textContent = dict.devMsg);
 
-            if (document.getElementById('btn-back')) {
+            const btnBack = document.getElementById('btn-back');
+            if (btnBack) {
                 if (state.currentPage === 'math-chapter') {
-                    document.getElementById('btn-back').textContent = dict.btnBackCategory;
+                    btnBack.textContent = dict.btnBackCategory;
                 } else if (state.currentPage === 'math-category') {
-                    document.getElementById('btn-back').textContent = dict.btnBackSummary;
+                    btnBack.textContent = dict.btnBackSummary;
                 } else if (state.currentPage === 'math-summary') {
-                    document.getElementById('btn-back').textContent = dict.btnBackMath;
+                    btnBack.textContent = dict.btnBackMath;
                 } else {
-                    document.getElementById('btn-back').textContent = dict.btnBackHome;
+                    btnBack.textContent = dict.btnBackHome;
                 }
             }
             
@@ -2037,7 +2199,7 @@
                 });
             }
 
-            // --- 學生進度追蹤及開發者信箱更新邏輯 ---
+            // 更新排序列表
             const studentContainer = document.getElementById('student-list-container');
             const mailboxContainer = document.getElementById('dev-mailbox-container');
 
@@ -2071,6 +2233,7 @@
                 if (selectUser) {
                     const currentVal = selectUser.value;
                     selectUser.innerHTML = '';
+                    
                     const defaultOpt = document.createElement('option');
                     defaultOpt.value = "";
                     defaultOpt.textContent = dict.selectUserToChange || "--- 請選擇帳號 ---";
@@ -2091,6 +2254,7 @@
                 if (selectPassUser) {
                     const currentPassVal = selectPassUser.value;
                     selectPassUser.innerHTML = '';
+                    
                     const defaultOpt2 = document.createElement('option');
                     defaultOpt2.value = "";
                     defaultOpt2.textContent = dict.selectUserToChange || "--- 請選擇帳號 ---";
@@ -2111,6 +2275,7 @@
                 if (listContainer) {
                     const checkedBoxes = Array.from(document.querySelectorAll('.delete-checkbox:checked')).map(cb => cb.value);
                     listContainer.innerHTML = '';
+                    
                     const roleOptionsText = {
                         'zh-TW': { s: '學生', t: '教師', d: '開發者' },
                         'zh-CN': { s: '学生', t: '教师', d: '开发者' },
@@ -2121,6 +2286,7 @@
                     allUsersArr.forEach(u => {
                         const roleName = u.role === 'developer' ? tText.d : (u.role === 'teacher' ? tText.t : tText.s);
                         const isChecked = checkedBoxes.includes(u.username) ? 'checked' : '';
+                        
                         const label = document.createElement('label');
                         label.className = "flex items-center gap-3 p-3 hover:bg-red-100/50 dark:hover:bg-red-900/30 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-red-200 dark:hover:border-red-800/50";
                         label.innerHTML = `
@@ -2284,7 +2450,6 @@
                 });
             };
             
-            // 強制先執行本地畫面渲染，再執行 Firebase 連線，避免斷網或連線錯誤導致畫面空白
             if (state.currentPage === 'teacher' || state.currentPage === 'developer') {
                 if (state.currentPage === 'teacher') redrawCards();
                 if (state.currentPage === 'developer') updateDeveloperDropdown();
@@ -2365,7 +2530,6 @@
                 }
             }
 
-            // --- Page Routing ---
             const viewLogin = document.getElementById('view-login');
             const viewHome = document.getElementById('view-home');
             const viewLesson = document.getElementById('view-lesson');
@@ -2378,6 +2542,8 @@
             const lessonHeaderSub = document.getElementById('lesson-header-sub');
             const lessonHeaderEnglish = document.getElementById('lesson-header-english');
             const lessonHeaderChinese = document.getElementById('lesson-header-chinese'); 
+            const lessonHeaderScience = document.getElementById('lesson-header-science');
+            const lessonHeaderGeography = document.getElementById('lesson-header-geography');
             
             const contentMathMain = document.getElementById('content-math-main');
             const contentMathSummary = document.getElementById('content-math-summary');
@@ -2385,6 +2551,8 @@
             const contentMathChapter = document.getElementById('content-math-chapter');
             const contentEnglish = document.getElementById('content-english');
             const contentChinese = document.getElementById('content-chinese'); 
+            const contentScience = document.getElementById('content-science');
+            const contentGeography = document.getElementById('content-geography');
 
             if (viewLogin) {
                 viewLogin.classList.remove('flex');
@@ -2421,6 +2589,8 @@
             if (lessonHeaderSub) lessonHeaderSub.classList.add('hidden');
             if (lessonHeaderEnglish) lessonHeaderEnglish.classList.add('hidden');
             if (lessonHeaderChinese) lessonHeaderChinese.classList.add('hidden'); 
+            if (lessonHeaderScience) lessonHeaderScience.classList.add('hidden');
+            if (lessonHeaderGeography) lessonHeaderGeography.classList.add('hidden');
             
             if (contentMathMain) contentMathMain.classList.add('hidden');
             if (contentMathSummary) contentMathSummary.classList.add('hidden');
@@ -2428,6 +2598,8 @@
             if (contentMathChapter) contentMathChapter.classList.add('hidden');
             if (contentEnglish) contentEnglish.classList.add('hidden');
             if (contentChinese) contentChinese.classList.add('hidden'); 
+            if (contentScience) contentScience.classList.add('hidden');
+            if (contentGeography) contentGeography.classList.add('hidden');
 
             setTimeout(() => {
                 if (state.currentPage === 'login' && viewLogin) {
@@ -2474,6 +2646,19 @@
                     viewLesson.classList.add('fade-in');
                     if (lessonHeaderChinese) lessonHeaderChinese.classList.remove('hidden');
                     if (contentChinese) contentChinese.classList.remove('hidden');
+                }
+                else if (state.currentPage === 'science' && viewLesson) {
+                    viewLesson.classList.remove('hidden');
+                    viewLesson.classList.add('fade-in');
+                    if (lessonHeaderScience) lessonHeaderScience.classList.remove('hidden');
+                    if (contentScience) contentScience.classList.remove('hidden');
+                    if (contentScience) contentScience.classList.add('flex');
+                }
+                else if (state.currentPage === 'geography' && viewLesson) {
+                    viewLesson.classList.remove('hidden');
+                    viewLesson.classList.add('fade-in');
+                    if (lessonHeaderGeography) lessonHeaderGeography.classList.remove('hidden');
+                    if (contentGeography) contentGeography.classList.remove('hidden');
                 }
                 else if (state.currentPage === 'teacher' && viewTeacherDashboard) {
                     viewTeacherDashboard.classList.remove('hidden');
