@@ -96,9 +96,7 @@
                     </div>
                     
                     <div id="login-error" class="hidden items-start gap-2 p-3 mt-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/50 text-red-600 dark:text-red-400 text-sm rounded-lg font-medium">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         <div class="flex flex-col gap-1 w-full text-left">
                             <span id="login-error-text"></span>
                             <button type="button" onclick="window.appNavigate('write-letter')" class="text-xs text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-bold underline mt-1 text-left self-start" id="btn-login-contact-dev">想聯絡開發者嗎？</button>
@@ -155,7 +153,7 @@
                         <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> <span id="badge-teacher-only">教師專屬</span>
                     </div>
                     <div class="flex items-center gap-4 mb-4 mt-2">
-                        <div class="w-14 h-14 bg-amber-50 dark:bg-amber-900/30 text-amber-500 dark:text-amber-400 rounded-2xl flex items-center justify-center transition-colors">
+                        <div class="w-14 h-14 bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 rounded-2xl flex items-center justify-center transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                         </div>
                         <div>
@@ -178,7 +176,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg> ROOT
                     </div>
                     <div class="flex items-center gap-4 mb-4 mt-2">
-                        <div class="w-14 h-14 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center transition-colors">
+                        <div class="w-14 h-14 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 rounded-2xl flex items-center justify-center transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 14l9-5-9-5-9 5 9 5z" />
                                 <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
@@ -285,7 +283,7 @@
             </div>
         </div>
 
-        <!-- Developer Mode View -->
+        <!-- Developer Mode View (ONLY ONE IN THE WHOLE FILE!) -->
         <div id="view-developer" class="w-full fade-in hidden">
             <button onclick="window.appNavigateBack()" class="mb-6 flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white font-medium transition-colors w-fit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
@@ -297,7 +295,7 @@
                 <p id="desc-dev-page" class="text-slate-500 dark:text-slate-400 transition-colors">管理系統帳號、設定與底層資料庫。</p>
             </div>
 
-            <!-- 新增帳號面板 -->
+            <!-- 開發者專屬：新增帳號面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-indigo-200 dark:border-indigo-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors">
                 <h3 class="text-xl font-bold text-indigo-900 dark:text-indigo-200 mb-6 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>
@@ -407,7 +405,7 @@
             <!-- 編輯今日總結面板 -->
             <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-rose-200 dark:border-rose-800/50 rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-colors mt-8">
                 <h3 class="text-xl font-bold text-rose-900 dark:text-rose-200 mb-6 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-600 dark:text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                     <span id="text-dev-edit-summary-title">編輯今日總結</span>
                 </h3>
                 <div class="bg-rose-50/50 dark:bg-rose-900/20 rounded-2xl p-10 flex flex-col items-center justify-center border border-rose-100 dark:border-rose-800/30">
@@ -573,7 +571,7 @@
                 <a href="https://keyword.toukinxi.top/" target="_blank" class="px-8 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 inline-block" id="btn-science-link-text">
                     前往科學平台 &rarr;
                 </a>
-                <span class="text-xs text-rose-500 dark:text-rose-400 font-semibold mt-6 italic" id="text-science-s1-tip">*This is now a S1 app</span>
+                <span class="text-xs text-rose-500 dark:text-rose-400 font-semibold mt-6 italic" id="text-science-s1-tip">*This is currently a S1 app</span>
             </div>
 
             <!-- 地理課程內容區塊 (Geography Content - NEW) -->
@@ -840,11 +838,10 @@
                 changePassBtn: '變更密碼',
                 changePassSuccess: '密碼變更成功！',
                 changePassErrorWrong: '原密碼錯誤！',
-                // 科學頁面翻譯
                 scienceAppTitle: 'S1 科學外部系統',
                 scienceAppDesc: '請點擊下方按鈕，安全前往 S1 科學專屬學習平台進行深度探索。(此網站不由本作者創作)',
                 scienceLinkBtn: '前往科學平台 →',
-                scienceS1Tip: '*This is now a S1 app',
+                scienceS1Tip: '*現在中一應用程式',
                 // 今日總結翻譯
                 summaryOfToday: '今日總結',
                 summaryDesc: '查看您今天的學習進度與重點。',
@@ -903,7 +900,7 @@
                 teacherDesc: '查看所有学生的学习进度与状态。',
                 viewProgress: '查看进度',
                 teacherDashboardTitle: '学生进度追踪',
-                teacherDashboardDesc: '查看所有已注册账号的学习状态与数据。',
+                teacherDashboardDesc: '查看所有已注册账号的学习状态 with 数据。',
                 avgScore: '平均分数',
                 completedLessons: '已完成课程',
                 unitScore: ' 分',
@@ -913,7 +910,7 @@
                 roleDeveloper: '开发者',
                 roleTeacher: '教师',
                 roleStudent: '学生',
-                tabScores: '分数与进度',
+                tabScores: '分数 with 进度',
                 tabStatus: '在线状态',
                 currentStatus: '当前状态',
                 statusOnline: '在线',
@@ -979,12 +976,12 @@
                 scienceAppTitle: 'S1 科学外部系统',
                 scienceAppDesc: '请点击下方按钮，安全前往 S1 科学专属学习平台进行深度探索。(此网站不由本作者创作)',
                 scienceLinkBtn: '前往科学平台 →',
-                scienceS1Tip: '*This is now a S1 app',
+                scienceS1Tip: '*現在中一應用程序',
                 // 今日总结翻译
                 summaryOfToday: '今日总结',
                 summaryDesc: '查看您今天的学习进度与重点。',
                 summaryStart: '查看总结',
-                notRightTime: '目前还不是使用的时機',
+                notRightTime: '目前还不是使用的時機',
                 devEditSummary: '编辑今日总结',
                 langs: {
                     'zh-TW': '繁体中文',
@@ -1070,7 +1067,7 @@
                 addAccExists: 'This username is already taken!',
                 devChangeRoleTitle: 'Change Account Role',
                 changeAccUser: 'Username',
-                changeAccNewRole: 'New Role',
+                changePassNewRole: 'New Role',
                 changeAccBtn: 'Change Role',
                 changeAccSuccess: 'Role successfully changed!',
                 changeAccNotFound: 'Account not found!',
@@ -1114,7 +1111,7 @@
                 scienceAppTitle: 'S1 Science External System',
                 scienceAppDesc: 'Please click the button below to safely visit the S1 Science learning platform. (This website is not created by this author)',
                 scienceLinkBtn: 'Go to Science Platform →',
-                scienceS1Tip: '*This is now a S1 app',
+                scienceS1Tip: '*This is currently a S1 app',
                 // Summary
                 summaryOfToday: 'Summary of Today',
                 summaryDesc: 'Review your learning progress and key points of the day.',
@@ -1481,7 +1478,7 @@
                      await setDoc(userRef, {
                         username: user,
                         password: localUser ? localUser.password : '',
-                        role: newRole,
+                        role: localUser ? localUser.role : 'student',
                         avgScore: 0,
                         completedLessons: 0,
                         lastLogin: null,
@@ -1733,6 +1730,7 @@
             if (!state.isLoggedIn && page !== 'login' && page !== 'write-letter') { page = 'login'; }
             state.currentPage = page;
 
+            // 路由語言重置邏輯
             if (page === 'math' || page === 'math-summary' || page === 'math-category' || page === 'math-chapter' || page === 'chinese' || page === 'science' || page === 'geography') {
                 if (state.currentLang === 'en') { state.currentLang = state.lastChineseLang; }
             } else if (page === 'english') {
@@ -2205,7 +2203,6 @@
                 });
             }
 
-            // 更新排序列表
             const studentContainer = document.getElementById('student-list-container');
             const mailboxContainer = document.getElementById('dev-mailbox-container');
 
